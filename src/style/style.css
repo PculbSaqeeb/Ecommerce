@@ -1,0 +1,127 @@
+.bg-image1 {
+  background-image: url("../assets/images/Rectangle\ 373.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-image {
+  background-image: url("../assets/images/Rectangle\ 376.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.font {
+  font-family: "Playfair Display", serif;
+}
+
+.font-lato {
+  font-family: "Lato", sans-serif;
+}
+
+.slick-dots li.slick-active div {
+  /* width: 20px !important;
+    height: 20px !important; */
+  background-color: #002482 !important;
+}
+
+.required:after {
+  content:" *";
+  color: red;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+/* input.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  margin-top: -5px; 
+}
+
+input.slider::-webkit-slider-runnable-track {
+  height: 8px;
+  background: #0081DE;
+  border-radius: 5px;
+}
+
+input.slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+
+input.slider::-moz-range-track {
+  height: 8px;
+  background: #939393;
+  border-radius: 5px;
+} */
+
+
+input[type='range'].range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  background: transparent;
+  pointer-events: all;
+}
+
+input[type='range'].range-thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #939393;
+  cursor: pointer;
+  margin-top: -4px;
+  /* position: relative; */
+  z-index: 30;
+}
+
+input[type='range'].range-thumb::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #939393;
+  cursor: pointer;
+  /* position: ; */
+  z-index: 30;
+}
+
+
+@font-face {
+  font-family: "SF Pro Display Regular";
+  src: url(../assets/fonts/sf-pro-display/SFPRODISPLAYREGULAR.OTF);
+}
+
+.displayRegular {
+  font-family: 'SF Pro Display Regular', sans-serif;
+}

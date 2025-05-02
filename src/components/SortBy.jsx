@@ -1,0 +1,25 @@
+import React from "react";
+
+const SortBy = () => {
+  return (
+    <div>
+      <div className="w-[355px] pt-[30px] pl-[28px] text-[18px] text-textPrimary bg-slate-50 rounded-[10px] absolute right-[48px] mt-[19px]">
+        <p className="font-bold">Popularity</p>
+        <div className="mt-[29px]">
+          <input type="radio" id="l_to_h" name="sort"/>
+          <label htmlFor="l_to_h" className="ml-[8px]">Price - Low to High</label>
+        </div>
+        <div className="mt-[29px]">
+          <input type="radio" id="h_to_l" name="sort"/>
+          <label htmlFor="h_to_l" className="ml-[8px]">Price - High to Low</label>
+        </div>
+        <div className="mt-[29px] pb-[43px] ">
+          <input type="radio" id="new" name="sort"/>
+          <label htmlFor="new" className="ml-[8px]">Newest</label>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SortBy;
