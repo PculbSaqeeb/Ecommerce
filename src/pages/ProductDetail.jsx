@@ -27,25 +27,20 @@ import {
   incrementQuantity,
   removeToCart,
 } from "../redux/cartSlice";
+import { fetchProductData } from "../redux/productSlice";
 
 const ProductDetail = () => {
+  const dispatch = useDispatch();
   const [tabList, setTabList] = useState("details");
   const [isWishlist, setIsWishlist] = useState(false);
-  const handleTabClick = (role) => {
-    setTabList(role);
-  };
-
-  const dispatch = useDispatch();
   const products = useSelector((state) => state.product.items);
-  // const cart = useSelector((state) => state.cart || []);
-  const { cart, totalPrice, totalQuantity, breakdown } = useSelector(
-    (state) => state.cart
-  );
-  console.log(cart,"avsdv",totalPrice, "vvf",totalQuantity,"vafv",breakdown);
-
   const { loading, error } = useSelector((state) => state.product);
   const { id } = useParams();
   const product = products.find((item) => item.id === id);
+
+  const handleTabClick = (role) => {
+    setTabList(role);
+  };
 
   const handleAddToWishlist = (id) => {
     dispatch(addProductToWishlist(id));
@@ -58,7 +53,6 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = (id) => {
-    console.log(id);
     dispatch(addToCart(id));
   };
 
@@ -66,18 +60,33 @@ const ProductDetail = () => {
     dispatch(removeToCart(id));
   };
 
-  const handleIncrement = () => {
-    dispatch(incrementQuantity(product.id));
+  const navigate = useNavigate();
+  let startX = 0;
+  let endX = 0;
+
+  const handleMouseDown = (e) => {
+    startX = e.clientX || e.touches?.[0]?.clientX || 0;
   };
 
-  const handleDecrement = () => {
-    dispatch(decrementQuantity(product.id));
+  const handleMouseUp = (e) => {
+    endX = e.clientX || e.changedTouches?.[0]?.clientX || 0;
   };
+
+  const handleProductDetailsNavigate = (e, id) => {
+    e.stopPropagation();
+    if (Math.abs(endX - startX) < 5) {
+      navigate(`/product-detail/${id}`);
+    }
+  };
+
+  const { items } = useSelector((state) => state.product);
+  useEffect(() => {
+    dispatch(fetchProductData());
+  }, [dispatch]);
 
   return (
     <Layout>
       {loading && <p className="text-center mt-3 text-xl">Loading...</p>}
-      {error && <p>Error: {error}</p>}
       <div className="mt-[26px] flex gap-24">
         <div className="flex gap-[22px] ml-[49px]">
           <div>
@@ -145,8 +154,8 @@ const ProductDetail = () => {
             />
           </p>
 
-          <div className="flex gap-[19px] mt-[21px] ">
-            {product.sizes.map((size) => (
+          <div className="flex gap-[19px] mt-[21px]">
+            {product?.sizes?.map((size) => (
               <div
                 key={size.id}
                 className="w-[55px] h-[55px] text-textPrimary border border-[#BABABA] rounded-full flex items-center justify-center cursor-pointer"
@@ -230,14 +239,14 @@ const ProductDetail = () => {
             </button>
             {!isWishlist ? (
               <img
-                onClick={() => handleAddToWishlist(product.id)}
+                onClick={()=>handleAddToWishlist(id)}
                 src={heart_icon}
                 size={40}
                 className="w-[25.38] h-[22.31px] cursor-pointer"
               />
             ) : (
               <img
-                onClick={() => handleDeleteToWishlist(product.id)}
+                onClick={()=>handleDeleteToWishlist(id)}
                 src={red_heart_icon}
                 size={40}
                 className="w-[25.38] h-[22.31px] cursor-pointer"
@@ -304,9 +313,9 @@ const ProductDetail = () => {
           </ul>
         )}
 
-        {tabList === "spec" && <Specifications />}
+        {tabList === "spec" && <Specifications product={products} />}
 
-        {tabList === "rating" && <Rating />}
+        {tabList === "rating" && <Rating productId={id} />}
       </div>
 
       <div className="ml-[50px] mt-[80px]">
@@ -315,15 +324,18 @@ const ProductDetail = () => {
         </p>
 
         <div className="mt-[27px] pb-1">
-          <div className="rounded-[10px]">
-            <Sliders slidesToShow={4}>
-              {[1, 2, 3, 4, 5, 6].map((_, index) => (
-                <div key={index} className="">
-                  <ProductCard />
-                </div>
-              ))}
-            </Sliders>
-          </div>
+          <Sliders slidesToShow={4}>
+            {items.map((product, index) => (
+              <div
+                key={index}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
+                onClick={(e) => handleProductDetailsNavigate(e, product.id)}
+              >
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </Sliders>
         </div>
       </div>
 
@@ -333,15 +345,18 @@ const ProductDetail = () => {
         </p>
 
         <div className="mt-[27px] pb-1">
-          <div className="rounded-[10px]">
-            <Sliders slidesToShow={4}>
-              {[1, 2, 3, 4, 5, 6].map((_, index) => (
-                <div key={index} className="">
-                  <ProductCard />
-                </div>
-              ))}
-            </Sliders>
-          </div>
+          <Sliders slidesToShow={4}>
+            {items.map((product, index) => (
+              <div
+                key={index}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
+                onClick={(e) => handleProductDetailsNavigate(e, product.id)}
+              >
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </Sliders>
         </div>
       </div>
     </Layout>

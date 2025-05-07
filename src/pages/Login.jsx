@@ -1,24 +1,20 @@
-import React from "react";
-import profile from "../assets/icons/profile.svg";
-import lock from "../assets/icons/Password.svg";
-import google from "../assets/icons/google.svg";
-import iphone from "../assets/icons/iphone.svg";
-import facebook from "../assets/icons/facebook.svg";
-import logo from "../assets/icons/Group 400.svg";
+import React, { useState } from "react";
+import profile_icon from "../assets/icons/profile_icon.svg";
+import lock_icon from "../assets/icons/password_icon.svg";
 import AuthLayout from "../layout/AuthLayout";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import LoginSchema from "../constant/formErrorSchema/loginSchema";
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import { Navigate, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { loginUser } from "../services/authServices";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const {
     register,
     handleSubmit,
@@ -30,16 +26,12 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      // const userLoginData = await axios.post(
-      //   `${process.env.REACT_APP_BASE_URL}/user/login`,
-      //   data
-      // );
       const userLogin = await loginUser(data);
       if (userLogin.status === 203) {
         toast.error(userLogin.data?.message || "Invalid credentials");
-        return; 
+        return;
       }
-    
+
       const token = JSON.stringify(userLogin?.data?.access_token);
       if (token) {
         localStorage.setItem("token", token);
@@ -59,7 +51,7 @@ const Login = () => {
   return (
     <div className="h-screen flex flex-col items-center justify-center displayRegular">
       <AuthLayout>
-        <p className="text-text text-[18px] text-center mt-[26px] text-bold">
+        <p className="text-text text-[18px] text-center mt-[26px] font-bold">
           Welcome back to E-com
         </p>
         <p className="text-center mt-[10px] text-[18px] text-textSecondary">
@@ -71,12 +63,12 @@ const Login = () => {
             <input
               {...register("email")}
               type="email"
-              placeholder="janedoe@gmail.com"
-              className="w-[440px] px-3 py-2 pl-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your Email"
+              className="w-[440px] px-3 py-2 pl-12 border border-inputBorder rounded-[5px] placeholder:text-inputText placeholder:text-[14px]"
               required
             />
             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-              <img src={profile} alt="" />
+              <img src={profile_icon} alt="" />
             </div>
           </div>
 
@@ -84,16 +76,26 @@ const Login = () => {
             <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>
           )}
 
-          <div className="relative mt-[25px]">
+          <div className="relative mt-[10px]">
             <input
               {...register("password")}
-              type="password"
-              placeholder="••••••••••••••••"
-              className={`w-[440px] px-3 py-2 pl-12 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 `}
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your Password"
+              className="w-[440px] px-3 py-2 pl-12 pr-10  border border-inputBorder rounded-[5px] placeholder:text-inputText placeholder:text-[12px]"
               required
             />
             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-              <img src={lock} alt="" />
+              <img src={lock_icon} alt="" />
+            </div>
+            <div
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? (
+                <AiOutlineEyeInvisible size={20} />
+              ) : (
+                <AiOutlineEye size={20} />
+              )}
             </div>
           </div>
 
@@ -103,23 +105,26 @@ const Login = () => {
             </p>
           )}
 
-          <div className="flex items-center justify-between mt-[14px]">
-            <div className="space-x-2">
-              <input
-                type="checkbox"
-                id="remember"
-                className="h-4 w-4 text-[#0c2b8e] focus:ring-[#0c2b8e] border-gray-300 rounded"
-              />
-              <label htmlFor="remember" className="text-sm text-gray-700">
-                Remember Me
-              </label>
-            </div>
-            <a
-              href="/forgot-password"
-              className="text-sm text-textTertiary hover:underline "
-            >
-              Forgot Password?
-            </a>
+<div className="w-full flex justify-end mt-2">
+  <a
+    href="/forgot-password"
+    className="text-sm text-textTertiary hover:underline font-bold cursor-pointer"
+  >
+    Forgot Password?
+  </a>
+</div>
+
+
+
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="remember"
+              className="h-4 w-4 accent-[#BDC0CD]"
+            />
+            <label htmlFor="remember" className="text-sm text-textSecondary">
+              Remember Me
+            </label>
           </div>
 
           <Button
@@ -127,13 +132,14 @@ const Login = () => {
             onClick={handleSubmit(onSubmit)}
             variant="blueButton"
             size="xl"
+            className="text-[18px]"
           >
             Login
           </Button>
 
           <div className="relative flex items-center justify-center mt-[35px]">
-            <div className="border-t border-gray-300 w-[440px]"></div>
-            <span className="bg-white px-2 text-sm text-gray-500 absolute">
+            <div className="border-t border-[#E1E2E7] w-[440px]"></div>
+            <span className="bg-white px-2 text-sm text-textSecondary absolute font-bold">
               OR
             </span>
           </div>
@@ -143,11 +149,11 @@ const Login = () => {
           </div>
         </form>
       </AuthLayout>
-      <div className="text-center text-sm mt-[40px] text-textSecondary">
+      <div className="text-center text-[12px] mt-[40px] text-textSecondary">
         Don't have a account?
         <a
           href="/register"
-          className="text-[#0c2b8e] font-medium hover:underline ml-1"
+          className="text-[#5C61F4] font-medium hover:underline ml-1"
         >
           Register
         </a>

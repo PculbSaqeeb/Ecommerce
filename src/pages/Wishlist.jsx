@@ -1,21 +1,26 @@
 import React, { useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import OrderLayout from "../layout/OrderLayout";
+import red_heart_icon from "../assets/icons/red_heart_icon.png";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addProductToWishlist,
+  deleteProductToWishlist,
   fetchWishlistProduct,
 } from "../redux/wishlistSlice";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
   const { wishlist, loading, error } = useSelector((state) => state.wishlist);
-  console.log(wishlist);
 
   useEffect(() => {
     dispatch(fetchWishlistProduct());
   }, []);
+
+  const handleDeleteToWishlist = (id) => {
+    dispatch(deleteProductToWishlist(id));
+  };
 
   return (
     <OrderLayout>
@@ -24,18 +29,19 @@ const Wishlist = () => {
           My <span className="text-[#002482]">Wishlist</span>
         </p>
         <div className="flex flex-wrap gap-[60px] mt-[38px]">
-          {/* {Array.from({ length: 8 }).map((_, index) => (
-            <div key={index} className="flex-shrink-0">
-              <ProductCard />
-            </div>
-          ))} */}
-          {/* {error && <p>Error: {error}</p>} */}
-          {wishlist.length===0 && <p>Wishlist is empty!</p>}
-          {wishlist && wishlist.map((item,index) => (
-            <div key={index} className="flex-shrink-0">
-              <ProductCard product={item}/>
-            </div>
-          ))}
+          {wishlist?.length === 0 && <p>Wishlist is empty!</p>}
+          {wishlist?.length > 0 &&
+            wishlist?.map((item, index) => (
+              <div key={index} className="flex-shrink-0 relative">
+                <ProductCard product={item} />
+
+                <img
+                  onClick={() => handleDeleteToWishlist(item.id)}
+                  src={red_heart_icon}
+                  className="w-[30.38] h-[27.31px] cursor-pointer absolute top-3 right-3"
+                />
+              </div>
+            ))}
         </div>
       </div>
     </OrderLayout>

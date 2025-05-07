@@ -1,14 +1,16 @@
-import React from "react";
-import image_3 from "../assets/images/Rectangle 374.jpg";
-import image_6 from "../assets/images/Vector-removebg-preview.png";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../style/style.css";
 import { useNavigate } from "react-router";
 import Button from "./Button";
-
-const Banner = () => {
+import { getCarouselData } from "../services/crousoleServices";
+  
+  
+  const Banner = () => {
+  const navigate = useNavigate();
+  const [carousel,setCarousel]=useState([]);
   const settings = {
     dots: true,
     infinite: true,
@@ -43,41 +45,50 @@ const Banner = () => {
     ),
   };
 
-  const navigate = useNavigate();
 
   const handleProductNavigate = () => {
     navigate("/products");
   };
 
-  const images = [image_3, image_3, image_3, image_3];
+  const fetchCarousel = async () => {
+    try {
+      const data = await getCarouselData();
+      setCarousel(data);
+    } catch (error) {
+      console.error("Failed to load carousel:", error);
+    }
+  };
+
+  useEffect(()=>{
+    fetchCarousel();
+  },[])
+
 
   return (
     <div className="w-full">
       <Slider {...settings}>
-        {images.map((item) => {
+        {carousel.data && carousel.data.map((item) => {
           return (
             <div className="!flex w-full">
-              <img className="w-[1028px] h-[796px]" src={item} alt="" />
-              <div className="bg-image1 w-[892px] h-[797px] flex items-center justify-center shadow-[0,0,10px,rgba(#000000)]">
+              <img className="w-[1028px] h-[793px] object-cover" src={item.image} alt={item.brand} />
+              <div className="bg-image1 w-[892px] h-[797px] flex items-center justify-center">
                 <div className=" ">
-                  <img className="w-[533px] h-[83px] " src={image_6} alt="" />
+                  {/* <img className="w-[533px] h-[83px] " src={image_6} alt="" /> */}
+                  <p className="text-7xl font-bold text-center tracking-widest">{item.brand.toUpperCase()}</p>
                   <p className="bold text-5xl text-textMuted bg-transparent mt-[66px] text-center">
                     Big Fashion Festival
                   </p>
 
-                  <p className="bold text-5xl text-textMuted mt-[22px] text-center">
-                    50% - 80% off
+                  <p className="bold text-[42px] text-textMuted mt-[22px] text-center">
+                    {item.offer}
                   </p>
                   <div className="flex justify-center">
-                    {/* <button onClick={handleProductNavigate} className="w-[172px] h-[48px] rounded-[10px] border-2 border-borderDark mt-[34px] ">
-                      Explore
-                    </button> */}
 
                     <Button
                       onClick={handleProductNavigate}
                       variant="lightOutline"
                       size="md"
-                      className="w-[172px] mt-[34px]"
+                      className="w-[172px] mt-[34px] text-[24px]"
                     >
                       Explore
                     </Button>

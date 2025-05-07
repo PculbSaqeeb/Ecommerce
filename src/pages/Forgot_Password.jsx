@@ -1,6 +1,6 @@
 import React from "react";
 import AuthLayout from "../layout/AuthLayout";
-import profile_icon from "../assets/icons/profile.svg";
+import profile_icon from "../assets/icons/profile_icon.svg";
 import logo from "../assets/icons/Group 400.svg";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
@@ -24,11 +24,6 @@ const Forgot_Password = () => {
 
   const onSubmit = async (data) => {
     try {
-      // const forgetPasswordEmail = await axios.post(
-      //   `${process.env.REACT_APP_BASE_URL}/user/forget-password`,
-      //   data
-      // );
-
       const forgetPasswordEmail=await forgotPassword(data);
       localStorage.setItem("email", forgetPasswordEmail?.data?.Email_Send_To);
 
@@ -42,7 +37,7 @@ const Forgot_Password = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen displayRegular">
       <div className="w-[72px] h-[72px] rounded-[16px] bg-textTertiary mx-auto">
         <div className="flex h-full items-center justify-center">
           <img className="-rotate-90 " src={logo} alt="" />
@@ -50,20 +45,20 @@ const Forgot_Password = () => {
       </div>
 
       <p className="text-center mt-[26px] text-[18px] text-textTertiary font-semibold">
-        Welcome Back to E-com!
+        Forgot Password
       </p>
-      <p className="text-center mt-[10px] text-textSecondary ">
+      <p className="text-center mt-[10px] text-textSecondary w-[440px]">
         <span className="text-red-500">*</span> We will send you a message to
         set or reset your new password
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-[26px] space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-[41px]">
         <div className="relative">
           <input
             {...register("email")}
             type="email"
             placeholder="Your Email / Phone Number"
-            className="w-[440px] px-3 py-2 pl-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-[440px] px-3 py-2 pl-12 border border-inputBorder rounded-[5px] placeholder:text-inputText placeholder:text-[14px]"
             required
           />
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
@@ -74,7 +69,7 @@ const Forgot_Password = () => {
         {errors.email && (
           <p className="text-red-500 text-sm">{errors.email.message}</p>
         )}
-        <Button type="submit" variant="blueButton" size="xl">
+        <Button className="mt-[42px] text-[18px]" type="submit" variant="blueButton" size="xl">
           Send Verification
         </Button>
       </form>

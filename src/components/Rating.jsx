@@ -1,70 +1,267 @@
-import React from 'react'
-import image_11 from "../assets/images/Rectangle 375.jpg";
-import black_star_icon from '../assets/icons/black_star_icon.svg';
-import yellow_star_icon from '../assets/icons/yellow_star_icon.svg'
+import React, { useRef, useState } from "react";
+import black_star_icon from "../assets/icons/black_star_icon.svg";
+import yellow_star_icon from "../assets/icons/yellow_star_icon.svg";
+import empty_star from "../assets/icons/empty_star.svg";
+import { FaStarHalfAlt } from "react-icons/fa";
+import { BiSolidImageAdd } from "react-icons/bi";
+import { reviewEndpoint } from "../services/reviewServices";
+import { useSelector } from "react-redux";
 
-const Rating = () => {
+const Rating = ({ productId }) => {
+  const products = useSelector((state) => state.product.items);
+  const product = products.find((p) => p.id === productId);
+
+  const [showReview, setShowReview] = useState(false);
+  const [selectedRating, setSelectedRating] = useState(0);
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [description, setDescription] = useState("");
+  const [expandedReviewIndex, setExpandedReviewIndex] = useState(null);
+  const fileInputRef = useRef(null);
+  const [showAllReviews, setShowAllReviews] = useState(false);
+
+  const ratingCounts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+  const totalReviews = product.reviews?.length || 0;
+
+  product.reviews?.forEach((review) => {
+    const rating = Math.round(review.rating);
+    if (ratingCounts[rating] !== undefined) {
+      ratingCounts[rating]++;
+    }
+  });
+
+  const ratingDistribution = {};
+  Object.keys(ratingCounts).forEach((star) => {
+    const count = ratingCounts[star];
+    ratingDistribution[star] =
+      totalReviews > 0 ? Math.round((count / totalReviews) * 100) : 0;
+  });
+
+  const handleRating = (i) => setSelectedRating(i + 1);
+
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImages((prev) => [...prev, reader.result]);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleImageDelete = (i) => {
+    setSelectedImages((prev) => prev.filter((_, index) => index !== i));
+  };
+
+  const handleToPostRating = () => {
+    reviewEndpoint(productId, selectedRating, description, selectedImages);
+    setShowReview(false);
+    setSelectedRating(0);
+    setDescription("");
+    setSelectedImages([]);
+  };
+
+  const toggleExpanded = (index) => {
+    setExpandedReviewIndex((prev) => (prev === index ? null : index));
+  };
+
   return (
-    <div>
-        <div>
-            <p className="mt-[27px] text-[24px] font-bold text-textPrimary">
-              Ratings
-            </p>
-            <div className="flex items-center gap-[8px] mt-[29px]">
-              <p className="text-[48px] text-textPrimary">4.4</p>
-              {[1, 2, 3, 4, 5].map(() => (
-                <img src={black_star_icon} size={30} className="ml-[2px]" />
+    <div className="relative text-textPrimary">
+      <p className="mt-[27px] text-[24px] font-bold">Ratings & Reviews</p>
+
+      <div className="flex items-start gap-6 relative mt-[30px]">
+        <div className="flex gap-3 items-center">
+          <p className="text-[36px] font-semibold pt-2">
+            {product.averageRating || 0}
+          </p>
+          <img src={black_star_icon} alt="star" className="w-[32px]" />
+        </div>
+
+        <div className="flex flex-col gap-2 w-full max-w-[300px]">
+          {[5, 4, 3, 2, 1].map((star) => {
+            const percent = ratingDistribution[star] || 0;
+
+            return (
+              <div key={star} className="flex items-center gap-2">
+                <p className="text-sm w-[12px]">{star}</p>
+                <img src={black_star_icon} alt="star" className="w-[14px]" />
+                <div className="w-full h-[10px] bg-gray-200 rounded overflow-hidden">
+                  <div
+                    className="h-full bg-yellow-500 rounded"
+                    style={{ width: `${percent}%` }}
+                  ></div>
+                </div>
+                <p className="text-sm text-gray-600 min-w-[32px] text-right">
+                  {percent}%
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        <button
+          onClick={() => setShowReview(!showReview)}
+          className="border px-5 py-3 absolute right-0"
+        >
+          Rate Product
+        </button>
+      </div>
+
+      {showReview && (
+        <div className="absolute top-0 bg-white w-full border pt-4 pl-6 pb-6 z-10">
+          <p className="text-[20px] font-bold">Rate this product</p>
+
+          <div className="flex gap-5 mt-[18px] cursor-pointer">
+            {[1, 2, 3, 4, 5].map((_, index) => (
+              <img
+                key={index}
+                onClick={() => handleRating(index)}
+                src={index < selectedRating ? yellow_star_icon : empty_star}
+                alt="star"
+                className="w-[28px] h-[28px] transition-all duration-200"
+              />
+            ))}
+          </div>
+
+          <p className="border-t pt-[20px] mt-[25px] text-[20px] font-bold">
+            Review this product
+          </p>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            cols={100}
+            rows={10}
+            className="border mt-[20px] p-3 w-full"
+            placeholder="Description..."
+          ></textarea>
+
+          <div className="mt-[22px]">
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              className="hidden"
+            />
+            <div
+              onClick={() => fileInputRef.current.click()}
+              className="w-16 h-16 bg-gray-200 flex items-center justify-center cursor-pointer hover:bg-gray-300 transition rounded"
+            >
+              <BiSolidImageAdd size={35} />
+            </div>
+
+            <div className="flex flex-wrap gap-4 mt-4 relative">
+              {selectedImages.map((src, index) => (
+                <div className="relative" key={index}>
+                  <img
+                    src={src}
+                    alt="rating"
+                    className="w-20 h-20 object-cover rounded"
+                  />
+                  <p
+                    onClick={() => handleImageDelete(index)}
+                    className="absolute top-0 right-0 text-2xl text-white font-bold bg-slate-600 w-5 h-5 rounded-full flex items-center justify-center cursor-pointer"
+                  >
+                    -
+                  </p>
+                </div>
               ))}
             </div>
-            <p className="mt-[28px] text-[18px]">40 Verfied buyer</p>
+          </div>
 
-            <div className="w-[985px]">
-              <div className="flex">
-                {[1, 2, 3, 4, 5].map(() => (
-                  <img src={yellow_star_icon} size={25} className="" />
-                ))}
-                <p className="text-[18px] ml-[12px]">4.4</p>
-              </div>
-              <p className="text-[18px] text-textPrimary mt-[15px]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus
-                tristique in tellus diam, metus sit. Quis venenatis, neque arcu
-                accumsan sollicitudin aliquet nunc. Enim, arcu non in aenean
-                tristique felis.Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. neque arcu accumsan sollicitudin{" "}
-                <button className="text-linkPrimary text-[18px]">
-                  Read more
-                </button>
-              </p>
+          <button
+            onClick={handleToPostRating}
+            className="px-8 py-3 bg-orange-500 text-white mt-[36px] text-[20px]"
+          >
+            Submit
+          </button>
+        </div>
+      )}
 
-              <div className="flex gap-[15px] mt-[16px] ">
-                <img
-                  className="w-[140px] h-[140px] rounded-[10px]"
-                  src={image_11}
-                  alt=""
-                />
-                <img
-                  className="w-[140px] h-[140px] rounded-[10px]"
-                  src={image_11}
-                  alt=""
-                />
-                <div className="relative bg-black rounded-[10px]">
-                  <img
-                    className="w-[140px] h-[140px] rounded-[10px] opacity-50"
-                    src={image_11}
-                    alt=""
-                  />
-                  <p className="text-[48px] text-white absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">+3</p>
+      <div className="w-[985px]">
+        {(showAllReviews ? product.reviews : product.reviews?.slice(0, 3))?.map(
+          (review, index) => {
+            const shouldTruncate = review.comment.length > 100;
+            const isExpanded = expandedReviewIndex === index;
+            const displayedText = isExpanded
+              ? review.comment
+              : review.comment.slice(0, 100);
+
+            return (
+              <div className="text-[18px]" key={index}>
+                <div className="flex items-center gap-[2px] mt-[45px] h-[24px]">
+                  {[1, 2, 3, 4, 5].map((_, i) => {
+                    const rating = review.rating;
+                    if (rating >= i + 1) {
+                      return (
+                        <img
+                          key={i}
+                          src={yellow_star_icon}
+                          alt="full star"
+                          className="w-[20px] h-[19px]"
+                        />
+                      );
+                    } else if (rating >= i + 0.5) {
+                      return <FaStarHalfAlt key={i} size={22} />;
+                    } else {
+                      return (
+                        <img
+                          key={i}
+                          src={empty_star}
+                          alt="empty star"
+                          className="w-[20px] h-[19px]"
+                        />
+                      );
+                    }
+                  })}
+                  <p className="ml-[10px]">{review.rating}</p>
+                </div>
+
+                <p className="mt-[16px]">
+                  {displayedText}
+                  {shouldTruncate && (
+                    <span
+                      onClick={() => toggleExpanded(index)}
+                      className="text-linkPrimary ml-1 underline text-[18px] cursor-pointer"
+                    >
+                      {isExpanded ? "Read Less" : "Read More"}
+                    </span>
+                  )}
+                </p>
+
+                <div className="mt-[16px] flex gap-4 flex-wrap">
+                  {review.images?.map((img, imgIndex) => (
+                    <img
+                      key={imgIndex}
+                      className="w-[140px] h-[140px] rounded-[10px] border"
+                      src={img}
+                      alt={`review-${imgIndex}`}
+                    />
+                  ))}
+                </div>
+
+                <div className="mt-[15px]">
+                  <span>Annoe</span>
+                  <span className="text-textSecondary ml-[6px]">|</span>
+                  <span className="ml-[6px]">28 September</span>
                 </div>
               </div>
-              <p className="text-[18px] text-textPrimary mt-[15px]">
-                Anna Cloe <span className="text-textSecondary ml-[6px]">|</span>{" "}
-                28 September
-              </p>
-            </div>
-            <button className='text-[24px] mt-[51px] text-linkPrimary font'>View all Reviews</button>
-          </div>
-    </div>
-  )
-}
+            );
+          }
+        )}
 
-export default Rating
+        {!showAllReviews && product.reviews?.length > 3 && (
+          <button
+            onClick={() => setShowAllReviews(true)}
+            className="text-[24px] mt-[51px] text-linkPrimary font"
+          >
+            View all Reviews
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Rating;

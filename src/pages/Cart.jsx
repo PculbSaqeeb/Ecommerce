@@ -18,12 +18,10 @@ const Cart = () => {
     (state) => state.cart
   );
 
-  console.log(cart);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(dispatch(getAllCartItems()));
+    dispatch(getAllCartItems());
   }, [dispatch]);
 
   const handleRemoveToCart = (id) => {
@@ -103,26 +101,6 @@ const Cart = () => {
                             >
                               +
                             </button>
-
-                            {/* <button
-                              onClick={() =>
-                                dispatch(decrementQuantity(item.productId))
-                              }
-                              className="px-2 text-xl hover:bg-gray-300 w-7 rounded-md"
-                            >
-                              −
-                            </button>
-                            <span className="text-center pt-[4px] text-black text-sm w-7 h-7 rounded-full bg-gray-200 mx-3">
-                              {item.quantity}
-                            </span>
-                            <button
-                              onClick={() =>
-                                dispatch(incrementQuantity(item.productId))
-                              }
-                              className="px-2 text-xl hover:bg-gray-300 w-7 rounded-md"
-                            >
-                              +
-                            </button> */}
                           </div>
                         </td>
 

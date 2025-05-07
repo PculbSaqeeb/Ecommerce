@@ -8,7 +8,6 @@ import ProductCard from "../components/ProductCard";
 const SubCategoryPage = () => {
   const { categoryName,subCategory } = useParams();
   const navigate=useNavigate();
-  console.log(categoryName,subCategory);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +16,6 @@ const SubCategoryPage = () => {
     try {
       setLoading(true);
       const response = await getSubCategoryByName(categoryName,subCategory);
-      console.log(response);
       setProducts(response.data);
       setError(null);
     } catch (error) {
@@ -25,7 +23,6 @@ const SubCategoryPage = () => {
       setProducts([]);
     }
   };
-  console.log(products);
 
   useEffect(() => {
     fetchProducts();

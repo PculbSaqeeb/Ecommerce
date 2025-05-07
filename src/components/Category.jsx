@@ -37,13 +37,14 @@ const Category = () => {
               </p>
             </div>
           </div>
+
+          
           <div className=" col-span-2 relative group">
             <img
               className="w-[590px] h-[331px] rounded-[10px] object-cover"
               src={image_8}
               alt=""
             />
-
             <div className="absolute top-0 left-0 pl-[29.35px] pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white w-[585px] h-[330px] bg-black bg-opacity-50 rounded-[10px]">
               <p className="text-[24px] font-bold">Sweater</p>
               <p className="flex items-center">
@@ -73,7 +74,7 @@ const Category = () => {
               src={image_8}
               alt=""
             />
-             <div className="absolute top-0 left-0 pl-[29.35px] pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white w-[279px] h-[330px] bg-black bg-opacity-50 rounded-[10px]">
+            <div className="absolute top-0 left-0 pl-[29.35px] pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white w-[279px] h-[330px] bg-black bg-opacity-50 rounded-[10px]">
               <p className="text-[24px] font-bold">Pants</p>
               <p className="flex items-center">
                 Explore <VscArrowSmallRight size={27} className="text-white" />
@@ -86,7 +87,7 @@ const Category = () => {
               src={image_8}
               alt=""
             />
-             <div className="absolute top-0 left-0 pl-[29.35px] pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white w-[279px] h-[330px] bg-black bg-opacity-50 rounded-[10px]">
+            <div className="absolute top-0 left-0 pl-[29.35px] pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white w-[279px] h-[330px] bg-black bg-opacity-50 rounded-[10px]">
               <p className="text-[24px] font-bold">Women Jacket</p>
               <p className="flex items-center">
                 Explore <VscArrowSmallRight size={27} className="text-white" />

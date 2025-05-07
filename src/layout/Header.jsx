@@ -8,12 +8,14 @@ import image_2 from "../assets/images/Ellipse 1.png";
 import { NavLink, useNavigate } from "react-router";
 import Button from "../components/Button";
 import { getAllCategory } from "../services/catogeryServices";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductData } from "../redux/productSlice";
 
 const Header = () => {
   const navigate = useNavigate();
+  // const dispatch=useDispatch();
   const cart = useSelector((state) => state.cart.cart || []);
-  const { wishlist } = useSelector((state) => state.wishlist || []);
+  const { wishlist } = useSelector((state) => state.wishlist);
   
 
   const handleLoginNavigate = () => {
@@ -44,7 +46,6 @@ const Header = () => {
   const fetchCategory = async () => {
     try {
       const response = await getAllCategory();
-      console.log(response.data);
       setCategory(response.data);
     } catch (error) {
       throw new Error(error.message);
@@ -56,31 +57,20 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="sticky top-0 z-50 h-20 bg-white">
+    <div className="sticky top-0 z-50 h-20 bg-white text-[18px]">
       <header className="h-20 w-full shadow-[0_0_15px_rgba(0,0,0,0.07)]">
         <nav className="flex items-center h-20 ">
           <img
+          onClick={()=>navigate('/')}
             className="w-[57px] h-[48px] ml-[50px] cursor-pointer"
             src={image_1}
             alt="image_1"
           />
 
           <div>
-            <ul className="flex items-center text-[18px]  ml-[100px] gap-10 text-textPrimary cursor-pointer">
-              {/* <li onClick={()=>navigate('/men')}>Men</li>
-              <li >Women</li>
-              <li >Kids</li>
-              <li >Shop</li>
-              <li >Contact us</li> */}
-              {/* {category.map((item) => (
-                <NavLink 
-                  onClick={() =>
-                    navigate(`/categories/${item.name.toLowerCase()}`)
-                  }
-                >
-                  {item.name}
-                </NavLink>
-              ))} */}
+            <ul className="flex items-center text-[18px]  ml-[80px] gap-10 text-textPrimary cursor-pointer">
+             
+              <li onClick={()=>navigate('/products')}>All</li>
 
               {category.map((item) => (
                 <NavLink
@@ -100,7 +90,7 @@ const Header = () => {
             </ul>
           </div>
 
-          <div className="flex ml-[150px] relative">
+          <div className="flex ml-[100px] relative">
             <input
               className="w-[534px] h-[52px] pl-8 text-textPrimary outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg text-[18px]"
               type="text"
@@ -121,9 +111,9 @@ const Header = () => {
                 src={heart_icon}
                 alt=""
               />
-              {/* <p className="absolute -top-2 -right-3 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
-                {wishlist.length}
-              </p> */}
+              <p className="absolute -top-2 -right-3 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
+                {wishlist?.length || 0} 
+              </p>
             </div>
             <div className="flex items-start relative">
               <img
@@ -133,7 +123,7 @@ const Header = () => {
                 alt=""
               />
               <p className="absolute -top-2 -right-3 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
-                {cart.length}
+                {cart?.length}
               </p>
             </div>
             <img

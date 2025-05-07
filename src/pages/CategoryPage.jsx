@@ -7,8 +7,6 @@ import CategoryCard from "../components/CategoryCard";
 
 const CategoryPage = () => {
   const { categoryName } = useParams();
-  const navigate = useNavigate();
-  console.log(categoryName);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +15,6 @@ const CategoryPage = () => {
     try {
       setLoading(true);
       const response = await getCategoryByName(categoryName);
-      console.log(response);
       setProducts(response.data);
       setError(null);
     } catch (error) {

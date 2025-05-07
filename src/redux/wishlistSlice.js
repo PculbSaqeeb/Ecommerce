@@ -10,8 +10,8 @@ export const fetchWishlistProduct = createAsyncThunk(
   async () => {
     try {
       const response = await getAllWishlistItem();
-      console.log(response);
-      return response.data.data.items;
+      console.log(response.data.data);
+      return response.data.data;
     } catch (error) {
       throw new Error(error.message);
     }
@@ -22,7 +22,7 @@ export const addProductToWishlist = createAsyncThunk(
   async (productId, { rejectWithValue }) => {
     try {
       const response = await addToWishlist(productId);
-      return response.data.data.items; 
+      return response.data.data.items;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -32,9 +32,9 @@ export const addProductToWishlist = createAsyncThunk(
 export const deleteProductToWishlist = createAsyncThunk(
   "wishlist/deleteToWishlist",
   async (productId) => {
-    console.log(productId);
     try {
       const response = await deleteToWishlist(productId);
+      console.log(response.data.data.items);
       return response.data.data.items;
     } catch (error) {
       throw new Error(error.message);
@@ -49,6 +49,7 @@ const wishlistSlice = createSlice({
     loading: false,
     error: null,
   },
+
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -70,7 +71,8 @@ const wishlistSlice = createSlice({
       })
 
       .addCase(addProductToWishlist.fulfilled, (state, action) => {
-        state.loading = false
+        state.loading = false;
+        state.wishlist = action.payload;
       })
 
       .addCase(addProductToWishlist.rejected, (state, action) => {
@@ -82,12 +84,18 @@ const wishlistSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
+
       .addCase(deleteProductToWishlist.fulfilled, (state, action) => {
         state.loading = false;
-        state.wishlist = state.wishlist.data.items.filter(
-          (item) => item.productId !== action.payload
-        );
+        state.wishlist = action.payload;
       })
+      
+      // .addCase(deleteProductToWishlist.fulfilled, (state, action) => {
+      //   state.loading = false;
+      //   const deletedProductId = action.meta.arg;
+      //   state.wishlist = state.wishlist.filter(item => item.id !== deletedProductId);
+      // })
+      
       .addCase(deleteProductToWishlist.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;

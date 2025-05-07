@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { toast } from 'react-toastify';
-import {verifyOTP} from '../services/authServices';
+import { toast } from "react-toastify";
+import { verifyOTP } from "../services/authServices";
 
 const Verification = () => {
   const navigate = useNavigate();
@@ -23,14 +23,7 @@ const Verification = () => {
   const onSubmit = async (data) => {
     try {
       const email = localStorage.getItem("email");
-      // const otpVerified = await axios.post(
-      //   `${process.env.REACT_APP_BASE_URL}/user/verify-otp`,
-      //   {
-      //     email: email,
-      //     OTP: Number(data.otp.trim()),
-      //   }
-    // );
-    const otpVerified= await verifyOTP(email,Number(data.otp));
+      const otpVerified = await verifyOTP(email, Number(data.otp));
       if (otpVerified.data.status === 202) {
         navigate("/new-password");
       }
@@ -48,22 +41,22 @@ const Verification = () => {
         </div>
       </div>
 
-      <p className="text-center text-[24px] text-textTertiary font-semibold mt-[27px]">
+      <p className="text-center text-[18px] text-textTertiary font-semibold mt-[27px]">
         Enter Verification Code
       </p>
 
-      <p className="text-center mt-[10px] text-textSecondary">
+      <p className="text-center mt-[10px] text-textSecondary text-[14px] w-[400px]">
         <span className="text-red-500">*</span> We will send you a message to
         set or reset your new password
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-7 mt-[26px]">
+      <form onSubmit={handleSubmit(onSubmit)} className=" mt-[41px]">
         <div className="">
           <input
             {...register("otp")}
-            type="text"
+            type="number"
             placeholder="Enter OTP here"
-            className="w-[440px] px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-[440px] px-3 py-3 border  rounded-[5px] border-[#E1E2E7] placeholder:text-textSecondary placeholder:text-[14px]"
             required
           />
         </div>
@@ -72,7 +65,12 @@ const Verification = () => {
           <p className="text-red-500 text-sm mt-2">{errors.otp.message}</p>
         )}
 
-        <Button type="submit" variant="blueButton" size="xl">
+        <Button
+          className="mt-[42px]"
+          type="submit"
+          variant="blueButton"
+          size="xl"
+        >
           Confirm
         </Button>
       </form>

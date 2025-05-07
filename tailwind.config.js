@@ -15,7 +15,10 @@
         success: "#0A8200",    
         iconColor:"#444E66",
         textTertiary:'#002482',
-        text:'#223263'
+        text:'#223263',
+        inputBorder:'#EBF0FF',
+        inputText:'#9098B1',
+        
       },
     },
   },

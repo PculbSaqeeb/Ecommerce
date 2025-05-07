@@ -8,7 +8,6 @@ import {
 import { toast } from "react-toastify";
 import { paymentEndpoint } from "../services/orderServices";
 
-// Async Thunks
 export const getAllCartItems = createAsyncThunk(
   "cart/getCartItems",
   async (_, { rejectWithValue }) => {
@@ -151,17 +150,7 @@ const cartSlice = createSlice({
         state.error = null;
       })
 
-      // .addCase(addToCart.fulfilled, (state, action) => {
-      //   const { cartDetails, breakdown } = action.payload;
-      //   state.loading = false;
-      //   state.cart = cartDetails.items.map((item) => ({
-      //     ...item,
-      //     quantity: item.quantity || 1,
-      //   }));
-      //   state.totalPrice = cartDetails.totalPrice;
-      //   state.totalQuantity = cartDetails.totalQuantity;
-      //   state.breakdown = breakdown;
-      // })
+
 
       .addCase(addToCart.fulfilled, (state, action) => {
         state.loading = false;
@@ -197,8 +186,6 @@ const cartSlice = createSlice({
         state.loading = false;
         const { cart } = action.payload;
         const { cartDetails, breakdown } = action.payload ;
-
-        console.log(cartDetails.breakdown);
       
         state.cart = cartDetails.items.map((item) => ({
           ...item,
@@ -219,17 +206,6 @@ const cartSlice = createSlice({
         state.error = null;
       })
 
-      // .addCase(removeToCart.fulfilled, (state, action) => {
-      //   const { cartDetails, breakdown } = action.payload;
-      //   state.loading = false;
-      //   state.cart = state.cartDetails.items.map((item) => ({
-      //     ...item,
-      //     quantity: item.quantity || 1,
-      //   }));
-      //   state.totalPrice = cartDetails.totalPrice;
-      //   state.totalQuantity = cartDetails.totalQuantity;
-      //   state.breakdown = breakdown;
-      // })
       .addCase(removeToCart.fulfilled, (state, action) => {
         state.loading = false;
         const removedId = action.meta.arg;
@@ -252,14 +228,14 @@ const cartSlice = createSlice({
 
 
       .addCase(payment.pending, (state) => {
-        state.loading = true;  // Set loading to true when payment is in progress
+        state.loading = true;  
       })
       .addCase(payment.fulfilled, (state, action) => {
-        state.loading = false;  // Reset loading after success
-        state.paymentLink = action.payload;  // Store the payment link
+        state.loading = false; 
+        state.paymentLink = action.payload;  
       })
       .addCase(payment.rejected, (state, action) => {
-        state.loading = false;  // Reset loading if failed
+        state.loading = false; 
         state.error = action.payload;
       })
   },

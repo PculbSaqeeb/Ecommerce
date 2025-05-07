@@ -7,31 +7,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductData } from "../redux/productSlice";
 
 const TrendingProduct = () => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 700,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    arrows: false,
-  };
 
   const navigate = useNavigate();
+  let startX = 0;
+  let endX = 0;
+
+  const handleMouseDown = (e) => {
+    startX = e.clientX || e.touches?.[0]?.clientX || 0;
+  };
+
+  const handleMouseUp = (e) => {
+    endX = e.clientX || e.changedTouches?.[0]?.clientX || 0;
+  };
 
   const handleProductDetailsNavigate = (e, id) => {
-    e.stopPropagation(); 
-    navigate(`/product-detail/${id}`);
+    e.stopPropagation();
+    if (Math.abs(endX - startX) < 5) {
+      navigate(`/product-detail/${id}`);
+    }
   };
 
   const dispatch = useDispatch();
   const { items, loading, error } = useSelector((state) => state.product);
-  console.log(items);
 
   useEffect(() => {
     dispatch(fetchProductData());
   }, [dispatch]);
 
-  console.log(items);
 
   return (
     <div className="ml-[50px] mt-[79px]">
@@ -39,10 +41,12 @@ const TrendingProduct = () => {
       <div className="mt-[27px]">
         <Sliders slidesToShow={4}>
           {loading && <p className="text-center mt-3 text-xl">Loading...</p>}
-          {error && <p>Error: {error}</p>}
+          {/* {error && <p>Error: {error}</p>} */}
           {items &&
             items.map((product, index) => (
               <div
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
                 onClick={(e) => handleProductDetailsNavigate(e, product.id)}
                 key={index}
               >

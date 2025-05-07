@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const VerfiyOTPSchema = z.object({
-  otp: z.string().regex(/^\d{6}$/, "OTP must be exactly 6 digits"),
+  otp: z.string().max(6)
 });
 
 export default VerfiyOTPSchema;

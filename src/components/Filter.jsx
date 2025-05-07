@@ -2,232 +2,113 @@
 // import down_arrow_icon from "../assets/icons/down_arrow_icon.svg";
 // import up_arrow_icon from "../assets/icons/up_arrow_icon.svg";
 // import "../style/style.css";
-// import * as Slider from "@radix-ui/react-slider";
-// import dots from "../assets/icons/dot.svg";
 // import Button from "./Button";
-// import { applyFilters, clearFilters } from "../store/productSlice";
-// import { fetchFilteredProducts } from "../redux/productSlice";
+// import { useDispatch } from "react-redux";
+// import { fetchFilteredProducts, fetchProductData } from "../redux/productSlice";
+// import * as Slider from "@radix-ui/react-slider"
 
-// const allBrands = ["Nike", "Adidas", "Puma"];
-// const allColors = ["Red", "Blue", "Green"];
-// const allDiscounts = [10, 20, 30, 50];
-
+// const allBrands = ["Levi's", "Reebok", "H&M", "Under Armour"];
+// const allColors = ["Red", "Blue", "Green", "Black", "White"];
+// const allDiscounts = ["10%", "20%", "30%", "40%", "50%", "60%"];
 
 // const Filter = ({ filterVisible }) => {
-//   const [showBrandList, setShowBrandList] = useState(null);
+//   const dispatch = useDispatch();
+//   const [showBrandList, setShowBrandList] = useState(false);
+//   const [showColorList, setShowColorList] = useState(false);
+//   const [showDiscountList, setShowDiscountList] = useState(false);
+
 //   const [selectedBrands, setSelectedBrands] = useState([]);
 //   const [selectedColors, setSelectedColors] = useState([]);
 //   const [selectedDiscounts, setSelectedDiscounts] = useState([]);
-//   const [priceRange, setPriceRange] = useState([0, 3000]);
-//   const min = 0;
-//   const max = 3000;
-//   const step = (max - min) / 30;
+
+//   const [priceRange, setPriceRange] = useState([0, 3000])
+//   const min = 0
+//   const max = 3000
+//   const step = (max - min) / 30 // 8 dots + 1
+
 //   const handleValueChange = (newValues) => {
-//     setPriceRange(newValues);
+//     setPriceRange(newValues)
+//   }
+
+//   const handleCheckboxChange = (item, list, setList) => {
+//     setList((prev) =>
+//       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
+//     );
 //   };
 
-//   const handleBrandList = (filterSection) => {
-//     setShowBrandList((prev) => (prev === filterSection ? null : filterSection));
-//   };
-
-//   const handleCheckboxChange = (type, value) => {
-//     const updater = {
-//       brand: [selectedBrands, setSelectedBrands],
-//       color: [selectedColors, setSelectedColors],
-//       discount: [selectedDiscounts, setSelectedDiscounts],
-//     };
-
-//     const [filters, setFilters] = useState({
-//       brands: [],
-//       colors: [],
-//       priceRange: [0, 10000],
-//       discounts: [],
-//     });
-  
-
-//     const [current, set] = updater[type];
-//     if (current.includes(value)) {
-//       set(current.filter((item) => item !== value));
+//   const handleApplyFilter = () => {
+//     if (
+//       selectedBrands.length === 0 &&
+//       selectedColors.length === 0 &&
+//       selectedDiscounts.length === 0
+//     ) {
+//       dispatch(fetchProductData());
 //     } else {
-//       set([...current, value]);
+//       dispatch(
+//         fetchFilteredProducts({
+//           brands: selectedBrands,
+//           colors: selectedColors,
+//           discount: selectedDiscounts,
+//         })
+//       );
 //     }
 //   };
-
-//   // const handleApplyFilter = () => {
-//   //   const filters = {
-//   //     brands: selectedBrands,
-//   //     colors: selectedColors,
-//   //     discounts: selectedDiscounts,
-//   //     priceRange: priceRange,
-//   //   };
-//   //   console.log("Applied Filters:", filters);
-//   // };
 
 //   const handleClearAll = () => {
 //     setSelectedBrands([]);
 //     setSelectedColors([]);
 //     setSelectedDiscounts([]);
-//     setPriceRange([0, 3000]);
+//     dispatch(fetchProductData());
 //   };
 
-
-//   const handleCheckbox = (type, value) => {
-//     setFilters((prev) => {
-//       const isChecked = prev[type].includes(value);
-//       const updated = isChecked
-//         ? prev[type].filter((item) => item !== value)
-//         : [...prev[type], value];
-//       return { ...prev, [type]: updated };
-//     });
-//   };
-
-//   const handlePriceChange = (e) => {
-//     const [min, max] = e.target.value.split("-");
-//     setFilters((prev) => ({
-//       ...prev,
-//       priceRange: [parseInt(min), parseInt(max)],
-//     }));
-//   };
-
-//   useEffect(() => {
-//     dispatch(fetchFilteredProducts(filters));
-//   }, [filters]);
+//   const renderSection = (title, showList, setShowList, items, selectedList, setSelectedList) => (
+//     <div className="border-t border-[#84848480] pt-[25px] mt-[25px]">
+//       <div className="flex justify-between">
+//         <p className="text-[24px] text-textPrimary font-bold">{title}</p>
+//         <img
+//           onClick={() => setShowList(!showList)}
+//           className="pr-[6.5px] cursor-pointer"
+//           src={showList ? up_arrow_icon : down_arrow_icon}
+//           alt={`Toggle ${title} List`}
+//         />
+//       </div>
+//       {showList && (
+//         <div className="mt-2 space-y-2">
+//           {items.map((item) => (
+//             <label key={item} className="block text-[18px] text-[#333]">
+//               <input
+//                 type="checkbox"
+//                 className="mr-2"
+//                 checked={selectedList.includes(item)}
+//                 onChange={() => handleCheckboxChange(item, selectedList, setSelectedList)}
+//               />
+//               {title === "Discount Range" ? `${item} and above` : item}
+//             </label>
+//           ))}
+//         </div>
+//       )}
+//     </div>
+//   );
 
 //   return (
-//     <div
-//       className={`${!filterVisible ? "block" : "hidden"} w-[460px] mb-[80px]`}
-//     >
-//       <div className=" rounded-[10px] pl-[22px] pr-[23px] ml-[50px] mt-[58px] shadow-[0_0_30px_rgba(0,0,0,0.07)] pb-[25px]">
-//         <div className="pt-[31px] flex justify-between">
+//     <div className={`${!filterVisible ? "block" : "hidden"} w-[460px] mb-[80px]`}>
+//       <div className="rounded-[10px] pl-[22px] pr-[23px] ml-[50px] mt-[58px] shadow-[0_0_30px_rgba(0,0,0,0.07)] pb-[25px] bg-white">
+//         {/* Header */}
+//         <div className="pt-[31px] flex justify-between items-center">
 //           <p className="text-textPrimary text-[36px] font-bold">Filter</p>
-//           <Button
-//             onClick={handleClearAll}
-//             variant="textOnly"
-//             className=" text-[18px]"
-//           >
+//           <Button onClick={handleClearAll} variant="textOnly" className="text-[18px]">
 //             Clear all
 //           </Button>
 //         </div>
-//         <p className="mt-[17px] text-[24px]">Price</p>
 
-//         <div className="">
-//           <div className="relative cursor-pointer w-[297px] h-[32px] mt-[27px]">
-//             <Slider.Root
-//               className="relative flex items-center select-none touch-none"
-//               value={priceRange}
-//               onValueChange={handleValueChange}
-//               min={min}
-//               max={max}
-//               step={step}
-//               minStepsBetweenThumbs={1}
-//               aria-label="Price Range"
-//             >
-//               <Slider.Track className="bg-[#939393] relative grow rounded-full h-2">
-//                 <Slider.Range className="absolute bg-[#0081DE] rounded-full h-full" />
-//               </Slider.Track>
+//         {/* Filter Sections */}
+//         {renderSection("Brand", showBrandList, setShowBrandList, allBrands, selectedBrands, setSelectedBrands)}
+//         {renderSection("Color", showColorList, setShowColorList, allColors, selectedColors, setSelectedColors)}
+//         {renderSection("Discount Range", showDiscountList, setShowDiscountList, allDiscounts, selectedDiscounts, setSelectedDiscounts)}
 
-//               <div className="absolute w-[285px] top-[24px] cursor-pointer">
-//                 {Array.from({ length: 9 }).map((_, i) => (
-//                   <img
-//                     key={i}
-//                     src={dots}
-//                     className="absolute"
-//                     style={{ left: `${i * 12.5}%` }}
-//                   />
-//                 ))}
-//               </div>
-
-//               <Slider.Thumb className="block w-5 h-5 bg-white border border-[#898989] rounded-full focus:outline-none" />
-//               <Slider.Thumb className="block w-5 h-5 bg-white border border-[#898989] rounded-full focus:outline-none" />
-//             </Slider.Root>
-//           </div>
-
-//           <div className="flex gap-[180px] mt-[29px]">
-//             <p className="text-[18px] text-[#636363]">Min</p>
-//             <p className="text-[18px] text-[#636363]">Max</p>
-//           </div>
-
-//           <div className="flex gap-[125px] mt-[9px] border-b border-[#84848480] pb-[25px]">
-//             <p className="text-[16px]">Rs. {priceRange[0]}</p>
-//             <p className="text-[16px]">Rs. {priceRange[1]}</p>
-//           </div>
-//         </div>
-
-//         <div className="flex justify-between border-b border-[#84848480] pb-[25px]">
-//           <p className="mt-[25px] text-[24px] text-textPrimary font-bold">
-//             Brand
-//           </p>
-
-//           <img
-//             onClick={() => handleBrandList("brand")}
-//             className="pr-[6.5px] cursor-pointer"
-//             src={showBrandList === "brand" ? up_arrow_icon : down_arrow_icon}
-//             alt=""
-//           />
-//         </div>
-
-//         {showBrandList === "brand" &&  allBrands.map((brand) => (
-//           <label key={brand}>
-//             <input
-//               type="checkbox"
-//               checked={filters.brands.includes(brand)}
-//               onChange={() => handleCheckbox("brands", brand)}
-//             />
-//             {brand}
-//           </label>
-//         ))}
-
-//         <div className="flex justify-between border-b border-[#84848480] pb-[25px]">
-//           <p className="mt-[25px] text-[24px] text-textPrimary font-bold">
-//             Color
-//           </p>
-//           <img
-//             onClick={() => handleBrandList("color")}
-//             className="pr-[6.5px] cursor-pointer"
-//             src={showBrandList === "color" ? up_arrow_icon : down_arrow_icon}
-//             alt=""
-//           />
-//         </div>
-
-//         {showBrandList === "color" && allColors.map((color) => (
-//           <label key={color}>
-//             <input
-//               type="checkbox"
-//               checked={filters.colors.includes(color)}
-//               onChange={() => handleCheckbox("colors", color)}
-//             />
-//             {color}
-//           </label>
-//         ))}
-
-//         <div className="flex justify-between border-b border-[#84848480] pb-[25px]">
-//           <p className="mt-[25px] text-[24px] text-textPrimary font-bold">
-//             Discount
-//           </p>
-//           <img
-//             onClick={() => handleBrandList("discount")}
-//             className="pr-[6.5px] cursor-pointer"
-//             src={showBrandList === "discount" ? up_arrow_icon : down_arrow_icon}
-//             alt=""
-//           />
-//         </div>
-
-//         {showBrandList === "discount" && allDiscounts.map((d) => (
-//           <label key={d}>
-//             <input
-//               type="checkbox"
-//               onChange={() => handleCheckbox("discounts", d)}
-//               checked={filters.discounts.includes(d)}
-//             />
-//             {d}% and above
-//           </label>
-//         ))}
-
+//         {/* Apply Button */}
 //         <div className="flex justify-center">
-//           <Button
-//             onClick={() => handleApplyFilter()}
-//             className="mt-[20px] flex items-center"
-//           >
+//           <Button onClick={handleApplyFilter} className="mt-[20px] flex items-center">
 //             Apply Filter
 //           </Button>
 //         </div>
@@ -238,91 +119,95 @@
 
 // export default Filter;
 
-
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 import down_arrow_icon from "../assets/icons/down_arrow_icon.svg";
 import up_arrow_icon from "../assets/icons/up_arrow_icon.svg";
 import "../style/style.css";
-import * as Slider from "@radix-ui/react-slider";
-import dots from "../assets/icons/dot.svg";
 import Button from "./Button";
-import { fetchFilteredProducts } from "../redux/productSlice";
+import { useDispatch } from "react-redux";
+import { fetchFilteredProducts, fetchProductData } from "../redux/productSlice";
+import * as Slider from "@radix-ui/react-slider"
 
-const allBrands = ["Levi's", "Rebook", "H&M","Under Armour"];
-const allColors = ["Red", "Blue", "Green"];
-const allDiscounts = [10, 20, 30, 50];
+const allBrands = ["Levi's", "Reebok", "H&M", "Under Armour"];
+const allColors = ["Red", "Blue", "Green", "Black", "White"];
+const allDiscounts = ["10", "20", "30", "40", "50", "60"];
 
 const Filter = ({ filterVisible }) => {
   const dispatch = useDispatch();
+  const [showBrandList, setShowBrandList] = useState(false);
+  const [showColorList, setShowColorList] = useState(false);
+  const [showDiscountList, setShowDiscountList] = useState(false);
 
-  const [showBrandList, setShowBrandList] = useState(null);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedDiscounts, setSelectedDiscounts] = useState([]);
 
-  const [filters, setFilters] = useState({
-    brands: [],
-    colors: [],
-    priceRange: [0, 3000],
-    discounts: [],
-  });
+  const handleCheckboxChange = (item, list, setList) => {
+    setList((prev) =>
+      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
+    );
+  };
 
+  const [priceRange, setPriceRange] = useState([0, 3000]);
   const min = 0;
   const max = 3000;
-  const step = (max - min) / 30;
+  const step = Math.round((max - min) / 60); 
 
   const handleValueChange = (newValues) => {
-    setFilters((prev) => ({
-      ...prev,
-      priceRange: newValues,
-    }));
-  };
-
-  const handleBrandList = (filterSection) => {
-    setShowBrandList((prev) => (prev === filterSection ? null : filterSection));
-  };
-
-  const handleCheckbox = (type, value) => {
-    setFilters((prev) => {
-      const isChecked = prev[type].includes(value);
-      const updated = isChecked
-        ? prev[type].filter((item) => item !== value)
-        : [...prev[type], value];
-      return { ...prev, [type]: updated };
-    });
-  };
-
-  const handleClearAll = () => {
-    setFilters({
-      brands: [],
-      colors: [],
-      priceRange: [0, 3000],
-      discounts: [],
-    });
+    setPriceRange(newValues);
   };
 
   const handleApplyFilter = () => {
-    dispatch(fetchFilteredProducts(filters));
+    if (
+      selectedBrands.length === 0 &&
+      selectedColors.length === 0 &&
+      selectedDiscounts.length === 0 &&
+      priceRange[0] === 0 &&
+      priceRange[1] === 10000
+    ) {
+      dispatch(fetchProductData());
+    } else {
+      dispatch(
+        fetchFilteredProducts({
+          priceRange: priceRange,
+          brands: selectedBrands,
+          colors: selectedColors,
+          discounts: selectedDiscounts,
+        })
+      );
+    }
   };
 
-  // useEffect(() => {
-  //   dispatch(fetchFilteredProducts(filters));
-  // }, [filters]);
+  const handleClearAll = () => {
+    setPriceRange([0,10000])
+    setSelectedBrands([]);
+    setSelectedColors([]);
+    setSelectedDiscounts([]);
+    dispatch(fetchProductData());
+  };
 
   return (
-    <div className={`${!filterVisible ? "block" : "hidden"} w-[460px] mb-[80px]`}>
-      <div className="rounded-[10px] pl-[22px] pr-[23px] ml-[50px] mt-[58px] shadow-[0_0_30px_rgba(0,0,0,0.07)] pb-[25px]">
+    <div
+      className={`${!filterVisible ? "block" : "hidden"} w-[460px] mb-[80px]`}
+    >
+      <div className="rounded-[10px] pl-[22px] pr-[23px] ml-[50px] mt-[58px] shadow-[0_0_30px_rgba(0,0,0,0.07)] pb-[25px] bg-white">
         <div className="pt-[31px] flex justify-between">
-          <p className="text-textPrimary text-[36px] font-bold">Filter</p>
-          <Button onClick={handleClearAll} variant="textOnly" className="text-[18px]">
-            Clear all
+          <p className="text-textPrimary text-[36px] font-bold">Filters</p>
+          <Button
+            onClick={handleClearAll}
+            variant="textOnly"
+            className="text-[18px]"
+          >
+            Clear All
           </Button>
         </div>
 
-        {/* Price Section */}
         <p className="mt-[17px] text-[24px]">Price</p>
-        <div className="relative cursor-pointer w-[297px] h-[32px] mt-[27px]">
+
+        <div className="relative pb-6 mt-[27px]">
           <Slider.Root
-            className="relative flex items-center select-none touch-none"
-            value={filters.priceRange}
+            className="relative flex items-center select-none touch-none w-[297px] h-5"
+            value={priceRange}
             onValueChange={handleValueChange}
             min={min}
             max={max}
@@ -330,101 +215,136 @@ const Filter = ({ filterVisible }) => {
             minStepsBetweenThumbs={1}
             aria-label="Price Range"
           >
-            <Slider.Track className="bg-[#939393] relative grow rounded-full h-2">
+            <Slider.Track className="bg-[#939393] relative grow rounded-full h-2 border ">
               <Slider.Range className="absolute bg-[#0081DE] rounded-full h-full" />
             </Slider.Track>
-            <div className="absolute w-[285px] top-[24px] cursor-pointer">
+
+            <div className="absolute w-full top-[28px] left-[7px]">
               {Array.from({ length: 9 }).map((_, i) => (
-                <img
+                <div
                   key={i}
-                  src={dots}
-                  className="absolute"
-                  style={{ left: `${i * 12.5}%` }}
+                  className="absolute w-1.5 h-1.5 rounded-full bg-[#6D6D6D]"
+                  style={{ left: `${i * 11}%` }}
                 />
               ))}
             </div>
-            <Slider.Thumb className="block w-5 h-5 bg-white border border-[#898989] rounded-full focus:outline-none" />
-            <Slider.Thumb className="block w-5 h-5 bg-white border border-[#898989] rounded-full focus:outline-none" />
+
+            <Slider.Thumb className="block w-[20px] h-[20px] bg-white border border-[#898989] rounded-full" />
+            <Slider.Thumb className="block w-[20px] h-[20px] bg-white border border-[#898989] rounded-full " />
           </Slider.Root>
         </div>
-        <div className="flex gap-[180px] mt-[29px]">
-          <p className="text-[18px] text-[#636363]">Min</p>
-          <p className="text-[18px] text-[#636363]">Max</p>
-        </div>
-        <div className="flex gap-[125px] mt-[9px] border-b border-[#84848480] pb-[25px]">
-          <p className="text-[16px]">Rs. {filters.priceRange[0]}</p>
-          <p className="text-[16px]">Rs. {filters.priceRange[1]}</p>
+
+        <div className="flex mt-[29px] ">
+          <div>
+            <div className="text-lg text-[#636363] ">Min</div>
+            <div className="text-lg mt-[9px]">Rs. {priceRange[0]}</div>
+          </div>
+          <div className="ml-[180px]">
+            <div className="text-lg text-[#636363] font-serif">Max</div>
+            <div className="text-lg mt-[9px]">Rs. {priceRange[1]}</div>
+          </div>
         </div>
 
-        {/* Brand Section */}
-        <div className="flex justify-between border-b border-[#84848480] pb-[25px]">
-          <p className="mt-[25px] text-[24px] text-textPrimary font-bold">Brand</p>
+        <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
+          <p className="text-[24px] text-textPrimary font-bold">Brand</p>
           <img
-            onClick={() => handleBrandList("brand")}
+            onClick={() => setShowBrandList(!showBrandList)}
             className="pr-[6.5px] cursor-pointer"
-            src={showBrandList === "brand" ? up_arrow_icon : down_arrow_icon}
-            alt=""
+            src={showBrandList ? up_arrow_icon : down_arrow_icon}
+            alt="Toggle Brand Filter"
           />
         </div>
-        {showBrandList === "brand" &&
-          allBrands.map((brand) => (
-            <label key={brand}>
-              <input
-                type="checkbox"
-                checked={filters.brands.includes(brand)}
-                onChange={() => handleCheckbox("brands", brand)}
-              />
-              {brand}
-            </label>
-          ))}
+        {showBrandList && (
+          <div className="mt-2 space-y-2">
+            {allBrands.map((brand) => (
+              <label key={brand} className="block text-[18px] text-[#333]">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  checked={selectedBrands.includes(brand)}
+                  onChange={() =>
+                    handleCheckboxChange(
+                      brand,
+                      selectedBrands,
+                      setSelectedBrands
+                    )
+                  }
+                />
+                {brand}
+              </label>
+            ))}
+          </div>
+        )}
 
-        {/* Color Section */}
-        <div className="flex justify-between border-b border-[#84848480] pb-[25px]">
-          <p className="mt-[25px] text-[24px] text-textPrimary font-bold">Color</p>
+        <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
+          <p className="text-[24px] text-textPrimary font-bold">Color</p>
           <img
-            onClick={() => handleBrandList("color")}
+            onClick={() => setShowColorList(!showColorList)}
             className="pr-[6.5px] cursor-pointer"
-            src={showBrandList === "color" ? up_arrow_icon : down_arrow_icon}
-            alt=""
+            src={showColorList ? up_arrow_icon : down_arrow_icon}
+            alt="Toggle Color Filter"
           />
         </div>
-        {showBrandList === "color" &&
-          allColors.map((color) => (
-            <label key={color}>
-              <input
-                type="checkbox"
-                checked={filters.colors.includes(color)}
-                onChange={() => handleCheckbox("colors", color)}
-              />
-              {color}
-            </label>
-          ))}
+        {showColorList && (
+          <div className="mt-2 space-y-2">
+            {allColors.map((color) => (
+              <label key={color} className="block text-[18px] text-[#333]">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  checked={selectedColors.includes(color)}
+                  onChange={() =>
+                    handleCheckboxChange(
+                      color,
+                      selectedColors,
+                      setSelectedColors
+                    )
+                  }
+                />
+                {color}
+              </label>
+            ))}
+          </div>
+        )}
 
-        {/* Discount Section */}
-        <div className="flex justify-between border-b border-[#84848480] pb-[25px]">
-          <p className="mt-[25px] text-[24px] text-textPrimary font-bold">Discount</p>
+        <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
+          <p className="text-[24px] text-textPrimary font-bold">
+            Discount Range
+          </p>
           <img
-            onClick={() => handleBrandList("discount")}
+            onClick={() => setShowDiscountList(!showDiscountList)}
             className="pr-[6.5px] cursor-pointer"
-            src={showBrandList === "discount" ? up_arrow_icon : down_arrow_icon}
-            alt=""
+            src={showDiscountList ? up_arrow_icon : down_arrow_icon}
+            alt="Toggle Discount Filter"
           />
         </div>
-        {showBrandList === "discount" &&
-          allDiscounts.map((d) => (
-            <label key={d}>
-              <input
-                type="checkbox"
-                onChange={() => handleCheckbox("discounts", d)}
-                checked={filters.discounts.includes(d)}
-              />
-              {d}% and above
-            </label>
-          ))}
-
+        {showDiscountList && (
+          <div className="mt-2 space-y-2">
+            {allDiscounts.map((discount) => (
+              <label key={discount} className="block text-[18px] text-[#333]">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  checked={selectedDiscounts.includes(discount)}
+                  onChange={() =>
+                    handleCheckboxChange(
+                      discount,
+                      selectedDiscounts,
+                      setSelectedDiscounts
+                    )
+                  }
+                />
+                {discount} % and above
+              </label>
+            ))}
+          </div>
+        )}
         <div className="flex justify-center">
-          <Button onClick={handleApplyFilter} className="mt-[20px] flex items-center">
-            Apply Filter
+          <Button
+            onClick={handleApplyFilter}
+            className="mt-[20px] flex items-center"
+          >
+            Apply Filters
           </Button>
         </div>
       </div>
@@ -433,3 +353,4 @@ const Filter = ({ filterVisible }) => {
 };
 
 export default Filter;
+

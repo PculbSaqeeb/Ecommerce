@@ -10,7 +10,7 @@ const About = () => {
         <p className="mt-[27px] text-4xl font-bold text-textPrimary">
           Business Name
         </p>
-        <p className="mt-[26px] w-[882px] text-textPrimary">
+        <p className="mt-[26px] w-[882px] text-textPrimary text-[24px]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui vel morbi
           cursus sed sodales molestie proin dictum gravida. Porttitor maecenas
           tincidunt ipsum semper malesuada. In sapien feugiat laoreet convallis
@@ -27,12 +27,10 @@ const About = () => {
         <p className="text-[24px] font-bold mt-[26px] text-textPrimary">
           Contact Information
         </p>
-        <p className="mt-[15px] text-textPrimary">+91 1234567890</p>
+        <p className="mt-[15px] text-textPrimary text-[24px]">+91 1234567890</p>
         <p className="mt-[12px] text-textPrimary text-[24px]">
-          Somtinh@gamil.com
+          Somthing@gamil.com
         </p>
-
-        {/* <button className='rounded-[10px] text-[18px] text-textPrimary w-[168px] h-[48px] border-2 border-textPrimary mt-[26px]'>Directions</button> */}
 
         <Button
           variant="outlineDark"

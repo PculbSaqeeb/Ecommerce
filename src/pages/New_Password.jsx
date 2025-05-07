@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/icons/Group 400.svg";
-import lock_icon from "../assets/icons/Password.svg";
+import lock_icon from "../assets/icons/password_icon.svg";
 import Button from "../components/Button";
 import NewPasswordSchema from "../constant/formErrorSchema/newPasswordSchema";
 import { set, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { toast } from 'react-toastify';
-import {resetPassword} from '../services/authServices';
+import { toast } from "react-toastify";
+import { resetPassword } from "../services/authServices";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const New_Password = () => {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
   const {
     register,
     handleSubmit,
@@ -23,69 +27,82 @@ const New_Password = () => {
 
   const onSubmit = async (data) => {
     try {
-      const email=localStorage.getItem('email');
-      // const setNewPassword = await axios.post(
-      //   `${process.env.REACT_APP_BASE_URL}/user/change-password`,
-      //   {
-      //     email: email,
-      //     password:data.password,
-      //     confirmPassword:data.confirmPassword,
-      //   } 
-      // );
-      console.log(data);
-      const setNewPassword=await resetPassword(email,data);
+      const email = localStorage.getItem("email");
+      const setNewPassword = await resetPassword(email, data);
       if (setNewPassword.data.status === 200) {
         navigate("/login");
       }
-      toast.success(setNewPassword?.data?.message)
+      toast.success(setNewPassword?.data?.message);
     } catch (error) {
-      toast.error(error.response?.data?.message);
+      // toast.error(error.response?.data?.message);
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen displayRegular">
       <div className="w-[72px] h-[72px] rounded-[16px] bg-textTertiary mx-auto">
         <div className="flex h-full items-center justify-center">
           <img className="-rotate-90 " src={logo} alt="" />
         </div>
       </div>
 
-      <p className="text-center mt-[26px] text-[24px] text-textTertiary font-semibold">
+      <p className="text-center mt-[26px] text-[18px] text-textTertiary font-bold">
         New Password
       </p>
-      <p className="text-center mt-[10px] text-textSecondary">
+      <p className="text-center text-[14px] mt-[10px] text-textSecondary">
         Set new password for your account
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 mt-10">
-        <div className="relative">
+      <form onSubmit={handleSubmit(onSubmit)} className="">
+        <div className="relative mt-[42px]">
           <input
             {...register("password")}
-            type="password"
-            placeholder="Password"
-            className="w-[440px] px-3 py-3 pl-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter your Password"
+            className="w-[440px] px-3 py-2 pl-12 pr-10  border border-inputBorder rounded-md placeholder:text-inputText placeholder:text-[12px]"
             required
           />
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
             <img src={lock_icon} alt="" />
           </div>
+          <div
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer"
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? (
+              <AiOutlineEyeInvisible size={20} />
+            ) : (
+              <AiOutlineEye size={20} />
+            )}
+          </div>
         </div>
 
         {errors.password && (
-          <p className="text-red-500 text-sm mt-2">{errors.password.message}</p>
+          <p className="text-red-500 text-sm mt-2">
+            {errors.password.message}
+          </p>
         )}
 
-        <div className="relative">
+        <div className="relative mt-[8px]">
           <input
             {...register("confirmPassword")}
-            type="password"
-            placeholder="Password"
-            className="w-[440px] px-3 py-3 pl-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter your Confirm Password"
+            className="w-[440px] px-3 py-2 pl-12 pr-10  border border-inputBorder rounded-md placeholder:text-inputText placeholder:text-[12px]"
             required
           />
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
             <img src={lock_icon} alt="" />
+          </div>
+          <div
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer"
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? (
+              <AiOutlineEyeInvisible size={20} />
+            ) : (
+              <AiOutlineEye size={20} />
+            )}
           </div>
         </div>
 
@@ -100,6 +117,7 @@ const New_Password = () => {
           onClick={handleSubmit(onSubmit)}
           variant="blueButton"
           size="xl"
+          className="text-[18px]"
         >
           Submit
         </Button>

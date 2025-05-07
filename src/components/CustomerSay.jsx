@@ -33,7 +33,7 @@ const Trending = () => {
     speed: 700,
     slidesToShow: 1,
     centerMode: true,
-    centerPadding: "400px",
+    centerPadding: "418px",
     autoplay: true,
     autoplaySpeed: 3000,
     nextArrow: <NextArrow />,
@@ -49,39 +49,13 @@ const Trending = () => {
 
       <Slider {...settings}>
         {[1, 2, 3, 4].map((_, index) => (
-          // <div
-          //   key={index}
-          //   className="!flex items-center justify-center mt-[27px] cursor-pointer"
-          // >
-          //   <div className="w-[946px] h-[587px] flex flex-col items-center justify-center shadow-[0_4px_4px_rgba(0,0,0,0.25)] rounded-l-[10px] ">
-          //     <img
-          //       className="w-[150px] h-[150px] rounded-full mt-[58px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-          //       src={image_9}
-          //       alt="Offer"
-          //     />
-          //     <div className="flex items-center justify-center mt-[24px] text-center">
-          //       {[1, 2, 3, 4, 5].map((_, i) => (
-          //         <img className="w-[24px] m-[1px]" src={black_star_icon} alt="" />
-          //       ))}
-          //       <p className="text-[18px] ml-[11px]">4.4</p>
-          //     </div>
-
-          //     <p className="text-[24px] text-textPrimary mt-[24px] text-center px-[32px]">
-          //       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui vel
-          //       morbi cursus sed sodales molestie proin dictum gravida.
-          //       Porttitor maecenas tincidunt ipsum semper malesuada. In sapien
-          //       feugiat laoreet convallis eu sed.
-          //     </p>
-          //   </div>
-          // </div>
-
           <div
             key={index}
             className="!flex items-center justify-center mt-[27px] cursor-pointer pb-[5px]"
           >
-            <div className="w-[946px] h-[587px] flex flex-col items-center  shadow-[0px_0px_10px_rgba(0,0,0,0.04)] justify-center rounded-[10px] bg-white">
+            <div className="w-[946px]  flex flex-col items-center shadow-[0px_0px_10px_rgba(0,0,0,0.04)] justify-center rounded-[10px] bg-white">
               <img
-                className="w-[150px] h-[150px] rounded-full mt-[58px] "
+                className="w-[150px] h-[150px] rounded-full mt-[58px]"
                 src={image_9}
                 alt="Offer"
               />
@@ -97,7 +71,7 @@ const Trending = () => {
                 <p className="text-[18px] ml-[11px]">4.4</p>
               </div>
 
-              <p className="text-[24px] text-textPrimary mt-[24px] text-center px-[32px]">
+              <p className="text-[24px] text-textPrimary mt-[24px] text-center px-[32px] pb-[48px]">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui vel
                 morbi cursus sed sodales molestie proin dictum gravida.
                 Porttitor maecenas tincidunt ipsum semper malesuada. In sapien
