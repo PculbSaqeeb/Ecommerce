@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const Sliders = ({ children ,slidesToShow}) => {
+const Sliders = ({ children ,slidesToShow,responsive}) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -12,7 +12,9 @@ const Sliders = ({ children ,slidesToShow}) => {
     slidesToScroll: 4,
     arrows: false,
     autoplay: true,              
-    autoplaySpeed: 2000,         
+    autoplaySpeed: 2000,  
+  responsive:responsive,
+           
   };
   return (
     <div>

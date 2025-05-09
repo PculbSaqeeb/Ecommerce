@@ -63,7 +63,7 @@ const Banner_2 = () => {
                   <Button
                     onClick={handleProductNavigate}
                     variant="whiteOutline"
-                    className="mt-[34px] text-white px-[37px] py-[9px] text-[24px]"
+                    className="mt-[34px] text-white px-[37px] text-[24px]"
                   >
                     Explore
                   </Button>

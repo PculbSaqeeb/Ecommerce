@@ -5,26 +5,21 @@ import red_heart_icon from "../assets/icons/red_heart_icon.png";
 import ProductCard from "../components/ProductCard";
 import Rating from "../components/Rating";
 import Specifications from "../components/Specifications";
-import image_12 from "../assets/images/Rectangle 20.jpg";
 import black_star_icon from "../assets/icons/black_star_icon.svg";
 import right_arrow_icon from "../assets/icons/right_blue_icon.svg";
+import empty_star from "../assets/icons/empty_star.svg";
+import { FaStarHalfAlt } from "react-icons/fa";
 import Layout from "../layout/Index";
-import Slider from "react-slick";
 import Sliders from "../components/Sliders";
 import Button from "../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import ScrollToTop from "../components/ScrollToTop";
-import { addToWishlist } from "../services/wishlistServices";
 import {
   addProductToWishlist,
   deleteProductToWishlist,
-  fetchWishlistProduct,
 } from "../redux/wishlistSlice";
 import {
   addToCart,
-  decrementQuantity,
-  incrementQuantity,
   removeToCart,
 } from "../redux/cartSlice";
 import { fetchProductData } from "../redux/productSlice";
@@ -37,6 +32,7 @@ const ProductDetail = () => {
   const { loading, error } = useSelector((state) => state.product);
   const { id } = useParams();
   const product = products.find((item) => item.id === id);
+  const rating = product.averageRating;
 
   const handleTabClick = (role) => {
     setTabList(role);
@@ -125,12 +121,37 @@ const ProductDetail = () => {
           </p>
 
           <div className="flex items-center mt-[25px]">
-            {[1, 2, 3, 4, 5].map(() => (
+
+            {/* {[1, 2, 3, 4, 5].map(() => (
               <img src={black_star_icon} className="mx-[1px]" />
-            ))}
+            ))} */}
+            {[1, 2, 3, 4, 5].map((_, i) => {
+              const rating = product.averageRating;
+              if (rating >= i + 1) {
+                return (
+                  <img
+                    key={i}
+                    src={black_star_icon}
+                    alt="full star"
+                    className="w-[20px] h-[19px]"
+                  />
+                );
+              } else if (rating >= i + 0.5) {
+                return <FaStarHalfAlt key={i} size={22} />;
+              } else {
+                return (
+                  <img
+                    key={i}
+                    src={empty_star}
+                    alt="empty star"
+                    className="w-[20px] h-[19px]"
+                  />
+                );
+              }
+            })}
             <div className="text-[18px] text-textPrimary flex items-center mt-[2px]">
-              <p className="ml-[11px]">4.4</p>
-              <p className="ml-[19px]">36 Review</p>
+              <p className="ml-[11px]">{product?.averageRating?.toFixed(1) || 0}</p>
+              <p className="ml-[19px]">{product?.reviews?.length || 0} Review</p>
             </div>
           </div>
           <p className="text-[24px] text-textPrimary font-bold mt-[28px]">
@@ -239,14 +260,14 @@ const ProductDetail = () => {
             </button>
             {!isWishlist ? (
               <img
-                onClick={()=>handleAddToWishlist(id)}
+                onClick={() => handleAddToWishlist(id)}
                 src={heart_icon}
                 size={40}
                 className="w-[25.38] h-[22.31px] cursor-pointer"
               />
             ) : (
               <img
-                onClick={()=>handleDeleteToWishlist(id)}
+                onClick={() => handleDeleteToWishlist(id)}
                 src={red_heart_icon}
                 size={40}
                 className="w-[25.38] h-[22.31px] cursor-pointer"
@@ -259,28 +280,25 @@ const ProductDetail = () => {
       <div className="text-[#848484] text-[18px] flex items-center justify-center gap-[291px] mt-[80px] pb-[28px] ">
         <p
           onClick={() => handleTabClick("details")}
-          className={`cursor-pointer ${
-            tabList === "details" &&
+          className={`cursor-pointer ${tabList === "details" &&
             "text-[#002482] border-b-[3px] border-[#002482]"
-          }`}
+            }`}
         >
           Product Details
         </p>
         <p
           onClick={() => handleTabClick("spec")}
-          className={`cursor-pointer ${
-            tabList === "spec" &&
+          className={`cursor-pointer ${tabList === "spec" &&
             "text-[#002482] border-b-[3px] border-[#002482]"
-          }`}
+            }`}
         >
           Specification
         </p>
         <p
           onClick={() => handleTabClick("rating")}
-          className={`cursor-pointer ${
-            tabList === "rating" &&
+          className={`cursor-pointer ${tabList === "rating" &&
             "text-[#002482] border-b-[3px] border-[#002482]"
-          }`}
+            }`}
         >
           Rating & Reviews
         </p>

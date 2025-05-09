@@ -13,6 +13,7 @@ import CategoryPage from "../pages/CategoryPage";
 import SubCategoryPage from "../pages/SubCategoryPage";
 import Cart from "../pages/Cart";
 import CheckoutPage from "../pages/CheckoutPage";
+import Category from "../pages/Category";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,11 @@ const router = createBrowserRouter([
   {
     path:"/categories/:categoryName/:subCategory/product-detail/:id",
     element:<ProductDetail />
+  },
+
+  {
+    path:"/category",
+    element:<Category />
   },
 
   

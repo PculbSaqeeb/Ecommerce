@@ -44,10 +44,19 @@ const CategoryPage = () => {
           </p>
         )}
 
-        <div className="flex flex-wrap gap-[50px]">
+        {/* <div className="flex flex-wrap gap-[50px]">
           {products.map((product) => (
             <CategoryCard
             
+              key={product._id || product.id}
+              product={product}
+            />
+          ))}
+        </div> */}
+
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {products.map((product) => (
+            <CategoryCard
               key={product._id || product.id}
               product={product}
             />

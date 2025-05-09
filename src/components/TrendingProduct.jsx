@@ -36,6 +36,7 @@ const TrendingProduct = () => {
 
 
   return (
+    
     <div className="ml-[50px] mt-[79px]">
       <p className="text-textPrimary text-[36px] font-bold">Trending Now</p>
       <div className="mt-[27px]">
@@ -56,6 +57,64 @@ const TrendingProduct = () => {
         </Sliders>
       </div>
     </div>
+
+
+    // <div className="ml-4 md:ml-[50px] mt-8 md:mt-[79px]">
+    //   <p className="text-textPrimary text-2xl sm:text-3xl md:text-[36px] font-bold">
+    //     Trending Now
+    //   </p>
+
+    //   <div className="mt-6 md:mt-[27px]">
+    //     <Sliders
+    //       slidesToShow={1}
+    //       responsive={[
+    //         {
+    //           breakpoint: 640,
+    //           settings: {
+    //             slidesToShow: 1,
+    //           },
+    //         },
+    //         {
+    //           breakpoint: 768,
+    //           settings: {
+    //             slidesToShow: 2,
+    //           },
+    //         },
+    //         {
+    //           breakpoint: 1024,
+    //           settings: {
+    //             slidesToShow: 3,
+    //           },
+    //         },
+    //         {
+    //           breakpoint: 1280,
+    //           settings: {
+    //             slidesToShow: 4,
+    //           },
+    //         },
+    //       ]}
+    //     >
+    //       {loading && (
+    //         <p className="text-center mt-3 text-base sm:text-lg md:text-xl">
+    //           Loading...
+    //         </p>
+    //       )}
+
+    //       {items &&
+    //         items.map((product, index) => (
+    //           <div
+    //             onMouseDown={handleMouseDown}
+    //             onMouseUp={handleMouseUp}
+    //             onClick={(e) => handleProductDetailsNavigate(e, product.id)}
+    //             key={index}
+    //           >
+    //             <ProductCard product={product} />
+    //           </div>
+    //         ))}
+    //     </Sliders>
+    //   </div>
+    // </div>
+
   );
 };
 

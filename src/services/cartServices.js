@@ -24,3 +24,20 @@ export const quantityDecrementEndPoint = (productId) => {
     data: { productId: productId }
   });
 };
+
+export const getPromoCode = () => {
+  // return axiosInstance.get(`${BASE_URL}promocode`);
+
+  return axiosInstance.get(`http://192.168.1.58:5000/promocode`);
+};
+
+
+export const promoCode = (coupon) => {
+  // return axiosInstance.post(`${BASE_URL}promocode/apply`, {
+    
+  // });
+
+  return axiosInstance.post(`http://192.168.1.58:5000/promocode/apply`, {
+    promoCode:coupon
+  });
+};

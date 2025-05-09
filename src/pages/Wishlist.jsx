@@ -13,13 +13,15 @@ import {
 const Wishlist = () => {
   const dispatch = useDispatch();
   const { wishlist, loading, error } = useSelector((state) => state.wishlist);
+  console.log(wishlist);
 
   useEffect(() => {
     dispatch(fetchWishlistProduct());
   }, []);
 
-  const handleDeleteToWishlist = (id) => {
-    dispatch(deleteProductToWishlist(id));
+  const handleDeleteToWishlist =  (id) => {
+     dispatch(deleteProductToWishlist(id));
+    dispatch(fetchWishlistProduct()); 
   };
 
   return (

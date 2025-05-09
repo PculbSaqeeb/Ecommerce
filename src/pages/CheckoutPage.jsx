@@ -2,7 +2,7 @@ import React from "react";
 import OrderLayout from "../layout/OrderLayout";
 import red_cross_icon from "../assets/icons/cross.png";
 import { useDispatch, useSelector } from "react-redux";
-import { payment, removeToCart } from "../redux/cartSlice";
+import { addToCart, payment, quantityDecrement, removeToCart } from "../redux/cartSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,7 +28,7 @@ const CheckoutPage = () => {
     dispatch(payment(data));
   };
 
-  const { cart, loading, paymentLink, error } = useSelector(
+  const { cart, loading, paymentLink, error, coupon, discount } = useSelector(
     (state) => state.cart
   );
   const dispatch = useDispatch();
@@ -174,13 +174,17 @@ const CheckoutPage = () => {
                         ${item.price.toFixed()}
                       </p>
                       <div className="flex items-center gap-3 mt-2">
-                        <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+                        <button onClick={() =>
+                          dispatch(quantityDecrement(item.productId))
+                        } className="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
                           -
                         </button>
                         <p className="text-gray-700 font-medium">
                           {item.quantity}
                         </p>
-                        <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+                        <button onClick={() =>
+                          dispatch(addToCart(item.productId))
+                        } className="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
                           +
                         </button>
                       </div>
@@ -197,30 +201,45 @@ const CheckoutPage = () => {
                       ${subtotal.toFixed(2)}
                     </td>
                   </tr>
+
                   <tr>
                     <td className="py-2 text-gray-600">Shipping Charges</td>
                     <td className="py-2 text-right font-semibold text-gray-800">
                       ${shipping.toFixed(2)}
                     </td>
                   </tr>
+
                   <tr>
                     <td className="py-2 text-gray-600">GST (18%)</td>
                     <td className="py-2 text-right font-semibold text-gray-800">
                       ${gst.toFixed(2)}
                     </td>
                   </tr>
+
                   <tr>
                     <td className="py-2 text-gray-600">Coupon Code</td>
                     <td className="py-2 text-right font-semibold text-green-600 uppercase">
-                      ascsdvas
+                    {coupon.coupon}
                     </td>
                   </tr>
+
+
+                  <tr>
+                    <td className="text-gray-600 py-3 font-medium ">
+                      Discount
+                    </td>
+                    <td className="py-3 text-right font-semibold text-gray-800">
+                      -${discount.toFixed(2)}
+                    </td>
+                  </tr>
+
+
                   <tr className="border-t">
                     <td className="py-4 font-bold text-lg text-gray-800">
                       Total
                     </td>
                     <td className="py-4 text-right font-bold text-lg text-blue-600">
-                      ${Math.round(totalPayable)}
+                    ${Math.round(totalPayable - discount)}
                     </td>
                   </tr>
                 </tbody>

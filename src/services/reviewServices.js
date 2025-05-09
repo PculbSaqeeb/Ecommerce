@@ -8,4 +8,4 @@ export const reviewEndpoint = (productId,rating,comment,images) => {
         comment:comment,
         images:images,
     });
-  };
+  };    

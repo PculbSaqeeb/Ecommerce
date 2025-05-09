@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
             <p className="text-[18px] text-textPrimary mt-[5px]   ">
               {product?.brand?.name}
             </p>
-            <p className="text-lg text-textSecondary ml-[30px] mt-[4px]">4.4</p>
+            <p className="text-lg text-textSecondary ml-[30px] mt-[4px]">{product?.averageRating?.toFixed(1) ||0}</p>
             <img
               className="w-[18px] h-[17px] ml-[5px] mt-[2px]"
               src={star_icon}

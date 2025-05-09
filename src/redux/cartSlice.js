@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   addToCartEndPoint,
   getCartItems,
+  promoCode,
   quantityDecrementEndPoint,
   removeToCartEndPoint,
 } from "../services/cartServices";
@@ -75,6 +76,22 @@ export const payment = createAsyncThunk(
   }
 );
 
+
+export const applyPromoCode = createAsyncThunk(
+  "cart/applyPromoCode",
+  async (couponCode,{ rejectWithValue } ) => {
+    try {
+      const res = await promoCode(couponCode);
+      return {
+        discount: res.data.discount,
+        coupon: couponCode,
+      };
+    } catch (error) {
+      return rejectWithValue(error?.response?.data?.message || "Invalid Promo code");
+    }
+  }
+);
+
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -85,6 +102,8 @@ const cartSlice = createSlice({
     loading: false,
     error: null,
     paymentLink:null,
+    discount: 0,
+    coupon: null,
   },
   reducers: {
     incrementQuantity: (state, action) => {
@@ -121,9 +140,28 @@ const cartSlice = createSlice({
         item.quantity = quantity;
       }
     },
+
+    setCoupon: (state, action) => {
+      state.selectedCoupon = action.payload;
+    },
+
+    setDiscount: (state, action) => {
+      state.discount = action.payload;
+    },
+
+    removeCouponCode: (state) => {
+      state.coupon = null;
+      state.discount = 0;
+    },
+
   },
   extraReducers: (builder) => {
     builder
+    .addCase(applyPromoCode.fulfilled, (state, action) => {
+      state.discount = action.payload.discount;
+      state.coupon = action.payload.coupon;
+    })
+    
       .addCase(getAllCartItems.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -143,14 +181,11 @@ const cartSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-
     
       .addCase(addToCart.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-
-
 
       .addCase(addToCart.fulfilled, (state, action) => {
         state.loading = false;
@@ -226,7 +261,6 @@ const cartSlice = createSlice({
         state.error = action.payload;
       })
 
-
       .addCase(payment.pending, (state) => {
         state.loading = true;  
       })
@@ -241,7 +275,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { incrementQuantity, decrementQuantity, setQuantity ,paymentLink} = cartSlice.actions;
+export const { setCoupon, setDiscount, incrementQuantity, decrementQuantity, setQuantity ,paymentLink,removeCouponCode} = cartSlice.actions;
 export default cartSlice.reducer;
 
 

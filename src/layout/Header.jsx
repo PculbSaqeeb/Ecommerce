@@ -4,19 +4,22 @@ import search_icon from "../assets/icons/search_icon.svg";
 import heart_icon from "../assets/icons/heart_icon.svg";
 import cart_icon from "../assets/icons/cart_icon.svg";
 import order_icon from "../assets/icons/order_icon.svg";
-import image_2 from "../assets/images/Ellipse 1.png";
 import { NavLink, useNavigate } from "react-router";
+import profile_icon from '../assets/icons/profile_icon.svg'
 import Button from "../components/Button";
 import { getAllCategory } from "../services/catogeryServices";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProductData } from "../redux/productSlice";
+import white_logo from '../assets/icons/white_logo_icon.png'
+import { HiMenu } from "react-icons/hi";
+import { useSelector } from "react-redux";
+import { CgProfile } from "react-icons/cg";
+
 
 const Header = () => {
   const navigate = useNavigate();
-  // const dispatch=useDispatch();
+  const [menuOpen, setMenuOpen] = useState(false);
   const cart = useSelector((state) => state.cart.cart || []);
   const { wishlist } = useSelector((state) => state.wishlist);
-  
+
 
   const handleLoginNavigate = () => {
     navigate("/login");
@@ -57,107 +60,653 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="sticky top-0 z-50 h-20 bg-white text-[18px]">
-      <header className="h-20 w-full shadow-[0_0_15px_rgba(0,0,0,0.07)]">
-        <nav className="flex items-center h-20 ">
-          <img
-          onClick={()=>navigate('/')}
-            className="w-[57px] h-[48px] ml-[50px] cursor-pointer"
-            src={image_1}
-            alt="image_1"
-          />
+    // <div className="sticky top-0 z-10 h-20 bg-white text-[18px] ">
+    //   <header className="h-20 w-full shadow-[0_0_15px_rgba(0,0,0,0.07)] px-[50px]">
+    //     <nav className="flex items-center h-20">
 
-          <div>
-            <ul className="flex items-center text-[18px]  ml-[80px] gap-10 text-textPrimary cursor-pointer">
-             
-              <li onClick={()=>navigate('/products')}>All</li>
+    //     <div className="md:hidden">
+    //         <button onClick={() => setMenuOpen(!menuOpen)}>
+    //           <svg
+    //             className="w-8 h-8 text-gray-700"
+    //             fill="none"
+    //             stroke="currentColor"
+    //             viewBox="0 0 24 24"
+    //           >
+    //             <path
+    //               strokeLinecap="round"
+    //               strokeLinejoin="round"
+    //               strokeWidth={2}
+    //               d="M4 6h16M4 12h16M4 18h16"
+    //             />
+    //           </svg>
+    //         </button>
+    //       </div>
 
+    //       <img
+    //       onClick={()=>navigate('/')}
+    //         className="w-[57px] h-[48px]  cursor-pointer"
+    //         src={image_1}
+    //         alt="image_1"
+    //       />
+
+    //       <div>
+    //         <ul className="flex items-center text-[18px] ml-[80px] gap-10 text-textPrimary cursor-pointer">
+
+    //           <li className="hover:text-blue-600" onClick={()=>navigate('/products')}>All</li>
+
+    //           {category.map((item) => (
+    //             <NavLink
+    //               key={item.name}
+    //               to={`/categories/${item.name.toLowerCase()}`}
+    //               className={({ isActive }) =>
+    //                 `  ${
+    //                   isActive
+    //                     ? "text-red-400 font-semibold underline"
+    //                     : "text-gray-700 hover:text-blue-600"
+    //                 }`
+    //               }
+    //             >
+    //               {item.name}
+    //             </NavLink>
+    //           ))}
+    //         </ul>
+    //       </div>
+
+    //       <div className="flex ml-[80px] relative">
+    //         <input
+    //           className="w-[534px] h-[52px] pl-8 text-textPrimary outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg text-[18px]"
+    //           type="text"
+    //           placeholder="Search here"
+    //         />
+    //         <img
+    //           className="absolute text-textPrimary right-6 top-[14px] cursor-pointer "
+    //           src={search_icon}
+    //           alt=""
+    //         />
+    //       </div>
+
+    //       <div className="flex items-center gap-8 ml-[60px]">
+    //         <div className="flex items-start relative">
+    //           <img
+    //             onClick={handleWishlistNavigate}
+    //             className="w-[29px] h-[29px] text-textPrimary cursor-pointer"
+    //             src={heart_icon}
+    //             alt=""
+    //           />
+    //           <p className="absolute -top-2 -right-3 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
+    //             {wishlist?.length || 0} 
+    //           </p>
+    //         </div>
+    //         <div className="flex items-start relative">
+    //           <img
+    //             onClick={handleCartNavigate}
+    //             className="w-[29px] h-[29px] text-textPrimary cursor-pointer"
+    //             src={cart_icon}
+    //             alt=""
+    //           />
+    //           <p className="absolute -top-2 -right-3 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
+    //             {cart?.length}
+    //           </p>
+    //         </div>
+    //         <img
+    //           onClick={handleOrderNavigate}
+    //           className="w-[25px] h-[25px] text-textPrimary cursor-pointer"
+    //           src={order_icon}
+    //           alt=""
+    //         />
+    //       </div>
+
+    //       <div className="ml-[40px]">
+    //         {token ? (
+    //           <Button
+    //             onClick={handleLogout}
+    //             variant="outlineDark"
+    //             size="md"
+    //             className="w-[132px]"
+    //           >
+    //             Logout
+    //           </Button>
+    //         ) : (
+    //           <Button
+    //             onClick={handleLoginNavigate}
+    //             variant="outlineDark"
+    //             size="md"
+    //             className="w-[132px]"
+    //           >
+    //             Login
+    //           </Button>
+    //         )}
+    //       </div>
+    //     </nav>
+    //   </header>
+    // </div>
+
+
+
+    // <>
+    //   <div className="sticky top-0 z-50 bg-white shadow-md">
+    //     <header className="flex justify-between items-center px-4 py-3 h-20">
+    //       {/* Mobile Menu Icon */}
+    //       <div className="md:hidden">
+    //         <button onClick={() => setMenuOpen(!menuOpen)}>
+    //           <svg
+    //             className="w-8 h-8 text-gray-700"
+    //             fill="none"
+    //             stroke="currentColor"
+    //             viewBox="0 0 24 24"
+    //           >
+    //             <path
+    //               strokeLinecap="round"
+    //               strokeLinejoin="round"
+    //               strokeWidth={2}
+    //               d="M4 6h16M4 12h16M4 18h16"
+    //             />
+    //           </svg>
+    //         </button>
+    //       </div>
+
+    //       {/* Logo */}
+    //       <img
+    //         onClick={() => navigate("/")}
+    //         className="w-[57px] h-[48px] cursor-pointer ml-[-30px]"
+    //         src={image_1}
+    //         alt="logo"
+    //       />
+
+
+    //       <ul className="hidden md:flex items-center ml-8 gap-6 text-[18px] text-textPrimary">
+    //         <li className="hover:text-blue-600" onClick={() => navigate("/products")}>
+    //           All
+    //         </li>
+    //         {category.map((item) => (
+    //           <NavLink
+    //             key={item.name}
+    //             to={`/categories/${item.name.toLowerCase()}`}
+    //             className={({ isActive }) =>
+    //               isActive
+    //                 ? "text-red-400 font-semibold underline"
+    //                 : "text-gray-700 hover:text-blue-600"
+    //             }
+    //           >
+    //             {item.name}
+    //           </NavLink>
+    //         ))}
+    //       </ul>
+
+    //       <div className="hidden md:flex ml-auto mr-6 relative">
+    //         <input
+    //           className="w-[400px] h-[44px] pl-4 text-[16px] bg-inputBackground placeholder-textPlaceholder rounded-md outline-none"
+    //           type="text"
+    //           placeholder="Search here"
+    //         />
+    //         <img
+    //           src={search_icon}
+    //           className="absolute right-3 top-2.5 cursor-pointer"
+    //           alt="search"
+    //         />
+    //       </div>
+
+    //       <div className="flex items-center gap-5">
+    //         <div className="relative cursor-pointer " onClick={handleWishlistNavigate}>
+    //           <img src={heart_icon} className="w-6 h-6" alt="wishlist" />
+    //           <p className="absolute -top-2 -right-2 bg-yellow-400 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+    //             {wishlist?.length || 0}
+    //           </p>
+    //         </div>
+
+    //         <div className="relative cursor-pointer" onClick={handleCartNavigate}>
+    //           <img src={cart_icon} className="w-6 h-6" alt="cart" />
+    //           <p className="absolute -top-2 -right-2 bg-yellow-400 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+    //             {cart?.length || 0}
+    //           </p>
+    //         </div>
+
+    //         <img
+    //           src={order_icon}
+    //           onClick={handleOrderNavigate}
+    //           className="w-6 h-6 cursor-pointer "
+    //           alt="order"
+    //         />
+
+    //         <div>
+    //           {token ? (
+    //             <Button variant="outlineDark" size="sm" onClick={handleLogout}>
+    //               Logout
+    //             </Button>
+    //           ) : (
+    //             <Button variant="outlineDark" size="sm" onClick={handleLoginNavigate}>
+    //               Login
+    //             </Button>
+    //           )}
+    //         </div>
+    //       </div>
+    //     </header>
+
+    //     {/* Mobile Nav Menu */}
+    //     {menuOpen && (
+    //       <div className="md:hidden px-4 pb-4">
+    //         <ul className="flex flex-col gap-3 text-gray-700 text-lg">
+    //           <li className="hover:text-blue-600" onClick={() => navigate("/products")}>
+    //             All
+    //           </li>
+    //           {category.map((item) => (
+    //             <NavLink
+    //               key={item.name}
+    //               to={`/categories/${item.name.toLowerCase()}`}
+    //               className={({ isActive }) =>
+    //                 isActive
+    //                   ? "text-red-400 font-semibold underline"
+    //                   : "hover:text-blue-600"
+    //               }
+    //               onClick={() => setMenuOpen(false)}
+    //             >
+    //               {item.name}
+    //             </NavLink>
+    //           ))}
+    //         </ul>
+    //       </div>
+    //     )}
+    //   </div>
+
+    //   {/* Mobile Search (below header) */}
+    //   <div className="md:hidden px-4 py-3">
+    //     <div className="relative">
+    //       <input
+    //         className="w-full h-11 pl-4 pr-10 text-[16px] bg-inputBackground rounded-md outline-none placeholder-textPlaceholder"
+    //         type="text"
+    //         placeholder="Search here"
+    //       />
+    //       <img
+    //         src={search_icon}
+    //         className="absolute right-3 top-2.5 w-5 h-5 cursor-pointer"
+    //         alt="search"
+    //       />
+    //     </div>
+    //   </div>
+    // </>
+
+    // <>
+    //   <div className="sticky top-0 z-20 bg-white text-[18px] shadow-sm ">
+    //     <header className="h-20 w-full px-4 md:px-[50px]">
+    //       <nav className="flex items-center justify-between h-20 relative">
+
+    //         <div className="md:hidden">
+    //           <button onClick={() => setMenuOpen(true)}>
+    //             <svg
+    //               className="w-8 h-8 text-gray-700"
+    //               fill="none"
+    //               stroke="currentColor"
+    //               viewBox="0 0 24 24"
+    //             >
+    //               <path
+    //                 strokeLinecap="round"
+    //                 strokeLinejoin="round"
+    //                 strokeWidth={2}
+    //                 d="M4 6h16M4 12h16M4 18h16"
+    //               />
+    //             </svg>
+    //           </button>
+    //         </div>
+
+    //         <img
+    //           onClick={() => navigate("/")}
+    //           className="w-[50px] h-[40px] cursor-pointer mx-auto md:mx-0"
+    //           src={image_1}
+    //           alt="logo"
+    //         />
+
+    //         <ul className="hidden lg:flex items-center ml-10 gap-10 text-textPrimary cursor-pointer">
+    //           <li className="hover:text-blue-600" onClick={() => navigate("/products")}>All</li>
+    //           {category.map((item) => (
+    //             <NavLink
+    //               key={item.name}
+    //               to={`/categories/${item.name.toLowerCase()}`}
+    //               className={({ isActive }) =>
+    //                 isActive
+    //                   ? "text-red-400 font-semibold underline"
+    //                   : "text-gray-700 hover:text-blue-600"
+    //               }
+    //             >
+    //               {item.name}
+    //             </NavLink>
+    //           ))}
+    //         </ul>
+
+    //         <div className="hidden md:flex ml-[170px]  relative max-w-[534px] w-full ">
+    //           <input
+    //             className="w-full h-[52px] pl-8 text-textPrimary outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg"
+    //             type="text"
+    //             placeholder="Search here"
+    //           />
+    //           <img
+    //             className="absolute right-6 top-[14px] cursor-pointer"
+    //             src={search_icon}
+    //             alt="search"
+    //           />
+    //         </div>
+
+    //         <div className="flex items-center gap-4 md:gap-8 ml-auto ">
+    //           <div className="relative hidden md:block">
+    //             <img
+    //               onClick={handleWishlistNavigate}
+    //               className="w-[25px] h-[25px] cursor-pointer"
+    //               src={heart_icon}
+    //               alt="wishlist"
+    //             />
+    //             <p className="absolute -top-2 -right-2 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
+    //               {wishlist?.length || 0}
+    //             </p>
+    //           </div>
+
+    //           <div className="relative">
+    //             <img
+    //               onClick={handleCartNavigate}
+    //               className="w-[25px] h-[25px] cursor-pointer"
+    //               src={cart_icon}
+    //               alt="cart"
+    //             />
+    //             <p className="absolute -top-2 -right-2 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
+    //               {cart?.length || 0}
+    //             </p>
+    //           </div>
+
+    //           <img
+    //             onClick={handleOrderNavigate}
+    //             className="w-[25px] h-[25px] cursor-pointer hidden md:block"
+    //             src={order_icon}
+    //             alt="order"
+    //           />
+
+    //           <div>
+    //             {token ? (
+    //               <Button
+    //                 onClick={handleLogout}
+    //                 variant="outlineDark"
+    //                 size="sm"
+    //                 className="w-[100px] h-[40px]"
+    //               >
+    //                 Logout
+    //               </Button>
+    //             ) : (
+    //               <Button
+    //                 onClick={handleLoginNavigate}
+    //                 variant="outlineDark"
+    //                 size="sm"
+    //                 className="w-[100px] h-[40px]"
+    //               >
+    //                 Login
+    //               </Button>
+    //             )}
+    //           </div>
+    //         </div>
+    //       </nav>
+    //     </header>
+
+    //     <div className="md:hidden px-4 pb-3">
+    //       <input
+    //         className="w-full h-[45px] pl-4 text-sm outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg"
+    //         type="text"
+    //         placeholder="Search here"
+    //       />
+    //     </div>
+    //   </div>
+
+    //   {menuOpen && (
+    //     <>
+    //       <div
+    //         className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10"
+    //         onClick={() => setMenuOpen(false)}
+    //       />
+    //       <div className="fixed top-0 left-0 w-[20%] h-screen bg-white z-20 shadow-lg transition-transform duration-300 text-textPrimary ">
+    //         <button onClick={() => setMenuOpen(false)} className="mb-4 text-xl absolute right-4 top-16">✕</button>
+    //         <div className="h-14 bg-blue-500 flex gap-5 items-center px-3">\
+    //           <CgProfile size={24} className="text-white" />
+    //           <p className="text-white text-[18px] font">Login & Signup</p>
+    //           <img className="w-10 ml-[24px]" src={white_logo} alt="" />
+    //         </div>
+    //         <ul className="flex flex-col gap-4 text-[14px] mt-[16px] p-5">
+    //           <li className="border-b pb-3" onClick={() => { navigate("/category"); setMenuOpen(false); }}>All Categories</li>
+    //           <li onClick={() => navigate('/cart')} className="border-b pb-3">My Cart</li>
+    //           <li onClick={() => navigate('/wishlist')} className="border-b pb-3">My Wishlist</li>
+    //           <li onClick={() => navigate('/order')} className="border-b pb-3">My Order</li>
+    //           <button className="py-2 rounded-[10px] text-white bg-orange-400" onClick={() => {
+    //             setMenuOpen(false);
+    //             token ? handleLogout() : handleLoginNavigate();
+    //           }}>
+    //             {token ? "Logout" : "Login"}
+    //           </button>
+    //         </ul>
+
+    //         <div className="lg:hidden px-4 py-2 flex flex-wrap gap-4 border-t border-gray-200 bg-white">
+    //           <button
+    //             className="hover:text-blue-600 text-sm font-medium"
+    //             onClick={() => navigate("/products")}
+    //           >
+    //             All
+    //           </button>
+    //           {category.map((item) => (
+    //             <button
+    //               key={item.name}
+    //               onClick={() => navigate(`/categories/${item.name.toLowerCase()}`)}
+    //               className="hover:text-blue-600 text-sm font-medium"
+    //             >
+    //               {item.name}
+    //             </button>
+    //           ))}
+    //         </div>
+    //       </div>
+    //     </>
+    //   )}
+    // </>
+
+    <div>
+      <div className="sticky top-0 z-20 bg-white text-[18px] shadow-sm ">
+        <header className="h-20 w-full px-4 md:px-[50px]">
+          <nav className="flex items-center justify-between h-20 relative">
+            <div className="md:hidden">
+              <button onClick={() => setMenuOpen(true)}>
+                <svg
+                  className="w-8 h-8 text-gray-700"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Logo */}
+            <img
+              onClick={() => navigate("/")}
+              className="w-[50px] h-[40px] cursor-pointer mx-auto md:mx-0"
+              src={image_1}
+              alt="logo"
+            />
+
+            {/* Category links - Desktop only */}
+            <ul className="hidden lg:flex items-center ml-10 gap-10 text-textPrimary cursor-pointer">
+              <li className="hover:text-blue-600" onClick={() => navigate("/products")}>All</li>
               {category.map((item) => (
                 <NavLink
                   key={item.name}
                   to={`/categories/${item.name.toLowerCase()}`}
                   className={({ isActive }) =>
-                    `  ${
-                      isActive
-                        ? "text-red-400 font-semibold underline"
-                        : "text-gray-700 hover:text-blue-600"
-                    }`
+                    isActive
+                      ? "text-red-400 font-semibold underline"
+                      : "text-gray-700 hover:text-blue-600"
                   }
                 >
                   {item.name}
                 </NavLink>
               ))}
             </ul>
-          </div>
 
-          <div className="flex ml-[100px] relative">
-            <input
-              className="w-[534px] h-[52px] pl-8 text-textPrimary outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg text-[18px]"
-              type="text"
-              placeholder="Search here"
-            />
-            <img
-              className="absolute text-textPrimary right-6 top-[14px] cursor-pointer "
-              src={search_icon}
-              alt=""
-            />
-          </div>
-
-          <div className="flex items-center gap-8 ml-[60px]">
-            <div className="flex items-start relative">
-              <img
-                onClick={handleWishlistNavigate}
-                className="w-[29px] h-[29px] text-textPrimary cursor-pointer"
-                src={heart_icon}
-                alt=""
+            {/* Search bar - Desktop only */}
+            <div className="hidden lg:flex ml-[170px] relative max-w-[534px] w-full">
+              <input
+                className="w-full h-[52px] pl-8 text-textPrimary outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg"
+                type="text"
+                placeholder="Search here"
               />
-              <p className="absolute -top-2 -right-3 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
-                {wishlist?.length || 0} 
-              </p>
-            </div>
-            <div className="flex items-start relative">
               <img
-                onClick={handleCartNavigate}
-                className="w-[29px] h-[29px] text-textPrimary cursor-pointer"
-                src={cart_icon}
-                alt=""
+                className="absolute right-6 top-[14px] cursor-pointer"
+                src={search_icon}
+                alt="search"
               />
-              <p className="absolute -top-2 -right-3 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
-                {cart?.length}
-              </p>
             </div>
-            <img
-              onClick={handleOrderNavigate}
-              className="w-[25px] h-[25px] text-textPrimary cursor-pointer"
-              src={order_icon}
-              alt=""
-            />
-          </div>
 
-          <div className="ml-[40px]">
-            {token ? (
-              <Button
-                onClick={handleLogout}
-                variant="outlineDark"
-                size="md"
-                className="w-[132px]"
+            {/* Icons */}
+            <div className="flex items-center gap-4 md:gap-8 ml-auto">
+              {/* Wishlist */}
+              <div className="relative hidden md:block">
+                <img
+                  onClick={handleWishlistNavigate}
+                  className="w-[25px] h-[25px] cursor-pointer"
+                  src={heart_icon}
+                  alt="wishlist"
+                />
+                <p className="absolute -top-2 -right-2 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
+                  {wishlist?.length || 0}
+                </p>
+              </div>
+
+              {/* Cart */}
+              <div className="relative">
+                <img
+                  onClick={handleCartNavigate}
+                  className="w-[25px] h-[25px] cursor-pointer"
+                  src={cart_icon}
+                  alt="cart"
+                />
+                <p className="absolute -top-2 -right-2 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
+                  {cart?.length || 0}
+                </p>
+              </div>
+
+              {/* Orders */}
+              <img
+                onClick={handleOrderNavigate}
+                className="w-[25px] h-[25px] cursor-pointer hidden md:block"
+                src={order_icon}
+                alt="order"
+              />
+
+              {/* Login / Logout */}
+              <div>
+                {token ? (
+                  <Button
+                    onClick={handleLogout}
+                    variant="outlineDark"
+                    size="sm"
+                    className="w-[100px] h-[40px]"
+                  >
+                    Logout
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleLoginNavigate}
+                    variant="outlineDark"
+                    size="sm"
+                    className="w-[100px] h-[40px]"
+                  >
+                    Login
+                  </Button>
+                )}
+              </div>
+            </div>
+          </nav>
+        </header>
+
+        <div className="md:hidden px-4 pb-3">
+          <input
+            className="w-full h-[45px] pl-4 text-sm outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg"
+            type="text"
+            placeholder="Search here"
+          />
+        </div>
+      </div>
+
+      {menuOpen && (
+        <>
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10"
+            onClick={() => setMenuOpen(false)}
+          />
+          <div className="fixed top-0 left-0 w-[80%] sm:w-[60%] md:w-[40%] lg:w-[20%] h-screen bg-white z-20 shadow-lg transition-transform duration-300 text-textPrimary">
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="mb-4 text-xl absolute right-4 top-16"
+            >
+              ✕
+            </button>
+            <div className="h-14 bg-blue-500 flex gap-5 items-center px-3">
+              <CgProfile size={24} className="text-white" />
+              <p className="text-white text-[18px] font">Login & Signup</p>
+              <img className="w-10 ml-[24px]" src={white_logo} alt="logo" />
+            </div>
+            <ul className="flex flex-col gap-4 text-[14px] mt-[16px] p-5">
+              <li className="border-b pb-3" onClick={() => { navigate("/category"); setMenuOpen(false); }}>All Categories</li>
+              <li onClick={() => navigate('/cart')} className="border-b pb-3">My Cart</li>
+              <li onClick={() => navigate('/wishlist')} className="border-b pb-3">My Wishlist</li>
+              <li onClick={() => navigate('/order')} className="border-b pb-3">My Order</li>
+              <button
+                className="py-2 rounded-[10px] text-white bg-orange-400"
+                onClick={() => {
+                  setMenuOpen(false);
+                  token ? handleLogout() : handleLoginNavigate();
+                }}
               >
-                Logout
-              </Button>
-            ) : (
-              <Button
-                onClick={handleLoginNavigate}
-                variant="outlineDark"
-                size="md"
-                className="w-[132px]"
-              >
-                Login
-              </Button>
-            )}
+                {token ? "Logout" : "Login"}
+              </button>
+            </ul>
           </div>
-        </nav>
-      </header>
+        </>
+      )}
+
+      <div>
+      <div className="hidden md:flex lg:hidden px-4 py-2 gap-4 border-t border-gray-200 bg-white justify-center flex-wrap">
+          
+          <div className="flex flex-wrap gap-6 justify-center px-4 mt-3">
+          
+            {category &&
+              category.map((item, index) => (
+                <div
+                  onClick={() => navigate(`/categories/${item.name.toLowerCase()}`)}
+                  key={index}
+                  className="w-[120px] flex flex-col items-center bg-white rounded-lg  hover:shadow-md transition duration-200 p-2"
+                >
+                  
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-[80px] h-[80px] object-cover rounded-full"
+                  />
+                  <p className="text-sm text-center mt-2 font-medium text-gray-700">
+                    {item.name}
+                  </p>
+                </div>
+              ))}
+          </div>
+        </div>
+        <div className="hidden md:flex lg:hidden px-4 pb-3">
+          <input
+            className="w-full h-[45px] pl-4 text-sm outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg"
+            type="text"
+            placeholder="Search here"
+          />
+        </div>
+
+      </div>
+
     </div>
+
+
   );
 };
 

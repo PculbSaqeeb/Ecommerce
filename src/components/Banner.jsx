@@ -6,11 +6,11 @@ import "../style/style.css";
 import { useNavigate } from "react-router";
 import Button from "./Button";
 import { getCarouselData } from "../services/crousoleServices";
-  
-  
-  const Banner = () => {
+
+
+const Banner = () => {
   const navigate = useNavigate();
-  const [carousel,setCarousel]=useState([]);
+  const [carousel, setCarousel] = useState([]);
   const settings = {
     dots: true,
     infinite: true,
@@ -59,47 +59,102 @@ import { getCarouselData } from "../services/crousoleServices";
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchCarousel();
-  },[])
+  }, [])
 
 
   return (
+    // <div className="w-full">
+    //   <Slider {...settings}>
+    //     {carousel.data && carousel.data.map((item) => {
+    //       return (
+    //         <div className="!flex w-full">
+    //           <img className="w-[1028px] h-[793px] object-cover" src={item.image} alt={item.brand} />
+    //           <div className="bg-image1 w-[892px] h-[797px] flex items-center justify-center">
+    //             <div className=" ">
+    //               {/* <img className="w-[533px] h-[83px] " src={image_6} alt="" /> */}
+    //               <p className="text-7xl font-bold text-center tracking-widest">{item.brand.toUpperCase()}</p>
+    //               <p className="bold text-5xl text-textMuted bg-transparent mt-[66px] text-center">
+    //                 Big Fashion Festival
+    //               </p>
+
+    //               <p className="bold text-[42px] text-textMuted mt-[22px] text-center">
+    //                 {item.offer}
+    //               </p>
+    //               <div className="flex justify-center">
+
+    //                 <Button
+    //                   onClick={handleProductNavigate}
+    //                   variant="lightOutline"
+    //                   size="md"
+    //                   className="w-[172px] mt-[34px] text-[24px]"
+    //                 >
+    //                   Explore
+    //                 </Button>
+    //               </div>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       );
+    //     })}
+    //   </Slider>
+    // </div>
+
     <div className="w-full">
       <Slider {...settings}>
-        {carousel.data && carousel.data.map((item) => {
-          return (
-            <div className="!flex w-full">
-              <img className="w-[1028px] h-[793px] object-cover" src={item.image} alt={item.brand} />
-              <div className="bg-image1 w-[892px] h-[797px] flex items-center justify-center">
-                <div className=" ">
-                  {/* <img className="w-[533px] h-[83px] " src={image_6} alt="" /> */}
-                  <p className="text-7xl font-bold text-center tracking-widest">{item.brand.toUpperCase()}</p>
-                  <p className="bold text-5xl text-textMuted bg-transparent mt-[66px] text-center">
-                    Big Fashion Festival
-                  </p>
+        {carousel.data && carousel.data.map((item, index) => (
+          <div
+            key={index}
+            className="!flex w-full flex-col lg:flex-row h-[797px]"
+          >
+            {/* Left Side Image */}
+            <div className="w-full lg:w-1/2 h-full">
+              <img
+                className="w-full h-full object-cover"
+                src={item.image}
+                alt={item.brand}
+              />
+            </div>
 
-                  <p className="bold text-[42px] text-textMuted mt-[22px] text-center">
-                    {item.offer}
-                  </p>
-                  <div className="flex justify-center">
+            {/* Right Side Content */}
+            <div className="bg-image1 w-full lg:w-1/2 h-full flex items-center justify-center">
+              <div className="text-center">
+                {/* Brand Name */}
+                <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-widest">
+                  {item.brand.toUpperCase()}
+                </p>
 
-                    <Button
-                      onClick={handleProductNavigate}
-                      variant="lightOutline"
-                      size="md"
-                      className="w-[172px] mt-[34px] text-[24px]"
-                    >
-                      Explore
-                    </Button>
-                  </div>
+                {/* Festival Text */}
+                <p className="font-bold text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl text-textMuted bg-transparent mt-6 lg:mt-[66px]">
+                  Big Fashion Festival
+                </p>
+
+                {/* Offer Text */}
+                <p className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[48px] text-textMuted mt-4 lg:mt-[22px]">
+                  {item.offer}
+                </p>
+
+                {/* Explore Button */}
+                <div className="flex justify-center">
+                  <Button
+                    onClick={handleProductNavigate}
+                    variant="lightOutline"
+                    size="md"
+                    className="mt-6 text-sm sm:text-base md:text-lg lg:text-[24px] w-[140px] md:w-[172px]"
+                  >
+                    Explore
+                  </Button>
                 </div>
               </div>
+
             </div>
-          );
-        })}
+          </div>
+        ))}
       </Slider>
     </div>
+
+
   );
 };
 
