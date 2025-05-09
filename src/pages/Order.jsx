@@ -24,7 +24,7 @@ const Order = () => {
           My <span className="text-[#002482]">Order</span>
         </h1>
 
-        {order.items.map((item) => (
+        {order?.items?.map((item) => (
           <div
             key={item.id} 
             className="my-[32px] w-[1260px] shadow-[0_0_10px_rgba(0,0,0,0.1)] mb-[89px] rounded-[5px]"

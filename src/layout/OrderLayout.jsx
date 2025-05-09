@@ -5,7 +5,7 @@ import ScrollToTop from '../components/ScrollToTop'
 
 const OrderLayout = ({children}) => {
   return (
-    <div>
+    <div className="w-full overflow-x-hidden">
       <ScrollToTop/>
         <Header/>
         {children}

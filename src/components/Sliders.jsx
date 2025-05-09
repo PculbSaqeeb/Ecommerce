@@ -9,7 +9,7 @@ const Sliders = ({ children ,slidesToShow,responsive}) => {
     infinite: true,
     speed: 700,
     slidesToShow: slidesToShow,
-    slidesToScroll: 4,
+    slidesToScroll: 1,
     arrows: false,
     autoplay: true,              
     autoplaySpeed: 2000,  

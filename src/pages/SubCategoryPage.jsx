@@ -6,8 +6,8 @@ import CategoryCard from "../components/CategoryCard";
 import ProductCard from "../components/ProductCard";
 
 const SubCategoryPage = () => {
-  const { categoryName,subCategory } = useParams();
-  const navigate=useNavigate();
+  const { categoryName, subCategory } = useParams();
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,7 +15,7 @@ const SubCategoryPage = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await getSubCategoryByName(categoryName,subCategory);
+      const response = await getSubCategoryByName(categoryName, subCategory);
       setProducts(response.data);
       setError(null);
     } catch (error) {
@@ -45,13 +45,23 @@ const SubCategoryPage = () => {
           </p>
         )}
 
-       <div  className="flex flex-wrap gap-[50px] ">
+        {/* <div  className="flex flex-wrap gap-[50px] ">
        {products.map((product) => (
         <div onClick={()=>navigate(`product-detail/${product.id}`)}>
             <ProductCard  key={product.id} product={product} />
         </div>
           ))}
-       </div>
+       </div> */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
+          {products.map((product) => (
+            <div
+              key={product.id}
+              onClick={() => navigate(`product-detail/${product.id}`)}
+            >
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
       </div>
     </Layout>
   );

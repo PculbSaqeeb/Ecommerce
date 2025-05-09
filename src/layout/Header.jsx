@@ -499,8 +499,8 @@ const Header = () => {
     //   )}
     // </>
 
-    <div>
-      <div className="sticky top-0 z-20 bg-white text-[18px] shadow-sm ">
+    <div className="sticky top-0 z-50">
+      <div className=" bg-white text-[18px] shadow-sm ">
         <header className="h-20 w-full px-4 md:px-[50px]">
           <nav className="flex items-center justify-between h-20 relative">
             <div className="md:hidden">

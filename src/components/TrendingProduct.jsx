@@ -37,8 +37,8 @@ const TrendingProduct = () => {
 
   return (
     
-    <div className="ml-[50px] mt-[79px]">
-      <p className="text-textPrimary text-[36px] font-bold">Trending Now</p>
+    <div className=" mt-[79px]">
+      <p className="text-textPrimary text-[36px] font-bold ml-[50px]">Trending Now</p>
       <div className="mt-[27px]">
         <Sliders slidesToShow={4}>
           {loading && <p className="text-center mt-3 text-xl">Loading...</p>}

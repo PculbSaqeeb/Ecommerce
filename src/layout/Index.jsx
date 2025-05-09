@@ -6,7 +6,7 @@ import ScrollToTop from "../components/ScrollToTop";
 const Layout = ({ children }) => {
   
   return (
-    <div>
+<div className="w-full overflow-x-hidden">
       <ScrollToTop/>
       <Header />
       {children}
