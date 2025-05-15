@@ -26,18 +26,18 @@ export const quantityDecrementEndPoint = (productId) => {
 };
 
 export const getPromoCode = () => {
-  // return axiosInstance.get(`${BASE_URL}promocode`);
+  return axiosInstance.get(`${BASE_URL}promocode`);
 
-  return axiosInstance.get(`http://192.168.1.58:5000/promocode`);
+  // return axiosInstance.get(`http://192.168.1.58:5000/promocode`);
 };
 
 
 export const promoCode = (coupon) => {
-  // return axiosInstance.post(`${BASE_URL}promocode/apply`, {
-    
-  // });
-
-  return axiosInstance.post(`http://192.168.1.58:5000/promocode/apply`, {
+  return axiosInstance.post(`${BASE_URL}promocode/apply`, {
     promoCode:coupon
   });
+
+  // return axiosInstance.post(`http://192.168.1.58:5000/promocode/apply`, {
+  //   promoCode:coupon
+  // });
 };

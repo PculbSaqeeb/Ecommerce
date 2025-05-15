@@ -19,8 +19,10 @@ const SubCategoryPage = () => {
       setProducts(response.data);
       setError(null);
     } catch (error) {
-      setError(error.message);
+      // setError(error.message);
       setProducts([]);
+    }  finally{
+      setLoading(false);
     }
   };
 
@@ -35,7 +37,7 @@ const SubCategoryPage = () => {
           {subCategory} Products
         </h1>
 
-        {!loading && <p className="text-center py-10">Loading products...</p>}
+        {loading && <p className="text-center py-10">Loading products...</p>}
 
         {error && <p className="text-center text-red-500 py-10">{error}</p>}
 

@@ -1,3 +1,7 @@
+main, body, html {
+  overflow: visible;
+}
+
 .bg-image1 {
   background-image: url("../assets/images/Rectangle\ 373.jpg");
   background-size: cover;

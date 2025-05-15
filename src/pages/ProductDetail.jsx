@@ -17,22 +17,43 @@ import { useNavigate, useParams } from "react-router";
 import {
   addProductToWishlist,
   deleteProductToWishlist,
+  fetchWishlistProduct,
 } from "../redux/wishlistSlice";
 import {
   addToCart,
   removeToCart,
 } from "../redux/cartSlice";
 import { fetchProductData } from "../redux/productSlice";
+import { CgLaptop, CgLayoutGrid } from "react-icons/cg";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
-  const [tabList, setTabList] = useState("details");
-  const [isWishlist, setIsWishlist] = useState(false);
-  const products = useSelector((state) => state.product.items);
-  const { loading, error } = useSelector((state) => state.product);
   const { id } = useParams();
+  const [tabList, setTabList] = useState("details");
+  const products = useSelector((state) => state.product.items);
+  const { wishlist } = useSelector((state) => state.wishlist);
   const product = products.find((item) => item.id === id);
-  const rating = product.averageRating;
+  const [showSizeChart, setShowSizeChart] = useState(false);
+  const [selectSize, setSelectSize] = useState(null);
+  const [selectColor, setSelectColor] = useState(null);
+  const cart = useSelector((state) => state.cart.cart);
+  const isCart = cart.some((item) => item.productId === id || item.id === id)
+
+  console.log(isCart);
+
+
+
+  useEffect(() => {
+    dispatch(fetchWishlistProduct());
+  }, [dispatch]);
+
+  const isWishlist = wishlist.some(item => item.productId === id || item.id === id);
+
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(fetchProductData());
+    }
+  }, [dispatch]);
 
   const handleTabClick = (role) => {
     setTabList(role);
@@ -40,12 +61,10 @@ const ProductDetail = () => {
 
   const handleAddToWishlist = (id) => {
     dispatch(addProductToWishlist(id));
-    setIsWishlist(!isWishlist);
   };
 
   const handleDeleteToWishlist = (id) => {
     dispatch(deleteProductToWishlist(id));
-    setIsWishlist(!isWishlist);
   };
 
   const handleAddToCart = (id) => {
@@ -75,6 +94,18 @@ const ProductDetail = () => {
     }
   };
 
+  const handleShowSizeChart = () => {
+    setShowSizeChart(!showSizeChart);
+  }
+
+  const handleSelectSize = (i) => {
+    setSelectSize(i)
+  }
+
+  const handleSelectColor = (i) => {
+    setSelectColor(i);
+  }
+
   const { items } = useSelector((state) => state.product);
   useEffect(() => {
     dispatch(fetchProductData());
@@ -82,7 +113,7 @@ const ProductDetail = () => {
 
   return (
     <Layout>
-      {loading && <p className="text-center mt-3 text-xl">Loading...</p>}
+      {/* {loading && <p className="text-center mt-3 text-xl">Loading...</p>} */}
       <div className="mt-[26px] flex gap-24">
         <div className="flex gap-[22px] ml-[49px]">
           <div>
@@ -94,6 +125,7 @@ const ProductDetail = () => {
             {[1, 2, 3, 4].map((_, i) => {
               return (
                 <img
+                  key={i}
                   className="w-[165px] h-[165px] bg-slate-50 rounded-[10px] mb-[15px] object-cover mx-auto cursor-pointer"
                   src={product?.images[i + 1]}
                   alt=""
@@ -122,11 +154,8 @@ const ProductDetail = () => {
 
           <div className="flex items-center mt-[25px]">
 
-            {/* {[1, 2, 3, 4, 5].map(() => (
-              <img src={black_star_icon} className="mx-[1px]" />
-            ))} */}
             {[1, 2, 3, 4, 5].map((_, i) => {
-              const rating = product.averageRating;
+              const rating = product?.averageRating;
               if (rating >= i + 1) {
                 return (
                   <img
@@ -166,7 +195,7 @@ const ProductDetail = () => {
           <h3 className="text-[24px] text-textPrimary font-bold mt-[30px]">
             Select Size
           </h3>
-          <p className="mt-[23px] text-lg text-linkPrimary flex items-center">
+          <p onClick={handleShowSizeChart} className="mt-[23px] text-lg text-linkPrimary flex items-center cursor-pointer">
             Size Chart
             <img
               src={right_arrow_icon}
@@ -175,29 +204,54 @@ const ProductDetail = () => {
             />
           </p>
 
-          <div className="flex gap-[19px] mt-[21px]">
-            {product?.sizes?.map((size) => (
-              <div
-                key={size.id}
-                className="w-[55px] h-[55px] text-textPrimary border border-[#BABABA] rounded-full flex items-center justify-center cursor-pointer"
-              >
-                {size?.name}
-              </div>
-            ))}
-          </div>
+          {showSizeChart && (
+            <div className="flex gap-[19px] mt-[21px]">
+              {product?.productSize.map((size, i) => (
+                <div
+                  onClick={() => handleSelectSize(i)}
+                  key={i}
+                  className={`w-[55px] h-[55px] text-textPrimary border ${selectSize === i ? "border-[#002482]" : "border-[#BABABA]"} rounded-full flex items-center justify-center cursor-pointer`}
+                >
+                  {size?.name}
+                </div>
+              ))}
+            </div>
+
+          )}
+
 
           <h4 className="text-[24px] text-textPrimary font-bold mt-[20px]">
             Select Color
           </h4>
-          <div className="mt-[22px] flex gap-[18px]">
-            {[1, 2, 3].map(() => (
+          {/* <div className="mt-[22px] flex gap-[18px]">
+            {[1, 2, 3].map((_, i) => (
               <img
+                key={i}
                 className="w-[74px] h-[74px] rounded-[5px] object-cover cursor-pointer"
-                src={image_11}
+                src={product?.images[i + 1]}
                 alt=""
               />
             ))}
+          </div> */}
+
+          <div className="flex gap-[19px] mt-[21px]">
+            {product.productColor?.map((color, i) => (
+              <div
+                key={i}
+                onClick={() => handleSelectColor(i)}
+                style={selectColor === i ? { borderColor: color.hexCode, borderWidth: '1px' } : {}}
+                className={`w-[55px] h-[55px] text-textPrimary rounded-full flex items-center justify-center cursor-pointer shadow-[0px_0px_8px_rgba(0,0,0,0.2)]`}
+              >
+                <span
+                  className="w-[30px] h-[30px] rounded-full border"
+                  style={{ backgroundColor: color.hexCode }}
+                ></span>
+              </div>
+            ))}
           </div>
+
+
+
           <h5 className="text-[24px] text-textPrimary font-bold mt-5">
             Best Offer
           </h5>
@@ -244,35 +298,40 @@ const ProductDetail = () => {
           </div> */}
 
           <div className="flex items-center gap-[22px] mt-[28px]">
-            <Button
-              onClick={(e) => handleAddToCart(product.id)}
-              variant="primary"
-              className="w-[168px] text-lg"
-            >
-              Add to Cart
-            </Button>
+            {isCart ? (
+              <button
+                onClick={() => handleRemoveToCart(product.id)}
+                className="text-lg bg-yellow-400 rounded-mg py-3 px-4 text-white rounded-[10px]"
+              >
+                Remove to cart
+              </button>
 
-            <button
-              onClick={() => handleRemoveToCart(product.id)}
-              className="text-lg bg-yellow-400 rounded-mg py-3 px-4 text-white rounded-[10px]"
-            >
-              Remove to cart
-            </button>
+            ) : (
+              <Button
+                onClick={() => handleAddToCart(product.id)}
+                variant="primary"
+                className="w-[168px] text-lg"
+              >
+                Add to Cart
+              </Button>
+            )}
+
             {!isWishlist ? (
               <img
                 onClick={() => handleAddToWishlist(id)}
                 src={heart_icon}
-                size={40}
-                className="w-[25.38] h-[22.31px] cursor-pointer"
+                alt="add to wishlist"
+                className="w-[25px] h-[25px] cursor-pointer"
               />
             ) : (
               <img
                 onClick={() => handleDeleteToWishlist(id)}
                 src={red_heart_icon}
-                size={40}
-                className="w-[25.38] h-[22.31px] cursor-pointer"
+                alt="remove from wishlist"
+                className="w-[25px] h-[25px] cursor-pointer"
               />
             )}
+
           </div>
         </div>
       </div>
@@ -319,7 +378,7 @@ const ProductDetail = () => {
             </li>
             <li className="text-[18px] text-textPrimary mt-[12px]">
               The model (height 5'8") is wearing a size{" "}
-              {product?.sizes[2]?.name}
+              {/* {product?.sizes[2]?.name} */}
             </li>
 
             <li className="text-textPrimary text-[24px] font-bold mt-[27px]">
@@ -331,7 +390,7 @@ const ProductDetail = () => {
           </ul>
         )}
 
-        {tabList === "spec" && <Specifications product={products} />}
+        {tabList === "spec" && <Specifications specification={product.specifications} />}
 
         {tabList === "rating" && <Rating productId={id} />}
       </div>

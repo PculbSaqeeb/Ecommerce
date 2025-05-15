@@ -1,6 +1,12 @@
 import React from "react";
+import { CgLaptop } from "react-icons/cg";
 
-const Specifications = () => {
+const Specifications = ({ specification }) => {
+  console.log(specification);
+  const mid = Math.ceil(specification.length / 2);
+  const leftSpecs = specification.slice(0, mid);
+  const rightSpecs = specification.slice(mid);
+
   return (
     <div>
       <p className="mt-[27px] text-[24px] font-bold text-textPrimary">
@@ -8,65 +14,33 @@ const Specifications = () => {
       </p>
       <div className="flex gap-[98px]">
         <ul>
-          <li className="mt-[12px] text-textSecondary text-[18px]">
-            Sleeve Length
-          </li>
-          <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-            Long Sleeve
-          </li>
-
-          <li className="mt-[12px] text-textSecondary text-[18px]">
-            Print and Pattern Type
-          </li>
-          <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-            Washed
-          </li>
-
-          <li className="mt-[12px] text-textSecondary text-[18px]">Length</li>
-          <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-            Regular
-          </li>
-
-          <li className="mt-[12px] text-textSecondary text-[18px]">
-            Lining Fabric
-          </li>
-          <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-            Unlined
-          </li>
-
-          <li className="mt-[12px] text-textSecondary text-[18px]">Hemline</li>
-          <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-            Straight
-          </li>
+          {leftSpecs.map((spec, index) => {
+            return (
+              <div key={index}>
+                <li className="mt-[12px] text-textSecondary text-[18px]">
+                  {spec.name}
+                </li>
+                <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
+                  {spec.value}
+                </li>
+              </div>
+            )
+          })}
         </ul>
 
         <ul>
-          <li className="mt-[12px] text-textSecondary text-[18px]">Type</li>
-          <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-            Denim Jacket
-          </li>
-
-          <li className="mt-[12px] text-textSecondary text-[18px]">Collor</li>
-          <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-            Spread Collor
-          </li>
-
-          <li className="mt-[12px] text-textSecondary text-[18px]">Closure</li>
-          <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-            Button
-          </li>
-
-          <li className="mt-[12px] text-textSecondary text-[18px]">
-            Number of Pocket
-          </li>
-          <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-            4
-          </li>
-
-          <li className="mt-[12px] text-textSecondary text-[18px]">Occasion</li>
-          <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-            Casual
-          </li>
+          {rightSpecs.map((spec, index) => {
+            return (
+              <div key={index}>
+                <li className="mt-[12px] text-textSecondary text-[18px]">
+                  {spec.name}
+                </li>
+                <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
+                  {spec.value}
+                </li>
+              </div>
+            )
+          })}
         </ul>
       </div>
     </div>

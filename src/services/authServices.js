@@ -23,7 +23,6 @@ export const forgotPassword = (data) => {
 };
 
 export const verifyOTP = (email, otp) => {
-  console.log(typeof otp);
   return axios.post(`${BASE_URL}user/verify-otp`, {
     email: email,
     OTP: otp,

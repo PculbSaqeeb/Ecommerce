@@ -14,6 +14,8 @@ export const getAllCartItems = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await getCartItems();
+      console.log(response.data);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error?.response?.data?.message || "Failed to fetch cart items");
@@ -26,6 +28,7 @@ export const addToCart = createAsyncThunk(
   async (productId, { rejectWithValue }) => {
     try {
       const response = await addToCartEndPoint(productId);
+      console.log(response.data);
       toast.success(response.data.message);
       return response.data;
     } catch (error) {
@@ -53,8 +56,9 @@ export const removeToCart = createAsyncThunk(
   async (productId, { rejectWithValue }) => {
     try {
       const response = await removeToCartEndPoint(productId);
+      console.log(response.data);
       toast.success(response.data.message);
-      return response.data;
+      return productId;
     } catch (error) {
       toast.error(error?.response?.data?.message);
       return rejectWithValue(error?.response?.data?.message || "Remove failed");
@@ -67,7 +71,7 @@ export const payment = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await paymentEndpoint(data);
-      window.location.href=response.data.paymentLink;
+      window.location.href = response.data.paymentLink;
       return response.data.paymentLink;
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -79,7 +83,7 @@ export const payment = createAsyncThunk(
 
 export const applyPromoCode = createAsyncThunk(
   "cart/applyPromoCode",
-  async (couponCode,{ rejectWithValue } ) => {
+  async (couponCode, { rejectWithValue }) => {
     try {
       const res = await promoCode(couponCode);
       return {
@@ -101,7 +105,7 @@ const cartSlice = createSlice({
     breakdown: {},
     loading: false,
     error: null,
-    paymentLink:null,
+    paymentLink: null,
     discount: 0,
     coupon: null,
   },
@@ -123,7 +127,7 @@ const cartSlice = createSlice({
       const itemIndex = state.cart.findIndex(
         (item) => item.productId === action.payload
       );
-    
+
       if (itemIndex !== -1) {
         if (state.cart[itemIndex].quantity > 1) {
           state.cart[itemIndex].quantity -= 1;
@@ -132,7 +136,7 @@ const cartSlice = createSlice({
         }
       }
     },
-    
+
     setQuantity: (state, action) => {
       const { productId, quantity } = action.payload;
       const item = state.cart.find((i) => i.productId === productId);
@@ -157,15 +161,16 @@ const cartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(applyPromoCode.fulfilled, (state, action) => {
-      state.discount = action.payload.discount;
-      state.coupon = action.payload.coupon;
-    })
-    
+      .addCase(applyPromoCode.fulfilled, (state, action) => {
+        state.discount = action.payload.discount;
+        state.coupon = action.payload.coupon;
+      })
+
       .addCase(getAllCartItems.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
+
       .addCase(getAllCartItems.fulfilled, (state, action) => {
         const { cartDetails, breakdown } = action.payload || {};
         state.loading = false;
@@ -177,11 +182,12 @@ const cartSlice = createSlice({
         state.totalQuantity = cartDetails?.totalQuantity || 0;
         state.breakdown = breakdown || {};
       })
+
       .addCase(getAllCartItems.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-    
+
       .addCase(addToCart.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -190,7 +196,7 @@ const cartSlice = createSlice({
       .addCase(addToCart.fulfilled, (state, action) => {
         state.loading = false;
         const { cartDetails, breakdown } = action.payload || {};
-      
+
         if (cartDetails && cartDetails.items) {
           state.cart = cartDetails.items.map((item) => ({
             ...item,
@@ -220,8 +226,8 @@ const cartSlice = createSlice({
       .addCase(quantityDecrement.fulfilled, (state, action) => {
         state.loading = false;
         const { cart } = action.payload;
-        const { cartDetails, breakdown } = action.payload ;
-      
+        const { cartDetails, breakdown } = action.payload;
+
         state.cart = cartDetails.items.map((item) => ({
           ...item,
           quantity: item.quantity || 1,
@@ -245,7 +251,8 @@ const cartSlice = createSlice({
         state.loading = false;
         const removedId = action.meta.arg;
         state.cart = state.cart.filter((item) => item.productId !== removedId);
-      
+
+
         if (state.cart.length === 0) {
           state.totalPrice = 0;
           state.totalQuantity = 0;
@@ -262,20 +269,22 @@ const cartSlice = createSlice({
       })
 
       .addCase(payment.pending, (state) => {
-        state.loading = true;  
+        state.loading = true;
       })
+
       .addCase(payment.fulfilled, (state, action) => {
-        state.loading = false; 
-        state.paymentLink = action.payload;  
+        state.loading = false;
+        state.paymentLink = action.payload;
       })
+
       .addCase(payment.rejected, (state, action) => {
-        state.loading = false; 
+        state.loading = false;
         state.error = action.payload;
       })
   },
 });
 
-export const { setCoupon, setDiscount, incrementQuantity, decrementQuantity, setQuantity ,paymentLink,removeCouponCode} = cartSlice.actions;
+export const { setCoupon, setDiscount, incrementQuantity, decrementQuantity, setQuantity, paymentLink, removeCouponCode } = cartSlice.actions;
 export default cartSlice.reducer;
 
 

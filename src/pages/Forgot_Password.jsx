@@ -37,43 +37,86 @@ const Forgot_Password = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen displayRegular">
-      <div className="w-[72px] h-[72px] rounded-[16px] bg-textTertiary mx-auto">
-        <div className="flex h-full items-center justify-center">
-          <img className="-rotate-90 " src={logo} alt="" />
-        </div>
+    // <div className="flex flex-col items-center justify-center h-screen displayRegular">
+    //   <div className="w-[72px] h-[72px] rounded-[16px] bg-textTertiary mx-auto">
+    //     <div className="flex h-full items-center justify-center">
+    //       <img className="-rotate-90 " src={logo} alt="" />
+    //     </div>
+    //   </div>
+
+    //   <p className="text-center mt-[26px] text-[18px] text-[#223263] font-semibold">
+    //     Forgot Password
+    //   </p>
+    //   <p className="text-center mt-[10px] text-[#676767] w-[440px]">
+    //     <span className="text-red-500">*</span> We will send you a message to
+    //     set or reset your new password
+    //   </p>
+
+    //   <form onSubmit={handleSubmit(onSubmit)} className="mt-[41px]">
+    //     <div className="relative">
+    //       <input
+    //         {...register("email")}
+    //         type="email"
+    //         placeholder="Your Email / Phone Number"
+    //         className="w-[440px] px-3 py-2 pl-12 border border-[#E1E2E7] rounded-[5px] placeholder:text-textSecondary placeholder:text-[14px]"
+    //       />
+    //       <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+    //         <img src={profile_icon} alt="" />
+    //       </div>
+    //     </div>
+
+    //     {errors.email && (
+    //       <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>
+    //     )}
+    //     <Button className="mt-[42px] text-[18px]" type="submit" variant="blueButton" size="xl">
+    //       Send Verification
+    //     </Button>
+    //   </form>
+    // </div>
+
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 displayRegular">
+  <div className="w-[72px] h-[72px] rounded-[16px] bg-textTertiary flex items-center justify-center">
+    <img className="-rotate-90" src={logo} alt="Logo" />
+  </div>
+
+  <p className="text-center mt-6 xl:mt-[26px] lg:mt-[26px] text-[18px] text-[#223263] font-semibold">
+    Forgot Password
+  </p>
+  <p className="text-center mt-2 lg:mt-[9px] xl:mt-[9px] text-[#676767] max-w-[90%] sm:max-w-[440px] text-sm">
+    <span className="text-red-500">*</span> We will send you a message to set or reset your new password
+  </p>
+
+  <form
+    onSubmit={handleSubmit(onSubmit)}
+    className="mt-10 xl:mt-[41px] lg:mt-[41px] w-full "
+  >
+    <div className="relative">
+      <input
+        {...register("email")}
+        type="email"
+        placeholder="Your Email / Phone Number"
+        className="w-[440px] px-3 py-2 pl-12 border border-[#E1E2E7] rounded-[5px] placeholder:text-textSecondary placeholder:text-[14px]"
+      />
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+        <img src={profile_icon} alt="icon" />
       </div>
-
-      <p className="text-center mt-[26px] text-[18px] text-textTertiary font-semibold">
-        Forgot Password
-      </p>
-      <p className="text-center mt-[10px] text-textSecondary w-[440px]">
-        <span className="text-red-500">*</span> We will send you a message to
-        set or reset your new password
-      </p>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-[41px]">
-        <div className="relative">
-          <input
-            {...register("email")}
-            type="email"
-            placeholder="Your Email / Phone Number"
-            className="w-[440px] px-3 py-2 pl-12 border border-inputBorder rounded-[5px] placeholder:text-inputText placeholder:text-[14px]"
-            required
-          />
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-            <img src={profile_icon} alt="" />
-          </div>
-        </div>
-
-        {errors.email && (
-          <p className="text-red-500 text-sm">{errors.email.message}</p>
-        )}
-        <Button className="mt-[42px] text-[18px]" type="submit" variant="blueButton" size="xl">
-          Send Verification
-        </Button>
-      </form>
     </div>
+
+    {errors.email && (
+      <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>
+    )}
+
+    <Button
+      className="mt-10 lg:mt-[42px] xl:mt-[42px] text-[18px] w-full"
+      type="submit"
+      variant="blueButton"
+      size="xl"
+    >
+      Send Verification
+    </Button>
+  </form>
+</div>
+
   );
 };
 

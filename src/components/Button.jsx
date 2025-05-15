@@ -16,7 +16,7 @@ const Button = ({
     sm: "h-[35px] text-sm px-[16px]",
     md: "h-[48px] text-[18px] px-[24px]",
     lg: "h-[56px] text-[20px] px-[32px]",
-    xl: "w-[440px] py-3 px-3 text-"
+    xl: "max-w-[440px] py-3 px-3"
   };
 
   const variantStyles = {

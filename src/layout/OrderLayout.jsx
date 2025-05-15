@@ -5,7 +5,7 @@ import ScrollToTop from '../components/ScrollToTop'
 
 const OrderLayout = ({children}) => {
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-hidden flex flex-col min-h-screen">
       <ScrollToTop/>
         <Header/>
         {children}
@@ -15,3 +15,6 @@ const OrderLayout = ({children}) => {
 }
 
 export default OrderLayout
+
+
+// overflow-x-hidden

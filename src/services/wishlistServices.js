@@ -20,7 +20,7 @@ export const addToWishlist = (productId) => {
 };
 
 export const deleteToWishlist = (productId) => {
-   axiosInstance.delete(`${BASE_URL}wishlist`, {
+  return axiosInstance.delete(`${BASE_URL}wishlist`, {
     data: { productId: productId }
   });
 

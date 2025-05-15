@@ -19,7 +19,7 @@ const Order = () => {
 
   return (
     <OrderLayout>
-      <div className="ml-[330px] font">
+      <div className="ml-[330px] font flex-grow">
         <h1 className="text-4xl font-bold mt-[76px] text-textPrimary">
           My <span className="text-[#002482]">Order</span>
         </h1>

@@ -16,7 +16,7 @@ const Category = () => {
               alt=""
             />
 
-            <div className="absolute top-0 left-0 pl-[29.35px] pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white w-[585px] h-[681px] bg-black bg-opacity-50 rounded-[10px]">
+            <div className="absolute top-1 left-0 pl-[29.35px] pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white w-[585px] h-[681px] bg-black bg-opacity-50 rounded-[10px]">
               <p className="text-[24px] font-bold">Women Pant</p>
               <p className="flex items-center">
                 Explore <VscArrowSmallRight size={27} className="text-white" />
@@ -38,7 +38,7 @@ const Category = () => {
             </div>
           </div>
 
-          
+
           <div className=" col-span-2 relative group">
             <img
               className="w-[590px] h-[331px] rounded-[10px] object-cover"
@@ -95,105 +95,64 @@ const Category = () => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>  */}
 
-      <div className="mx-4 sm:mx-6 md:mx-10 lg:mx-[50px] mt-16">
-  <p className="text-2xl sm:text-3xl md:text-4xl text-textPrimary font-bold">
-    Shop by Categories
-  </p>
-
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mt-8 cursor-pointer">
-    {/* Item 1 (Large) */}
-    <div className="xl:col-span-2 xl:row-span-2 relative group">
-      <img
-        className="w-full h-full max-h-[686px] rounded-[10px] object-cover"
-        src={image_8}
-        alt=""
-      />
-      <div className="absolute top-0 left-0 w-full h-full p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-[10px] text-white">
-        <p className="text-lg sm:text-xl md:text-2xl font-bold">Women Pant</p>
-        <p className="flex items-center mt-1">
-          Explore <VscArrowSmallRight size={24} />
+      <div className="mx-[20px] sm:mx-[30px] md:mx-[40px] lg:mx-[50px] mt-[40px] sm:mt-[60px] lg:mt-[80px]">
+        <p className="text-[24px] sm:text-[30px] lg:text-[36px] text-textPrimary font-bold">
+          Shop by Categories
         </p>
-      </div>
-    </div>
 
-    {/* Item 2 */}
-    <div className="relative group">
-      <img
-        className="w-full h-[200px] sm:h-[250px] md:h-[280px] lg:h-[331px] rounded-[10px] object-cover"
-        src={image_8}
-        alt=""
-      />
-      <div className="absolute top-0 left-0 w-full h-full p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-[10px] text-white">
-        <p className="text-lg sm:text-xl font-bold">Men's Jacket</p>
-        <p className="flex items-center mt-1">
-          Explore <VscArrowSmallRight size={24} />
-        </p>
-      </div>
-    </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-[20px] sm:gap-[25px] lg:gap-[20px] mt-[20px] sm:mt-[27px] cursor-pointer">
+          <div className="relative group lg:h-[686px] row-span-1 sm:row-span-1 md:row-span-2 col-span-1 sm:col-span-2 md:col-span-2 lg:row-span-2 lg:col-span-2">
+            <img className="w-full h-full rounded-[10px] object-cover" src={image_8} alt="" />
+            <div className="absolute inset-0 pl-[20px] pt-[20px] sm:pl-[29.35px] sm:pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white bg-black bg-opacity-50 rounded-[10px]">
+              <p className="text-[20px] sm:text-[24px] font-bold">Women Pant</p>
+              <p className="flex items-center">Explore <VscArrowSmallRight size={27} className="text-white" /></p>
+            </div>
+          </div>
 
-    {/* Item 3 */}
-    <div className="relative group">
-      <img
-        className="w-full h-[200px] sm:h-[250px] md:h-[280px] lg:h-[331px] rounded-[10px] object-cover"
-        src={image_8}
-        alt=""
-      />
-      <div className="absolute top-0 left-0 w-full h-full p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-[10px] text-white">
-        <p className="text-lg sm:text-xl font-bold">Sweater</p>
-        <p className="flex items-center mt-1">
-          Explore <VscArrowSmallRight size={24} />
-        </p>
-      </div>
-    </div>
+          <div className="relative group col-span-1 lg:h-[331px] lg:col-span-2 ">
+            <img className="w-full h-full rounded-[10px] object-cover" src={image_8} alt="" />
+            <div className="absolute inset-0 pl-[20px] pt-[20px] sm:pl-[29.35px] sm:pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white bg-black bg-opacity-50 rounded-[10px]">
+              <p className="text-[20px] sm:text-[24px] font-bold">Men's Jacket</p>
+              <p className="flex items-center">Explore <VscArrowSmallRight size={27} className="text-white" /></p>
+            </div>
+          </div>
 
-    {/* Item 4 */}
-    <div className="relative group">
-      <img
-        className="w-full h-[200px] sm:h-[250px] md:h-[280px] lg:h-[331px] rounded-[10px] object-cover"
-        src={image_8}
-        alt=""
-      />
-      <div className="absolute top-0 left-0 w-full h-full p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-[10px] text-white">
-        <p className="text-lg sm:text-xl font-bold">Women Top</p>
-        <p className="flex items-center mt-1">
-          Explore <VscArrowSmallRight size={24} />
-        </p>
-      </div>
-    </div>
+          <div className="relative group col-span-1 lg:col-span-2 lg:h-[331px]">
+            <img className="w-full h-full rounded-[10px] object-cover" src={image_8} alt="" />
+            <div className="absolute inset-0 pl-[20px] pt-[20px] sm:pl-[29.35px] sm:pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white bg-black bg-opacity-50 rounded-[10px]">
+              <p className="text-[20px] sm:text-[24px] font-bold">Sweater</p>
+              <p className="flex items-center">Explore <VscArrowSmallRight size={27} className="text-white" /></p>
+            </div>
+          </div>
 
-    {/* Item 5 */}
-    <div className="relative group">
-      <img
-        className="w-full h-[200px] sm:h-[250px] md:h-[280px] lg:h-[331px] rounded-[10px] object-cover"
-        src={image_8}
-        alt=""
-      />
-      <div className="absolute top-0 left-0 w-full h-full p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-[10px] text-white">
-        <p className="text-lg sm:text-xl font-bold">Pants</p>
-        <p className="flex items-center mt-1">
-          Explore <VscArrowSmallRight size={24} />
-        </p>
-      </div>
-    </div>
+          <div className="relative group col-span-1 lg:col-span-2 lg:h-[331px]">
+            <img className="w-full h-full rounded-[10px] object-cover" src={image_8} alt="" />
+            <div className="absolute inset-0 pl-[20px] pt-[20px] sm:pl-[29.35px] sm:pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white bg-black bg-opacity-50 rounded-[10px]">
+              <p className="text-[20px] sm:text-[24px] font-bold">Women Top</p>
+              <p className="flex items-center">Explore <VscArrowSmallRight size={27} className="text-white" /></p>
+            </div>
+          </div>
 
-    {/* Item 6 */}
-    <div className="relative group">
-      <img
-        className="w-full h-[200px] sm:h-[250px] md:h-[280px] lg:h-[331px] rounded-[10px] object-cover"
-        src={image_8}
-        alt=""
-      />
-      <div className="absolute top-0 left-0 w-full h-full p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-[10px] text-white">
-        <p className="text-lg sm:text-xl font-bold">Women Jacket</p>
-        <p className="flex items-center mt-1">
-          Explore <VscArrowSmallRight size={24} />
-        </p>
+          <div className="relative group col-span-1 lg:h-[331px]">
+            <img className="w-full h-full rounded-[10px] object-cover" src={image_8} alt="" />
+            <div className="absolute inset-0 pl-[20px] pt-[20px] sm:pl-[29.35px] sm:pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white bg-black bg-opacity-50 rounded-[10px]">
+              <p className="text-[20px] sm:text-[24px] font-bold">Pants</p>
+              <p className="flex items-center">Explore <VscArrowSmallRight size={27} className="text-white" /></p>
+            </div>
+          </div>
+
+          <div className="relative group col-span-1 lg:h-[331px]">
+            <img className="w-full h-full rounded-[10px] object-cover" src={image_8} alt="" />
+            <div className="absolute inset-0 pl-[20px] pt-[20px] sm:pl-[29.35px] sm:pt-[30.04px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white bg-black bg-opacity-50 rounded-[10px]">
+              <p className="text-[20px] sm:text-[24px] font-bold">Women Jacket</p>
+              <p className="flex items-center">Explore <VscArrowSmallRight size={27} className="text-white" /></p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
+
 
     </div>
   );

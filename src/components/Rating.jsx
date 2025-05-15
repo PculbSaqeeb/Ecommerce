@@ -1,23 +1,30 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import black_star_icon from "../assets/icons/black_star_icon.svg";
 import yellow_star_icon from "../assets/icons/yellow_star_icon.svg";
 import empty_star from "../assets/icons/empty_star.svg";
 import { FaStarHalfAlt } from "react-icons/fa";
 import { BiSolidImageAdd } from "react-icons/bi";
-import { reviewEndpoint } from "../services/reviewServices";
-import { useSelector } from "react-redux";
+import { reviewEndpoint, reviewImageEndpoint } from "../services/reviewServices";
+import { useDispatch, useSelector } from "react-redux";
+import cross from '../assets/icons/cross.png';
+import { fetchProductData } from "../redux/productSlice";
 
 const Rating = ({ productId }) => {
+  const dispatch = useDispatch();
   const products = useSelector((state) => state.product.items);
   const product = products.find((p) => p.id === productId);
-
   const [showReview, setShowReview] = useState(false);
   const [selectedRating, setSelectedRating] = useState(0);
   const [selectedImages, setSelectedImages] = useState([]);
   const [description, setDescription] = useState("");
   const [expandedReviewIndex, setExpandedReviewIndex] = useState(null);
-  const fileInputRef = useRef(null);
   const [showAllReviews, setShowAllReviews] = useState(false);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [imageSend, setImageSend] = useState([]);
+  const [showAllImages, setShowAllImages] = useState(false);
+
+
+  const fileInputRef = useRef(null);
 
   const ratingCounts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
   const totalReviews = product.reviews?.length || 0;
@@ -38,23 +45,58 @@ const Rating = ({ productId }) => {
 
   const handleRating = (i) => setSelectedRating(i + 1);
 
-  const handleFileChange = (e) => {
+  // const handleFileChange = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   files.forEach((file) => {
+  //     const reader = new FileReader();
+  //     console.log(reader);
+  //     reviewImageEndpoint(reader.result)
+  //     reader.onloadend = () => {
+  //       setSelectedImages((prev) => [...prev, reader.result]);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   });
+  // };
+
+  const handleFileChange = async (e) => {
     const files = Array.from(e.target.files);
+    const formData = new FormData();
+
     files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSelectedImages((prev) => [...prev, reader.result]);
-      };
-      reader.readAsDataURL(file);
+      formData.append('files', file);
     });
+
+    try {
+      const response = await reviewImageEndpoint(formData)
+      console.log('Upload success:', response.data.files);
+      setImageSend(response.data.files);
+
+
+      files.forEach((file) => {
+        const reader = new FileReader();
+        console.log(reader);
+
+        reader.onloadend = () => {
+          setSelectedImages((prev) => [...prev, reader.result]);
+
+        };
+        reader.readAsDataURL(file);
+      });
+    } catch (error) {
+      console.error('Upload failed:', error);
+    }
   };
+
+  console.log(selectedImages);
+  console.log(imageSend);
 
   const handleImageDelete = (i) => {
     setSelectedImages((prev) => prev.filter((_, index) => index !== i));
   };
 
-  const handleToPostRating = () => {
-    reviewEndpoint(productId, selectedRating, description, selectedImages);
+  const handleToPostRating = async () => {
+    await reviewEndpoint(productId, selectedRating, description, imageSend);
+    dispatch(fetchProductData());
     setShowReview(false);
     setSelectedRating(0);
     setDescription("");
@@ -65,10 +107,17 @@ const Rating = ({ productId }) => {
     setExpandedReviewIndex((prev) => (prev === index ? null : index));
   };
 
+  const handleCloseRating = () => {
+    setShowReview(!showReview)
+  }
+
+  // const handleImageUpload=()=>{
+  //   reviewImageEndpoint()
+  // }
+
   return (
     <div className="relative text-textPrimary">
       <p className="mt-[27px] text-[24px] font-bold">Ratings & Reviews</p>
-
       <div className="flex items-start gap-6 relative mt-[30px]">
         <div className="flex gap-3 items-center">
           <p className="text-[36px] font-semibold pt-2">
@@ -108,15 +157,23 @@ const Rating = ({ productId }) => {
       </div>
 
       {showReview && (
-        <div className="absolute top-0 bg-white w-full border pt-4 pl-6 pb-6 z-10">
-          <p className="text-[20px] font-bold">Rate this product</p>
-
+        <div className="absolute top-0 bg-white w-full border pt-4 px-6 pb-6 z-10">
+          <div className="flex justify-between items-center">
+            <p className="text-[20px] font-bold ">Rate this product</p>
+            <img onClick={handleCloseRating} className="w-5 cursor-pointer" src={cross} alt="" />
+          </div>
           <div className="flex gap-5 mt-[18px] cursor-pointer">
             {[1, 2, 3, 4, 5].map((_, index) => (
               <img
                 key={index}
                 onClick={() => handleRating(index)}
-                src={index < selectedRating ? yellow_star_icon : empty_star}
+                onMouseEnter={() => setHoverRating(index + 1)}
+                onMouseLeave={() => setHoverRating(0)}
+                src={
+                  (hoverRating || selectedRating) > index
+                    ? yellow_star_icon
+                    : empty_star
+                }
                 alt="star"
                 className="w-[28px] h-[28px] transition-all duration-200"
               />
@@ -184,6 +241,9 @@ const Rating = ({ productId }) => {
           (review, index) => {
             const shouldTruncate = review.comment.length > 100;
             const isExpanded = expandedReviewIndex === index;
+            const images = review.images || [];
+            const imageTruncate = images.length > 3;
+            const displayedImages = showAllImages ? images : images.slice(0, 3);
             const displayedText = isExpanded
               ? review.comment
               : review.comment.slice(0, 100);
@@ -231,13 +291,23 @@ const Rating = ({ productId }) => {
                 </p>
 
                 <div className="mt-[16px] flex gap-4 flex-wrap">
-                  {review.images?.map((img, imgIndex) => (
-                    <img
-                      key={imgIndex}
-                      className="w-[140px] h-[140px] rounded-[10px] border"
-                      src={img}
-                      alt={`review-${imgIndex}`}
-                    />
+                  {displayedImages.map((img, imgIndex) => (
+                    <div key={imgIndex} className="relative">
+                      <img
+                        src={img}
+                        alt={`review-${imgIndex}`}
+                        className="w-[140px] h-[140px] rounded-[10px] border object-cover"
+                      />
+
+                      {!showAllImages && imageTruncate && imgIndex === 2 && (
+                        <div
+                          className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 text-white text-[48px] font-semibold flex items-center justify-center rounded-[10px] cursor-pointer"
+                          onClick={() => setShowAllImages(true)}
+                        >
+                          +{images.length - 3}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
 

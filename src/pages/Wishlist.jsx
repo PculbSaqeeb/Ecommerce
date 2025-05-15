@@ -9,67 +9,79 @@ import {
   deleteProductToWishlist,
   fetchWishlistProduct,
 } from "../redux/wishlistSlice";
+import { CgLaptop } from "react-icons/cg";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { wishlist, loading, error } = useSelector((state) => state.wishlist);
-  console.log(wishlist);
 
   useEffect(() => {
     dispatch(fetchWishlistProduct());
   }, []);
 
-  const handleDeleteToWishlist =  (id) => {
-     dispatch(deleteProductToWishlist(id));
-    dispatch(fetchWishlistProduct()); 
+
+
+  const handleDeleteToWishlist = (e, id) => {
+    e.stopPropagation();
+    dispatch(deleteProductToWishlist(id));
+  };
+
+  const showProductDetails = (id) => {
+    navigate(`/product-detail/${id}`);
   };
 
   return (
     <OrderLayout>
-      <div className="ml-[50px]">
+      <div className="mx-[50px] flex-grow">
         <p className="mt-[56px] text-[36px] font-bold font">
           My <span className="text-[#002482]">Wishlist</span>
         </p>
-        <div className="flex flex-wrap gap-[60px] mt-[38px]">
-          {wishlist?.length === 0 && <p>Wishlist is empty!</p>}
-          {wishlist?.length > 0 &&
+        {/* <div className="flex flex-wrap gap-[60px] mt-[38px]">
+          {!loading && wishlist?.length === 0 && <p className="text-red-500 text-lg ">Wishlist is empty!</p>}
+          {loading && <p>loading...</p>}
+          {!loading && wishlist?.length > 0 &&
             wishlist?.map((item, index) => (
-              <div key={index} className="flex-shrink-0 relative">
+              <div  key={index} onClick={(e)=>{showProductDetails(item.id,e)}} className="flex-shrink-0 relative">
                 <ProductCard product={item} />
 
                 <img
-                  onClick={() => handleDeleteToWishlist(item.id)}
+                  onClick={(e) => handleDeleteToWishlist(e,item.id)}
                   src={red_heart_icon}
                   className="w-[30.38px] h-[27.31px] cursor-pointer absolute top-3 right-3"
                 />
               </div>
             ))}
+        </div> */}
+
+          {!loading && wishlist?.length === 0 && <p className="text-red-500 text-lg mt-[16px]">Wishlist is empty!</p>}
+ 
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[60px] mt-[26px] "
+        >
+          {loading ? (
+            <p>Loading products...</p>
+          ) : (
+            wishlist?.map((product, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 relative"
+                onClick={() => showProductDetails(product.id)}
+              >
+                <ProductCard product={product} />
+
+                 <img
+                  onClick={(e) => handleDeleteToWishlist(e,product.id)}
+                  src={red_heart_icon}
+                  alt="Remove from wishlist"
+                  className="w-[30px] h-[27px] cursor-pointer absolute top-3 right-6 md:right-5 lg:right-3 xl:right-2"
+                />
+              </div>
+            ))
+          )}
         </div>
+
       </div>
-
-      {/* <div className="px-4 md:px-8 lg:px-[50px]">
-  <p className="mt-10 text-2xl md:text-3xl lg:text-[36px] font-bold">
-    My <span className="text-[#002482]">Wishlist</span>
-  </p>
-
-  <div className="flex flex-wrap gap-6 md:gap-5 mt-10">
-    {wishlist?.length === 0 && <p className="text-gray-600">Wishlist is empty!</p>}
-
-    {wishlist?.length > 0 &&
-      wishlist.map((item, index) => (
-        <div key={index} className="w-full sm:w-[48%] md:w-[31%] lg:w-[28%] relative">
-          <ProductCard product={item} />
-
-          <img
-            onClick={() => handleDeleteToWishlist(item.id)}
-            src={red_heart_icon}
-            alt="Remove from wishlist"
-            className="w-[30px] h-[27px] cursor-pointer absolute top-3 right-3"
-          />
-        </div>
-      ))}
-  </div>
-</div> */}
 
     </OrderLayout>
   );

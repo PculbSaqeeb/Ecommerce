@@ -27,7 +27,6 @@ const Home = () => {
         <Blog />
         <Services />
         <About />
-        
       </Layout>
   );
 };

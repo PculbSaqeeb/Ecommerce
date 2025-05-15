@@ -322,6 +322,7 @@ const Cart = () => {
     (state) => state.cart
   );
 
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -358,7 +359,7 @@ const Cart = () => {
     if (!couponCode) return;
     dispatch(applyPromoCode(couponCode));
     setShowCouponCode(false);
-    setRemoveCoupon(true); 
+    setRemoveCoupon(true);
   };
 
   const handleCoupon = () => {
@@ -374,12 +375,13 @@ const Cart = () => {
   };
 
   return (
-      <OrderLayout>
-        <h3 className="text-2xl font-bold mb-6 text-center mt-[20px]">
-          Your Shopping Cart
-        </h3>
+    <OrderLayout>
+     <div className="flex-grow">
+       <p className="mt-[56px] text-[36px] font-bold font mx-[50px] ">
+        My <span className="text-[#002482]">Cart</span>
+      </p>
         {cart.length === 0 && (
-          <p className="mt-[20px] text-center text-red-500">Cart is Empty!</p>
+          <p className="text-lg text-red-500 mx-[50px] mt-[20px]">Cart is Empty!</p>
         )}
         {cart.length > 0 && (
           <div className="flex flex-wrap gap-8 p-8 justify-center">
@@ -472,11 +474,10 @@ const Cart = () => {
                       <button
                         key={index}
                         onClick={() => handleCouponClick(code)}
-                        className={`px-3 py-2 text-sm m-2 mt-[15px] rounded transition-colors ${
-                          selectedCoupon === code 
-                            ? 'bg-red-500 text-white' 
-                            : 'bg-red-100 text-gray-700 hover:bg-red-200'
-                        }`}
+                        className={`px-3 py-2 text-sm m-2 mt-[15px] rounded transition-colors ${selectedCoupon === code
+                          ? 'bg-red-500 text-white'
+                          : 'bg-red-100 text-gray-700 hover:bg-red-200'
+                          }`}
                       >
                         {code}
                       </button>
@@ -494,11 +495,10 @@ const Cart = () => {
                   <button
                     onClick={() => handleDiscount(selectedCoupon)}
                     disabled={!selectedCoupon}
-                    className={`px-3 py-2 rounded-[5px] ${
-                      !selectedCoupon 
-                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-                        : 'bg-linkPrimary text-white hover:bg-blue-700'
-                    }`}
+                    className={`px-3 py-2 rounded-[5px] ${!selectedCoupon
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-linkPrimary text-white hover:bg-blue-700'
+                      }`}
                   >
                     Apply
                   </button>
@@ -546,8 +546,8 @@ const Cart = () => {
                             <div className="mt-4 text-green-600 font-medium">
                               <div className="">
                                 <span className="font-bold text-sm">{coupon}</span>
-                                <p 
-                                  onClick={handleRemoveCoupon} 
+                                <p
+                                  onClick={handleRemoveCoupon}
                                   className="ml-2 text-[10px] cursor-pointer text-red-500 hover:text-red-700"
                                 >
                                   Remove
@@ -555,8 +555,8 @@ const Cart = () => {
                               </div>
                             </div>
                           ) : (
-                            <button 
-                              onClick={handleCoupon} 
+                            <button
+                              onClick={handleCoupon}
                               className="px-2 border text-xs py-2 rounded hover:bg-gray-50"
                             >
                               All Coupons
@@ -596,7 +596,8 @@ const Cart = () => {
             )}
           </div>
         )}
-      </OrderLayout>
+      </div>
+    </OrderLayout>
   );
 };
 

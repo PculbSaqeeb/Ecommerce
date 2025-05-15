@@ -131,7 +131,7 @@ const Banner = () => {
                 </p>
 
                 {/* Offer Text */}
-                <p className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[48px] text-textMuted mt-4 lg:mt-[22px]">
+                <p className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[48px] text-textMuted mt-4 lg:mt-[22px] xl:mt-[22px]">
                   {item.offer}
                 </p>
 
@@ -141,7 +141,7 @@ const Banner = () => {
                     onClick={handleProductNavigate}
                     variant="lightOutline"
                     size="md"
-                    className="mt-6 text-sm sm:text-base md:text-lg lg:text-[24px] w-[140px] md:w-[172px]"
+                    className="mt-6 text-sm sm:text-base md:text-lg lg:text-[24px] xl:text-[24px] w-[140px] md:w-[172px]"
                   >
                     Explore
                   </Button>

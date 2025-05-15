@@ -8,7 +8,7 @@ import tweeter_icon from "../assets/icons/tweeter_icon.svg";
 const Footer_1 = () => {
   return (
     <div>
-      <div className="w-full h-[460.11px] bg-[#1A4242] font text-white mt-[96px] ">
+      {/* <div className="w-full h-[460.11px] bg-[#1A4242] font text-white mt-[96px] ">
         <div className="flex ">
           <div className="flex gap-[38px]  ml-[139px] items-center">
             <img src={logo} alt="" />
@@ -51,9 +51,9 @@ const Footer_1 = () => {
             </ul>
           </div>
         </div>
-      </div> 
+      </div>  */}
 
- {/* <div className="w-full bg-[#1A4242] text-white mt-[96px]">
+ <div className="w-full bg-[#1A4242] text-white mt-[96px]">
   <div className="max-w-screen-xl mx-auto  py-[111px] flex flex-col md:flex-row md:justify-between">
  
     <div className="flex items-center gap-[38px] mb-10 md:mb-0">
@@ -97,7 +97,7 @@ const Footer_1 = () => {
       </ul>
     </div>
   </div>
-</div>  */}
+</div> 
 
 
     </div>
