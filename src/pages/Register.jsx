@@ -48,7 +48,7 @@ const Register = () => {
   return (
     <div className="mt-[28px] flex items-center justify-center flex-col displayRegular">
       <AuthLayout>
-        <p className="text-center lg:mt-[26px] xL:mt-[26px] text-[18px] text-text font-bold">
+        <p className="text-center lg:mt-[26px] xL:mt-[26px] text-[18px] text-text font-bold tracking-[0.5px]">
           Welcome to E-Com!
         </p>
         <p className="text-center text-[18px] mt-[10px] text-textSecondary">
@@ -133,7 +133,7 @@ const Register = () => {
             errors={errors}
             name="phoneNumber"
             type="number"
-            placeholder="Enter your phone no"
+            placeholder="Enter your phone number"
             isPhone
           />
 
@@ -214,7 +214,7 @@ const Register = () => {
             errors={errors}
             name="confirmPassword"
             type={showConfirmPassword ? "text" : "password"}
-            placeholder="Confirm password"
+            placeholder="Enter your confirm password"
             isConfirmPassword
             icon={lock_icon}
             showConfirmPassword={showConfirmPassword}
@@ -226,7 +226,7 @@ const Register = () => {
             variant="blueButton"
             size="xl"
             type="submit"
-            className="w-full"
+            className="w-full text-[18px]"
           >
             Register
           </Button>
@@ -237,7 +237,7 @@ const Register = () => {
               OR
             </span>
           </div>
-          <div className="text-center text-sm pt-[30px]">Register using</div>
+          <div className="text-center text-[15px] pt-[30px]">Register using</div>
         </form>
       </AuthLayout>
       <div className="text-center text-[12px] lg:mt-[40px] xl:mt-[40px] mt-[20px] text-textSecondary">

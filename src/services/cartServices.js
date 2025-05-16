@@ -2,12 +2,28 @@ import axiosInstance from "../utils/interceptor";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-export const addToCartEndPoint = (productId) => {
+// export const addToCartEndPoint = ({productId,productColorId,productSizeId}) => {
+//   console.log(productColorId,  productSizeId);
+
+//   return axiosInstance.post(`${BASE_URL}cart`, {
+//     productId: productId,
+//     quantity: 1,
+//     productColorId,
+//     productSizeId,
+//   });
+// };
+
+export const addToCartEndPoint = ({ productId, productColorId, productSizeId }) => {
+  console.log(productId, productColorId, productSizeId);
+
   return axiosInstance.post(`${BASE_URL}cart`, {
-    productId:productId,
-    quantity:1,
+    productId,
+    quantity: 1,
+    productColorId: productColorId,
+    productSizeId: productSizeId,
   });
 };
+
 
 export const getCartItems = () => {
   return axiosInstance.get(`${BASE_URL}cart`);
@@ -34,7 +50,7 @@ export const getPromoCode = () => {
 
 export const promoCode = (coupon) => {
   return axiosInstance.post(`${BASE_URL}promocode/apply`, {
-    promoCode:coupon
+    promoCode: coupon
   });
 
   // return axiosInstance.post(`http://192.168.1.58:5000/promocode/apply`, {

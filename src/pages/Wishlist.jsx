@@ -20,8 +20,6 @@ const Wishlist = () => {
     dispatch(fetchWishlistProduct());
   }, []);
 
-
-
   const handleDeleteToWishlist = (e, id) => {
     e.stopPropagation();
     dispatch(deleteProductToWishlist(id));
@@ -66,12 +64,12 @@ const Wishlist = () => {
               <div
                 key={index}
                 className="flex-shrink-0 relative"
-                onClick={() => showProductDetails(product.id)}
+                onClick={() => showProductDetails(product?.id)}
               >
                 <ProductCard product={product} />
 
                  <img
-                  onClick={(e) => handleDeleteToWishlist(e,product.id)}
+                  onClick={(e) => handleDeleteToWishlist(e,product?.id)}
                   src={red_heart_icon}
                   alt="Remove from wishlist"
                   className="w-[30px] h-[27px] cursor-pointer absolute top-3 right-6 md:right-5 lg:right-3 xl:right-2"

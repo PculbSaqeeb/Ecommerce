@@ -55,10 +55,10 @@ const SubCategoryPage = () => {
           ))}
        </div> */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
-          {products.map((product) => (
+          {products?.map((product) => (
             <div
               key={product.id}
-              onClick={() => navigate(`product-detail/${product.id}`)}
+              onClick={() => navigate(`product-detail/${product?.id}`)}
             >
               <ProductCard product={product} />
             </div>

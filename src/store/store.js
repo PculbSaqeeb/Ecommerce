@@ -7,6 +7,7 @@ import { combineReducers } from 'redux';
 import cartReducer from '../redux/cartSlice';
 import orderReducer from '../redux/orderSlice'
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import categoryReducer from '../redux/categorySlice';
 
 const persistConfig = {
   key: 'root',
@@ -15,6 +16,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   product: productReducer,
+  category:categoryReducer,
   cart:cartReducer,
   wishlist:wishlistReducer,
   order: orderReducer,

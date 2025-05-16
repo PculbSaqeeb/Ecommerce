@@ -31,8 +31,6 @@ const Verification = () => {
       }
       toast.success(otpVerified?.data?.message);
     } catch (error) {
-      console.log(error);
-
       toast.error(error.response?.data?.message || "Incorrect OTP");
     }
   };
@@ -79,14 +77,14 @@ const Verification = () => {
     //   </form>
     // </div>
 
-    <div className="flex flex-col items-center justify-center h-screen px-4">
+    <div className="flex flex-col items-center justify-center h-screen px-4 displayRegular">
       <div className="w-[72px] h-[72px] rounded-[16px] bg-textTertiary mx-auto">
         <div className="flex h-full items-center justify-center">
           <img className="-rotate-90" src={logo} alt="" />
         </div>
       </div>
 
-      <p className="text-center text-[18px] text-textTertiary font-semibold mt-[27px]">
+      <p className="text-center text-[18px] text-textTertiary font-semibold mt-[27px] tracking-[0.5px]">
         Enter Verification Code
       </p>
 
@@ -114,11 +112,13 @@ const Verification = () => {
           name="otp"
           type="number"
           placeholder="Enter OTP here"
-          className="pl-1"
+          isOtp
+          className="pl-[16px]"
         />
 
         <Button
-          className="mt-[42px] w-full"
+          onClick={handleSubmit(onSubmit)}
+          className="mt-[42px] w-full text-[18px]"
           type="submit"
           variant="blueButton"
           size="xl"

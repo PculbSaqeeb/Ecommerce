@@ -15,7 +15,7 @@ const ProductPage = () => {
   const [filterVisible, setFilterVisible] = useState(true);
   const dispatch = useDispatch();
   const { items, loading, error, filteredItems } = useSelector(
-    (state) => state.product
+    (state) => state?.product
   );
   const handleShowSorting = () => {
     setSortVisible(!sortVisible);
@@ -172,7 +172,7 @@ const ProductPage = () => {
                     <div
                       key={index}
                       className="flex-shrink-0"
-                      onClick={(e) => showProductDetails(product.id, e)}
+                      onClick={(e) => showProductDetails(product?.id, e)}
                     >
                       <ProductCard product={product} />
                     </div>

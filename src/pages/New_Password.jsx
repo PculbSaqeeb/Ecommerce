@@ -139,7 +139,7 @@ const New_Password = () => {
         Set new password for your account
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[440px]">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[440px] mt-[29px]">
         {/* <div className="relative mt-[29px]">
       <input
         {...register("password")}

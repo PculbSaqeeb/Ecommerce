@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { loginUser } from "../services/authServices";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Input from "../components/Input";
+import "../style/style.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,14 +42,14 @@ const Login = () => {
         toast.success("Login Successfully!");
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
     }
   };
 
-  // const token = localStorage.getItem("token");
-  // if (token) {
-  //   return <Navigate to="/" replace />;
-  // }
+  const token = localStorage.getItem("token");
+  if (token) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     //     <div className="h-screen flex flex-col items-center justify-center displayRegular">
@@ -162,9 +163,9 @@ const Login = () => {
     //       </div>
     //     </div>
 
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-0 mt-[18px]">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-0 mt-[18px] displayRegular">
       <AuthLayout>
-        <p className="text-text text-[18px] text-center mt-[17px] lg:mt-[26px] font-bold">
+        <p className="text-text text-[18px] text-center mt-[17px] lg:mt-[26px] font-bold tracking-[0.5px]">
           Welcome back to E-com
         </p>
         <p className="text-center mt-[8px] text-[18px] text-textSecondary">
@@ -245,7 +246,7 @@ const Login = () => {
           />
 
 
-          <div className="w-full flex justify-end mt-2">
+          <div className="w-full flex justify-end mt-[10px]">
             <a
               href="/forgot-password"
               className="text-sm text-textTertiary hover:underline font-bold cursor-pointer"
@@ -258,7 +259,7 @@ const Login = () => {
             <input
               type="checkbox"
               id="remember"
-              className="h-4 w-4 accent-[#BDC0CD]"
+              className="h-[15px] w-[15px] accent-[#BDC0CD]"
             />
             <label htmlFor="remember" className="text-sm text-textSecondary">
               Remember Me
@@ -282,7 +283,7 @@ const Login = () => {
             </span>
           </div>
 
-          <div className="text-center text-sm pt-[30px] lg:mt-[42px] text-[#323232]">
+          <div className="text-center text-[15px] pt-[30px] lg:mt-[42px] text-[#323232]">
             Login using
           </div>
         </form>

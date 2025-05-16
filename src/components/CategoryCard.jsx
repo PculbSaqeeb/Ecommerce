@@ -9,10 +9,10 @@ const CategoryCard = ({ product }) => {
 
   const toggleExpanded = () => setExpanded(!expanded);
 
-  const shouldTruncate = product.description.length > 50;
+  const shouldTruncate = product?.description?.length > 50;
   const displayedText = expanded
-    ? product.description
-    : product.description.slice(0, 50);
+    ? product?.description
+    : product?.description.slice(0, 50);
   return (
     // <div
     //   className="w-[410px] rounded-[10px] flex-shrink-0 shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden mt-[20px] pb-5"
@@ -49,17 +49,17 @@ const CategoryCard = ({ product }) => {
     <div
       className="w-full max-w-[400px] mx-auto sm:mx-0 rounded-[10px] shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden mt-5 pb-5"
       onClick={() =>
-        navigate(`/categories/${categoryName}/${product.name.toLowerCase()}`)
+        navigate(`/categories/${categoryName}/${product?.name?.toLowerCase()}`)
       }
     >
       <img
         className="w-full h-[210px] sm:h-[250px] md:h-[240px] object-cover"
-        src={product.image}
-        alt={product.name}
+        src={product?.image}
+        alt={product?.name}
       />
       <div className="px-5">
         <h5 className="font-bold text-xl md:text-2xl text-textPrimary mt-3">
-          {product.name}
+          {product?.name}
         </h5>
         <p className="font-normal text-base md:text-lg mt-3">
           {displayedText}

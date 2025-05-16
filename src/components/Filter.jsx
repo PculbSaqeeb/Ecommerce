@@ -159,9 +159,9 @@ const Filter = ({ filterVisible }) => {
 
   const handleApplyFilter = () => {
     if (
-      selectedBrands.length === 0 &&
-      selectedColors.length === 0 &&
-      selectedDiscounts.length === 0 &&
+      selectedBrands?.length === 0 &&
+      selectedColors?.length === 0 &&
+      selectedDiscounts?.length === 0 &&
       priceRange[0] === 0 &&
       priceRange[1] === 10000
     ) {

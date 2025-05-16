@@ -4,22 +4,22 @@ import { applyFilters } from '../services/filterServices'
 
 export const fetchProductData = createAsyncThunk("product/fetch", async () => {
   const response = await showAllProduct();
-  return response.data;
+  return response?.data;
 });
 
 export const fetchFilteredProducts = createAsyncThunk(
   "product/fetchFiltered",
   async (filters) => {
     const response = await applyFilters(filters);
-    return response.data;
+    return response?.data;
   }
 );
 
 export const fetchSearchProducts = createAsyncThunk(
   "product/fetchsearchProduct",
-  async (keyword) => {
-    const response = await searchProduct(keyword);
-    return response.data;
+  async ({search,category}) => {
+    const response = await searchProduct(search,category);
+    return response?.data;
   }
 );
 

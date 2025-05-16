@@ -29,10 +29,7 @@ const TrendingProduct = () => {
 
   const dispatch = useDispatch();
   const { items, loading, error } = useSelector((state) => state.product);
-
-  useEffect(() => {
-    dispatch(fetchProductData());
-  }, [dispatch]);
+  
 
   return (
     // <div className=" mt-[79px]">
@@ -78,11 +75,11 @@ const TrendingProduct = () => {
           )}
 
           {items &&
-            items.map((product, index) => (
+            items?.map((product, index) => (
               <div
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
-                onClick={(e) => handleProductDetailsNavigate(e, product.id)}
+                onClick={(e) => handleProductDetailsNavigate(e, product?.id)}
                 key={index}
               >
                 <ProductCard product={product} />

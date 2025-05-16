@@ -16,17 +16,26 @@ const Input = ({
     toggleConfirmPasswordVisibility,
     isPhone,
     isPassword,
+    isOtp,
     isConfirmPassword,
+    className
 }) => {
     return (
-        <div className=" mt-[8px]">
+        <div className=" mt-[8px] displayRegular">
             <div className="relative">
                 <input
                     {...register(name)}
                     type={type}
                     placeholder={placeholder}
-                    className="w-full px-3 py-2 pl-12 pr-10 border border-inputBorder rounded-[5px] placeholder:text-inputText placeholder:text-[12px]"
-                // required={required}
+                    className={`w-full px-3 py-2 pl-12 pr-10 border text-textSecondary border-inputBorder rounded-[5px] placeholder:text-inputText placeholder:text-[14px] placeholder:tracking-[0.5px] tracking-[0.5px] ${className}`}
+                    max={isPhone ? 10 : 6}
+                    onInput={(e) => {
+                        if (isPhone) {
+                            e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
+                        } if(isOtp){
+                            e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 6)
+                        }
+                    }}
                 />
                 {icon && (
                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">

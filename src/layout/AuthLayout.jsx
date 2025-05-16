@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 const AuthLayout = ({ children }) => {
   const navigate = useNavigate();
 
+
   return (
     // <div>
     //   <div className="w-[72px] h-[72px] rounded-[16px] bg-textTertiary mx-auto">
@@ -42,6 +43,8 @@ const AuthLayout = ({ children }) => {
 
     // </div>
 
+
+
     <div className="w-full flex flex-col items-center px-4 sm:px-0">
       {/* App Logo */}
       <div className="w-[72px] h-[72px] rounded-[16px] bg-textTertiary flex items-center justify-center mx-auto mb-6">
@@ -65,7 +68,7 @@ const AuthLayout = ({ children }) => {
           type="button"
           onClick={() => {
             window.location.href =
-              "https://6616-2401-4900-1f33-ff61-8f11-c63b-b465-b32f.ngrok-free.app/user/google";
+              "http://192.168.1.58:5000/user/google/callback";
           }}
           className="p-2 rounded-full"
         >

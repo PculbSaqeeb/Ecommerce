@@ -21,36 +21,41 @@ import {
 } from "../redux/wishlistSlice";
 import {
   addToCart,
+  getAllCartItems,
   removeToCart,
 } from "../redux/cartSlice";
 import { fetchProductData } from "../redux/productSlice";
-import { CgLaptop, CgLayoutGrid } from "react-icons/cg";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [tabList, setTabList] = useState("details");
   const products = useSelector((state) => state.product.items);
+  const product = products.find((item) => item?.id === id);
   const { wishlist } = useSelector((state) => state.wishlist);
-  const product = products.find((item) => item.id === id);
-  const [showSizeChart, setShowSizeChart] = useState(false);
-  const [selectSize, setSelectSize] = useState(null);
-  const [selectColor, setSelectColor] = useState(null);
+  const [showSizeChart, setShowSizeChart] = useState(true);
+  const [selectSize, setSelectSize] = useState(product?.productSize[0]?.id);
+  const [selectColor, setSelectColor] = useState(product?.productColor[0]?.id);
   const cart = useSelector((state) => state.cart.cart);
-  const isCart = cart.some((item) => item.productId === id || item.id === id)
+  console.log(cart);
 
+
+  const isCart = cart?.some((item) => item?.productId === id || item?.id === id);
   console.log(isCart);
-
-
-
+  
+  
+  useEffect(() => {
+    dispatch(getAllCartItems());
+  }, [dispatch]);
+  
   useEffect(() => {
     dispatch(fetchWishlistProduct());
   }, [dispatch]);
 
-  const isWishlist = wishlist.some(item => item.productId === id || item.id === id);
+  const isWishlist = wishlist.some(item => item?.productId === id || item?.id === id);
 
   useEffect(() => {
-    if (products.length === 0) {
+    if (products?.length === 0) {
       dispatch(fetchProductData());
     }
   }, [dispatch]);
@@ -66,9 +71,15 @@ const ProductDetail = () => {
   const handleDeleteToWishlist = (id) => {
     dispatch(deleteProductToWishlist(id));
   };
+  // console.log(selectSize,slec);
 
-  const handleAddToCart = (id) => {
-    dispatch(addToCart(id));
+
+  const handleAddToCart = (id, selectColorId, selectSizeId) => {
+    dispatch(addToCart({
+      productId: id,
+      productColorId: selectColorId,
+      productSizeId: selectSizeId
+    }));
   };
 
   const handleRemoveToCart = (id) => {
@@ -98,13 +109,15 @@ const ProductDetail = () => {
     setShowSizeChart(!showSizeChart);
   }
 
-  const handleSelectSize = (i) => {
-    setSelectSize(i)
+  const handleSelectSize = (sizeId) => {
+    setSelectSize(sizeId)
   }
 
-  const handleSelectColor = (i) => {
-    setSelectColor(i);
+  const handleSelectColor = (colorId) => {
+    setSelectColor(colorId);
   }
+
+
 
   const { items } = useSelector((state) => state.product);
   useEffect(() => {
@@ -183,10 +196,11 @@ const ProductDetail = () => {
               <p className="ml-[19px]">{product?.reviews?.length || 0} Review</p>
             </div>
           </div>
+
           <p className="text-[24px] text-textPrimary font-bold mt-[28px]">
-            {product?.price}
+            &#x20B9; {product?.price}
             <span className="text-[18px] text-[#646464] font-normal ml-[15px] line-through">
-              {product?.discountPrice}
+              &#x20B9; {product?.discountPrice}
             </span>
             <span className="text-[24px] text-success font-normal ml-[15px]">
               ({product?.discountPercentage}% off)
@@ -208,9 +222,9 @@ const ProductDetail = () => {
             <div className="flex gap-[19px] mt-[21px]">
               {product?.productSize.map((size, i) => (
                 <div
-                  onClick={() => handleSelectSize(i)}
+                  onClick={() => handleSelectSize(size.id)}
                   key={i}
-                  className={`w-[55px] h-[55px] text-textPrimary border ${selectSize === i ? "border-[#002482]" : "border-[#BABABA]"} rounded-full flex items-center justify-center cursor-pointer`}
+                  className={`w-[55px] h-[55px] text-textPrimary border ${selectSize === size.id ? "border-[#002482]" : "border-[#BABABA]"} rounded-full flex items-center justify-center cursor-pointer`}
                 >
                   {size?.name}
                 </div>
@@ -223,23 +237,12 @@ const ProductDetail = () => {
           <h4 className="text-[24px] text-textPrimary font-bold mt-[20px]">
             Select Color
           </h4>
-          {/* <div className="mt-[22px] flex gap-[18px]">
-            {[1, 2, 3].map((_, i) => (
-              <img
-                key={i}
-                className="w-[74px] h-[74px] rounded-[5px] object-cover cursor-pointer"
-                src={product?.images[i + 1]}
-                alt=""
-              />
-            ))}
-          </div> */}
-
           <div className="flex gap-[19px] mt-[21px]">
             {product.productColor?.map((color, i) => (
               <div
                 key={i}
-                onClick={() => handleSelectColor(i)}
-                style={selectColor === i ? { borderColor: color.hexCode, borderWidth: '1px' } : {}}
+                onClick={() => handleSelectColor(color.id)}
+                style={selectColor === color.id ? { borderColor: color.hexCode, borderWidth: '1px' } : {}}
                 className={`w-[55px] h-[55px] text-textPrimary rounded-full flex items-center justify-center cursor-pointer shadow-[0px_0px_8px_rgba(0,0,0,0.2)]`}
               >
                 <span
@@ -278,29 +281,12 @@ const ProductDetail = () => {
             <button className="text-lg ml-[15px] text-linkPrimary">T&C</button>
           </p>
 
-          {/* <div className="flex items-center rounded-md overflow-hidden w-max h-9 mt-[20px] ">
-            <button
-              onClick={handleDecrement}
-              className="px-2 text-xl hover:bg-gray-300 w-7 rounded-md bg-gray-200 "
-            >
-              −
-            </button>
-            <span className="text-center pt-[8px] text-black text-sm w-9 h-9 rounded-full bg-gray-200 mx-3">
-              {cart.find((item) => item.productId === product.id)?.quantity ||
-                1}
-            </span>
-            <button
-              onClick={handleIncrement}
-              className="px-2 text-xl hover:bg-gray-300 w-7 rounded-md bg-gray-200"
-            >
-              +
-            </button>
-          </div> */}
+          
 
           <div className="flex items-center gap-[22px] mt-[28px]">
             {isCart ? (
               <button
-                onClick={() => handleRemoveToCart(product.id)}
+                onClick={() => handleRemoveToCart(product?.id)}
                 className="text-lg bg-yellow-400 rounded-mg py-3 px-4 text-white rounded-[10px]"
               >
                 Remove to cart
@@ -308,7 +294,8 @@ const ProductDetail = () => {
 
             ) : (
               <Button
-                onClick={() => handleAddToCart(product.id)}
+                onClick={() =>
+                  handleAddToCart(product?.id, selectColor, selectSize)}
                 variant="primary"
                 className="w-[168px] text-lg"
               >
@@ -377,7 +364,7 @@ const ProductDetail = () => {
               Size & Fit
             </li>
             <li className="text-[18px] text-textPrimary mt-[12px]">
-              The model (height 5'8") is wearing a size{" "}
+              The model (height 5'8") is wearing a size
               {/* {product?.sizes[2]?.name} */}
             </li>
 
@@ -390,7 +377,7 @@ const ProductDetail = () => {
           </ul>
         )}
 
-        {tabList === "spec" && <Specifications specification={product.specifications} />}
+        {tabList === "spec" && <Specifications specification={product?.specifications} />}
 
         {tabList === "rating" && <Rating productId={id} />}
       </div>
@@ -407,7 +394,7 @@ const ProductDetail = () => {
                 key={index}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
-                onClick={(e) => handleProductDetailsNavigate(e, product.id)}
+                onClick={(e) => handleProductDetailsNavigate(e, product?.id)}
               >
                 <ProductCard product={product} />
               </div>

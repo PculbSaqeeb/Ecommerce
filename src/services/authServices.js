@@ -30,7 +30,6 @@ export const verifyOTP = (email, otp) => {
 };
 
 export const resetPassword = (email,data) => {
-    console.log(data);
   return axios.post(`${BASE_URL}user/change-password`, {
     email:email,
     password:data.password,
@@ -40,5 +39,15 @@ export const resetPassword = (email,data) => {
 
 
 export const googleAuth=()=>{
-  return axios.get("https://6616-2401-4900-1f33-ff61-8f11-c63b-b465-b32f.ngrok-free.app/user/google");
+  return axios.get("http://192.168.1.58:5000/user/google/callback");
 }
+
+fetch('http://localhost:3001/user/google/callback', {
+  method: 'GET',
+  credentials: 'include', // if needed
+})
+  .then(res => res.json())
+  .then(data => {
+    localStorage.setItem('access_token', data.access_token);
+    console.log('User data:', data.userData);
+  });

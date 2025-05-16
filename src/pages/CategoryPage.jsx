@@ -5,30 +5,17 @@ import Layout from "../layout/Index";
 import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
 import { CgLaptop } from "react-icons/cg";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategoryProductData, fetchSearchByCategory } from "../redux/categorySlice";
 
 const CategoryPage = () => {
   const { categoryName } = useParams();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const fetchProducts = async () => {
-    try {
-      setLoading(true);
-      const response = await getCategoryByName(categoryName);
-      setProducts(response.data);
-      setError(null);
-    } catch (error) {
-      setError(error.message);
-      setProducts([]);
-    } finally{
-      setLoading(false);
-    }
-  };
-
+  const dispatch = useDispatch();
+  const { category,filteredItems, loading, error } = useSelector((state) => state.category);
+  
   useEffect(() => {
-    fetchProducts();
-  }, [categoryName]);
+    dispatch(fetchCategoryProductData(categoryName));
+  }, [dispatch,categoryName]);
 
   return (
     <Layout>
@@ -41,7 +28,7 @@ const CategoryPage = () => {
 
         {error && <p className="text-center text-red-500 py-10">{error}</p>}
 
-        {!loading && !error && products.length === 0 && (
+        {!loading && !error && filteredItems?.length === 0 && (
           <p className="text-center py-10">
             No products found in this category.
           </p>
@@ -58,9 +45,9 @@ const CategoryPage = () => {
         </div> */}
 
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {!loading && !error && products.map((product) => (
+          {!loading && !error && filteredItems?.map((product) => (
             <CategoryCard
-              key={product._id || product.id}
+              key={product?._id || product?.id}
               product={product}
             />
           ))}

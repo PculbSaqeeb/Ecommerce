@@ -110,16 +110,16 @@ const Trending = () => {
       </p>
 
       <Slider {...settings} className="">
-        {carousel.data && carousel.data.map((item, index) => (
+        {carousel?.data && carousel?.data?.map((item, index) => (
           <div
             key={index}
             className="!flex items-center justify-center mt-[54px] cursor-pointer h-[587px] mb-2"
           >
             <div className="max-w-[1146px] h-[500px] flex flex-col lg:flex-row xl:flex-row items-center rounded-[10px] shadow-[0_0_12px_rgba(0,0,0,0.1)] overflow-hidden ">
               <div className="w-[300px] sm:w-[400px] md:w-[490px] lg:w-[350px] xl:w-[542px] h-full flex flex-col items-center justify-center bg-white">
-                <img className="w-[175px] h-[72px] object-cover object-center" src={item.logoURL} alt="Offer" />
+                <img className="w-[175px] h-[72px] object-cover object-center" src={item?.logoURL} alt="Offer" />
                 <p className="text-[24px] xl:text-[48px] font-bold text-textPrimary mt-[65px] text-center">
-                  {item.offer}
+                  {item?.offer}
                 </p>
                 <Button
 
@@ -134,7 +134,7 @@ const Trending = () => {
 
               <img
                 className="w-[310px] sm:w-[400px] md:w-[490px] lg:w-[300px] xl:w-[604px]  h-full object-cover"
-                src={item.image}
+                src={item?.image}
                 alt=""
               />
             </div>

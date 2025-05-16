@@ -4,7 +4,7 @@ import search_icon from "../assets/icons/search_icon.svg";
 import heart_icon from "../assets/icons/heart_icon.svg";
 import cart_icon from "../assets/icons/cart_icon.svg";
 import order_icon from "../assets/icons/order_icon.svg";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router";
 import profile_icon from '../assets/icons/profile_icon.svg'
 import Button from "../components/Button";
 import { getAllCategory } from "../services/catogeryServices";
@@ -13,19 +13,27 @@ import { HiMenu } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { CgLaptop, CgProfile } from "react-icons/cg";
 import { fetchProductData, fetchSearchProducts } from "../redux/productSlice";
+import useDebounce from "../hooks/useDebounce";
+import { fetchCategoryProductData, fetchSearchByCategory } from "../redux/categorySlice";
+import { LocalStorageCache } from "@auth0/auth0-react";
 
 
 const Header = () => {
+  const { categoryName } = useParams();
+  // const location
+  const location = useLocation();
+  console.log(location.search);
+  localStorage.setItem("token",location.search)
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
   const cart = useSelector((state) => state.cart.cart || []);
   const { wishlist } = useSelector((state) => state.wishlist);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [debouncedQuery, setDebouncedQuery] = useState('');
 
-  console.log(wishlist);
-  
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [category, setCategory] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const debouncedQuery = useDebounce(searchQuery, 500);
 
   const handleLoginNavigate = () => {
     navigate("/login");
@@ -50,38 +58,37 @@ const Header = () => {
     navigate("/login");
   };
 
-  const [category, setCategory] = useState([]);
 
   const fetchCategory = async () => {
     try {
       const response = await getAllCategory();
-      setCategory(response.data);
+      setCategory(response?.data);
     } catch (error) {
       throw new Error(error.message);
     }
   };
 
-    const handleSearch = (e) => {
+  const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedQuery(searchQuery);
-    }, 500);
-
-    return () => {
-      clearTimeout(handler); 
-    };
-  }, [searchQuery]);
-
-  useEffect(() => {
     if (debouncedQuery.trim() !== '') {
-      dispatch(fetchSearchProducts(debouncedQuery));
+      if (location.pathname !== '/products' && categoryName) {
+        dispatch(fetchSearchByCategory({ search: debouncedQuery, category: categoryName }));
+      } else if (location.pathname === '/products') {
+        dispatch(fetchSearchProducts({ search: debouncedQuery, category: categoryName }));
+      }
     } else {
-      dispatch(fetchProductData());
+      if (location.pathname !== '/products' && categoryName) {
+        console.log(categoryName);
+
+        dispatch(fetchCategoryProductData(categoryName));
+      } else if (location.pathname === '/products') {
+        dispatch(fetchProductData());
+      }
     }
-  }, [debouncedQuery, dispatch]);
+  }, [debouncedQuery, categoryName, dispatch]);
 
   useEffect(() => {
     fetchCategory();
@@ -275,7 +282,7 @@ const Header = () => {
             </div>
 
             <div className="flex items-center gap-4 md:gap-8 ml-auto">
-              <div  onClick={handleWishlistNavigate} className="relative hidden md:block">
+              <div onClick={handleWishlistNavigate} className="relative hidden md:block">
                 <img
                   onClick={handleWishlistNavigate}
                   className="w-[25px] h-[25px] cursor-pointer"
@@ -299,7 +306,6 @@ const Header = () => {
                 </p>
               </div>
 
-              {/* Orders */}
               <img
                 onClick={handleOrderNavigate}
                 className="w-[25px] h-[25px] cursor-pointer hidden md:block"
@@ -307,7 +313,6 @@ const Header = () => {
                 alt="order"
               />
 
-              {/* Login / Logout */}
               <div>
                 {token ? (
                   <Button
@@ -385,20 +390,19 @@ const Header = () => {
           <div className="flex flex-wrap gap-6 justify-center px-4 mt-3">
 
             {category &&
-              category.map((item, index) => (
+              category?.map((item, index) => (
                 <div
-                  onClick={() => navigate(`/categories/${item.name.toLowerCase()}`)}
+                  onClick={() => navigate(`/categories/${item?.name?.toLowerCase()}`)}
                   key={index}
                   className="w-[120px] flex flex-col items-center bg-white rounded-lg  hover:shadow-md transition duration-200 p-2"
                 >
-
                   <img
-                    src={item.image}
-                    alt={item.name}
+                    src={item?.image}
+                    alt={item?.name}
                     className="w-[80px] h-[80px] object-cover rounded-full"
                   />
                   <p className="text-sm text-center mt-2 font-medium text-gray-700">
-                    {item.name}
+                    {item?.name}
                   </p>
                 </div>
               ))}
