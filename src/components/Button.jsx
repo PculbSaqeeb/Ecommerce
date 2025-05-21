@@ -27,7 +27,7 @@ const Button = ({
     lightOutline: "text-[20px] text-textPrimary border-2 border-borderDark",
     textOnly: "text-linkPrimary bg-transparent border-none",
     cartBlue: "border border-textTertiary",
-    blueButton:"bg-textTertiary text-white mt-[29px]"
+    blueButton:"bg-textTertiary text-white"
   };
 
   return (

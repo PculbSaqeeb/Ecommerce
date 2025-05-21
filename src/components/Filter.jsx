@@ -163,7 +163,7 @@ const Filter = ({ filterVisible }) => {
       selectedColors?.length === 0 &&
       selectedDiscounts?.length === 0 &&
       priceRange[0] === 0 &&
-      priceRange[1] === 10000
+      priceRange[1] === 30000
     ) {
       dispatch(fetchProductData());
     } else {
@@ -179,7 +179,7 @@ const Filter = ({ filterVisible }) => {
   };
 
   const handleClearAll = () => {
-    setPriceRange([0,10000])
+    setPriceRange([0,3000])
     setSelectedBrands([]);
     setSelectedColors([]);
     setSelectedDiscounts([]);
@@ -257,10 +257,10 @@ const Filter = ({ filterVisible }) => {
         {showBrandList && (
           <div className="mt-2 space-y-2">
             {allBrands.map((brand) => (
-              <label key={brand} className="block text-[18px] text-[#333]">
+              <label key={brand} className="block text-[18px] text-textPrimary">
                 <input
                   type="checkbox"
-                  className="mr-2"
+                  className="mr-2 accent-textSecondary"
                   checked={selectedBrands.includes(brand)}
                   onChange={() =>
                     handleCheckboxChange(
@@ -270,7 +270,7 @@ const Filter = ({ filterVisible }) => {
                     )
                   }
                 />
-                {brand}
+                {brand}  <span className="text-textSecondary">(30)</span>
               </label>
             ))}
           </div>
@@ -288,10 +288,10 @@ const Filter = ({ filterVisible }) => {
         {showColorList && (
           <div className="mt-2 space-y-2">
             {allColors.map((color) => (
-              <label key={color} className="block text-[18px] text-[#333]">
+              <label key={color} className="block text-[18px] text-textPrimary">
                 <input
                   type="checkbox"
-                  className="mr-2"
+                  className="mr-2 accent-textSecondary"
                   checked={selectedColors.includes(color)}
                   onChange={() =>
                     handleCheckboxChange(
@@ -321,10 +321,10 @@ const Filter = ({ filterVisible }) => {
         {showDiscountList && (
           <div className="mt-2 space-y-2">
             {allDiscounts.map((discount) => (
-              <label key={discount} className="block text-[18px] text-[#333]">
+              <label key={discount} className="block text-[18px] text-textPrimary">
                 <input
                   type="checkbox"
-                  className="mr-2"
+                  className="mr-2 accent-textSecondary"
                   checked={selectedDiscounts.includes(discount)}
                   onChange={() =>
                     handleCheckboxChange(

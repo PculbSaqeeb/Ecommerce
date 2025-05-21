@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../layout/Index";
 import Banner from "../components/Banner";
 import TrendingProduct from "../components/TrendingProduct";
@@ -11,17 +11,29 @@ import Services from "../components/Services";
 import About from "../components/About";
 import Invite from "../components/Invite";
 import CustomerSay from '../components/CustomerSay';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCarousel } from "../redux/carouselSlice";
 
 
 const Home = () => {
+  const carousel=useSelector((state)=>state.crousole.crousole);
+  const dispatch=useDispatch();
+
+   useEffect(() => {
+    if (!carousel || carousel.length === 0) {
+      dispatch(fetchCarousel());
+    }
+  }, [dispatch]);
+
   return (
+    
       <Layout>
         <Invite />
-        <Banner />
+        <Banner carousel={carousel}/>
         <TrendingProduct />
         <Deal />
-        <Trending />
-        <Banner_2 />
+        <Trending carousel={carousel}/>
+        <Banner_2 carousel={carousel}/>
         <Category />
         <CustomerSay />
         <Blog />

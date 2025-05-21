@@ -57,6 +57,18 @@ input[type=number] {
 }
 
 
+.trending-slider-wrapper .slick-slide {
+  transition: transform 0.3s ease;
+  transform: scale(0.8);
+}
+
+.trending-slider-wrapper .slick-center {
+  transform: scale(1);
+  z-index: 10;
+}
+
+
+
 /* input.slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 20px;

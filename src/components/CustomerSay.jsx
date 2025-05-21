@@ -185,7 +185,7 @@ const Trending = () => {
                 {[1, 2, 3, 4, 5].map((_, i) => (
                   <img key={i} className="w-[24px] m-[1px]" src={black_star_icon} alt="" />
                 ))}
-                <p className="text-[18px] ml-[11px]">4.4</p>
+                <p className="text-[18px] ml-[11px]">5</p>
               </div>
 
               <p className="text-[18px] lg:text-[24px] xl:text-[24px] text-textPrimary mt-[24px] text-center px-[32px] pb-[48px]">

@@ -324,9 +324,11 @@ const Cart = () => {
     dispatch(getAllCartItems());
   }, [dispatch]);
 
-  const { cart, coupon, discount,breakdown,totalPrice,totalQuantity} = useSelector(
+  const { cart, coupon, discount, breakdown, totalPrice, totalQuantity } = useSelector(
     (state) => state.cart
   );
+
+
 
   const handleRemoveToCart = (id) => {
     dispatch(removeToCart(id));
@@ -601,15 +603,15 @@ const Cart = () => {
         )}
       </div> */}
 
-      <div className="flex-grow">
-        <p className="mt-6 md:mt-[56px] text-2xl md:text-[36px] font-bold mx-4 md:mx-[50px]">
+      <div className="flex-grow md:mx-[50px]">
+        <p className="mt-6 md:mt-[56px] text-2xl md:text-[36px] font-bold mx-4">
           My <span className="text-[#002482]">Cart</span>
         </p>
         {cart?.length === 0 && (
-          <p className="text-lg text-red-500 mx-4 md:mx-[50px] mt-4 md:mt-[20px]">Cart is Empty!</p>
+          <p className="text-lg text-red-500 mx-4 mt-4 md:mt-[20px]">Cart is Empty!</p>
         )}
         {cart?.length > 0 && (
-          <div className="flex flex-col lg:flex-row flex-wrap gap-4 md:gap-8 p-4 md:p-8 justify-center">
+          <div className="flex flex-col lg:flex-row flex-wrap gap-4 md:gap-8 p-4 mt-[20px]">
             <div className="max-w-[1100px] lg:flex-1">
               <div className="hidden md:block">
                 <table className="text-left rounded-lg overflow-hidden w-full shadow-[1px_1px_3px_rgba(0,0,0,0.1)]">
@@ -632,7 +634,7 @@ const Cart = () => {
                             <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white rounded-md shadow-[0px_0px_1px_rgba(0,0,0,0.7)]">
                               <img
                                 className="w-full h-full object-cover"
-                                src={item?.productImage || "/placeholder.svg"}
+                                src={item?.productImage[0] || "/placeholder.svg"}
                                 alt={item?.productName}
                                 onError={(e) => {
                                   e.target.onerror = null;
@@ -640,8 +642,12 @@ const Cart = () => {
                                 }}
                               />
                             </div>
-                            <div className="text-sm md:text-base">
+                            <div className="text-sm md:text-base font-bold">
                               {item?.productName}
+                              <div className="leading-5 mt-[3px] font-normal">
+                                <p className="text-[12px]">Size: {item?.productSize}</p>
+                                <p className="text-[12px]">Color: {item?.productColor}</p>
+                              </div>
                             </div>
                           </td>
                           <td className="pl-8 md:pl-16 lg:pl-36 py-4 text-sm md:text-lg font-medium">
@@ -694,15 +700,15 @@ const Cart = () => {
               </div>
               <div className="md:hidden">
                 {cart?.map((item) => (
-                  <div 
-                    key={item?.productId} 
+                  <div
+                    key={item?.productId}
                     className="mb-4 p-4 rounded-lg border shadow-sm"
                   >
                     <div className="flex gap-4 mb-3">
                       <div className="w-20 h-20 flex-shrink-0 rounded-md overflow-hidden shadow-sm">
                         <img
                           className="w-full h-full object-cover"
-                          src={item?.productImage || "/placeholder.svg"}
+                          src={item?.productImage[0] || "/placeholder.svg"}
                           alt={item?.productName}
                           onError={(e) => {
                             e.target.onerror = null;
@@ -721,7 +727,7 @@ const Cart = () => {
                         />
                       </div>
                     </div>
-                    
+
                     <div className="flex justify-between items-center mt-2">
                       <div className="flex items-center rounded-md overflow-hidden w-max h-9 -ml-2">
                         <button
@@ -886,7 +892,7 @@ const Cart = () => {
                 //     </button>
                 //   </div>
                 // </div>    
-                
+
                 <div className="rounded-md p-4 md:p-6 h-max relative shadow-[1px_1px_3px_rgba(0,0,0,0.1)]">
                   <h1 className="text-xl font-bold">Order Summary</h1>
                   <div className="space-y-4 md:space-y-6">
@@ -927,9 +933,9 @@ const Cart = () => {
                             </td>
                             <td className="text-right font-semibold">
                               {coupon ? (
-                                <div className="mt-2 text-green-600 font-medium">
-                                  <div className="flex items-center justify-end">
-                                    <span className="font-bold text-sm">{coupon}</span>
+                                <div className="mt-2 text-green-600 font-medium flex flex-col">
+                                  <div className="">
+                                    <p className="font-bold text-sm">{coupon}</p>
                                     <p
                                       onClick={handleRemoveCoupon}
                                       className="ml-2 text-[10px] cursor-pointer text-red-500 hover:text-red-700"
@@ -976,17 +982,17 @@ const Cart = () => {
                         <span className="font-medium text-gray-600">Sub total</span>
                         <span className="font-semibold text-gray-800">&#x20B9; {subtotal?.toFixed(2)}</span>
                       </div>
-                      
+
                       <div className="flex justify-between items-center">
                         <span className="font-medium text-gray-600">Shipping Charges</span>
                         <span className="font-semibold text-gray-800">&#x20B9; {shippingPrice?.toFixed(2)}</span>
                       </div>
-                      
+
                       <div className="flex justify-between items-center">
                         <span className="font-medium text-gray-600">GST (18%)</span>
                         <span className="font-semibold text-gray-800">&#x20B9; {gstAmount?.toFixed(2)}</span>
                       </div>
-                      
+
                       <div className="flex justify-between items-center">
                         <span className="font-medium text-gray-600">Coupon Code</span>
                         <div>
@@ -1012,12 +1018,12 @@ const Cart = () => {
                           )}
                         </div>
                       </div>
-                      
+
                       <div className="flex justify-between items-center">
                         <span className="font-medium text-gray-600">Discount</span>
                         <span className="font-semibold text-gray-800">- &#x20B9; {discount?.toFixed(2)}</span>
                       </div>
-                      
+
                       <div className="flex justify-between items-center pt-3 border-t border-gray-300">
                         <span className="font-bold text-base text-gray-800">Total amount to Pay</span>
                         <span className="font-extrabold text-base text-blue-600">&#x20B9; {Math.round(totalPayable - discount)}</span>

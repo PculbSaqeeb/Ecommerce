@@ -18,8 +18,6 @@ const clientId = "y2kthfe8kJTde1owBGwmHMCG6wK52BhV";
 
 
 root.render(
-  <React.StrictMode>
-    {/* <ToastContainer/> */}
    
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -38,7 +36,6 @@ root.render(
           <App />
         </PersistGate>
       </Provider>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

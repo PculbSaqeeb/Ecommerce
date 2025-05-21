@@ -3,12 +3,9 @@ import { useNavigate, useParams } from "react-router";
 
 const CategoryCard = ({ product }) => {
   const { categoryName } = useParams();
-
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
-
   const toggleExpanded = () => setExpanded(!expanded);
-
   const shouldTruncate = product?.description?.length > 50;
   const displayedText = expanded
     ? product?.description

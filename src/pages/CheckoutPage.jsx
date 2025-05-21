@@ -295,9 +295,6 @@ const CheckoutPage = () => {
   const { cart, loading, paymentLink, error, coupon, discount } = useSelector(
     (state) => state.cart
   );
-
-  console.log(cart);
-  
   
   const dispatch = useDispatch();
   
@@ -329,7 +326,7 @@ const CheckoutPage = () => {
   return (
     <div>
       <OrderLayout>
-        <div className="max-w-7xl p-10 mx-auto  bg-white shadow-lg rounded-lg mt-10">
+        <div className="max-w-7xl p-10 mx-auto bg-white shadow-lg rounded-lg mt-10">
           <h2 className="text-2xl font-bold mb-8 text-gray-800">Checkout</h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
@@ -409,7 +406,7 @@ const CheckoutPage = () => {
                 </div>
 
                 <button
-                  className="w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
+                  className={`w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200 `}
                   type="submit"
                   disabled={loading}
                 >

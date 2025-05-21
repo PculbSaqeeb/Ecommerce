@@ -3,9 +3,7 @@ import axiosInstance from "../utils/interceptor";
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // export const addToCartEndPoint = ({productId,productColorId,productSizeId}) => {
-//   console.log(productColorId,  productSizeId);
-
-//   return axiosInstance.post(`${BASE_URL}cart`, {
+//   return axiosInstance.post(`http://192.168.1.58:5000/cart`, {
 //     productId: productId,
 //     quantity: 1,
 //     productColorId,
@@ -14,8 +12,6 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 // };
 
 export const addToCartEndPoint = ({ productId, productColorId, productSizeId }) => {
-  console.log(productId, productColorId, productSizeId);
-
   return axiosInstance.post(`${BASE_URL}cart`, {
     productId,
     quantity: 1,

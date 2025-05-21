@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import image_1 from "../assets/images/Vector (1).png";
 import search_icon from "../assets/icons/search_icon.svg";
 import heart_icon from "../assets/icons/heart_icon.svg";
@@ -14,26 +14,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { CgLaptop, CgProfile } from "react-icons/cg";
 import { fetchProductData, fetchSearchProducts } from "../redux/productSlice";
 import useDebounce from "../hooks/useDebounce";
-import { fetchCategoryProductData, fetchSearchByCategory } from "../redux/categorySlice";
+import { fetchCategories, fetchCategoryProductData, fetchSearchByCategory } from "../redux/categorySlice";
 import { LocalStorageCache } from "@auth0/auth0-react";
+import Together from "together-ai";
 
 
 const Header = () => {
   const { categoryName } = useParams();
-  // const location
   const location = useLocation();
-  console.log(location.search);
-  localStorage.setItem("token",location.search)
-  
+
+  // console.log(location.search);
+  // localStorage.setItem("token", location.search)
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.cart || []);
   const { wishlist } = useSelector((state) => state.wishlist);
-
+  const categoryList = useSelector((state) => state.category.categoryList);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [category, setCategory] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedQuery = useDebounce(searchQuery, 500);
+  const hasFetchedCategory = useRef(false);
+
+  // const fetchCategory = async () => {
+  //   try {
+  //     const response = await getAllCategory();
+  //     setCategory(response?.data);
+  //   } catch (error) {
+  //     throw new Error(error.message);
+  //   }
+  // };
 
   const handleLoginNavigate = () => {
     navigate("/login");
@@ -51,21 +61,11 @@ const Header = () => {
     navigate("/wishlist");
   };
 
-  const token = localStorage.getItem("token");
+  const access_token = localStorage.getItem("access_token");
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
     navigate("/login");
-  };
-
-
-  const fetchCategory = async () => {
-    try {
-      const response = await getAllCategory();
-      setCategory(response?.data);
-    } catch (error) {
-      throw new Error(error.message);
-    }
   };
 
   const handleSearch = (e) => {
@@ -91,7 +91,10 @@ const Header = () => {
   }, [debouncedQuery, categoryName, dispatch]);
 
   useEffect(() => {
-    fetchCategory();
+    if (!hasFetchedCategory.current && (categoryList.length === 0 || !categoryList)) {
+      dispatch(fetchCategories());
+      hasFetchedCategory.current = true;
+    }
   }, []);
 
   return (
@@ -222,7 +225,7 @@ const Header = () => {
     <div className="sticky top-0 z-50 overflow-visible">
       <div className=" bg-white text-[18px] shadow-sm">
         <header className="h-20 w-full px-4 md:px-[50px]">
-          <nav className="flex items-center justify-between h-20 relative">
+          <nav className="flex items-center  h-20 relative">
             <div className="md:hidden">
               <button onClick={() => setMenuOpen(true)}>
                 <svg
@@ -243,22 +246,22 @@ const Header = () => {
 
             <img
               onClick={() => navigate("/")}
-              className="w-[50px] h-[40px] cursor-pointer mx-auto md:mx-0"
+              className="w-[50px] h-[40px] cursor-pointer ml-[50px] md:mx-0"
               src={image_1}
               alt="logo"
             />
 
 
-            <ul className="hidden lg:flex items-center ml-10 gap-10 text-textPrimary cursor-pointer text-[18px]">
-              <li className="hover:text-blue-600" onClick={() => navigate("/products")}>All</li>
-              {category.map((item) => (
+            <ul className="hidden lg:flex lg:text-[15px] xl:text-[18px] items-center ml-10 gap-10 text-textPrimary cursor-pointer text-[18px]">
+              <li className={`hover:text-blue-600 ${location.pathname === '/products' ? "text-red-400 font-semibold underline" : "text-textPrimary"}`} onClick={() => navigate("/products")}>All</li>
+              {categoryList.map((item) => (
                 <NavLink
                   key={item.name}
                   to={`/categories/${item.name.toLowerCase()}`}
                   className={({ isActive }) =>
                     isActive
                       ? "text-red-400 font-semibold underline"
-                      : "text-gray-700 hover:text-blue-600"
+                      : "text-textPrimary hover:text-blue-600"
                   }
                 >
                   {item.name}
@@ -266,7 +269,7 @@ const Header = () => {
               ))}
             </ul>
 
-            <div className="hidden lg:flex ml-[50px] relative max-w-[534px] w-full">
+            <div className="hidden ml-[50px] 2xl:flex relative 2xl:w-[350px] 3xl:w-[634px] w-full">
               <input
                 value={searchQuery}
                 onChange={(e) => handleSearch(e)}
@@ -285,25 +288,25 @@ const Header = () => {
               <div onClick={handleWishlistNavigate} className="relative hidden md:block">
                 <img
                   onClick={handleWishlistNavigate}
-                  className="w-[25px] h-[25px] cursor-pointer"
+                  className="md:w-[29px] md:h-[29px] w-[25px] h-[25px] cursor-pointer"
                   src={heart_icon}
                   alt="wishlist"
                 />
-                <p className="absolute -top-2 -right-2 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px] cursor-pointer">
+                {wishlist?.length > 0 && <p className="absolute -top-2 -right-2 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px] cursor-pointer">
                   {wishlist?.length || 0}
-                </p>
+                </p>}
               </div>
 
 
               <div onClick={handleCartNavigate} className="relative">
                 <img
-                  className="w-[25px] h-[25px] cursor-pointer"
+                  className="md:w-[29px] md:h-[29px] w-[25px] h-[25px] cursor-pointer"
                   src={cart_icon}
                   alt="cart"
                 />
-                <p className="absolute -top-2 -right-2 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px] cursor-pointer">
+                {cart?.length > 0 && <p className="absolute -top-2 -right-2 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px] cursor-pointer">
                   {cart?.length || 0}
-                </p>
+                </p>}
               </div>
 
               <img
@@ -314,7 +317,7 @@ const Header = () => {
               />
 
               <div>
-                {token ? (
+                {access_token ? (
                   <Button
                     onClick={handleLogout}
                     variant="outlineDark"
@@ -338,15 +341,18 @@ const Header = () => {
           </nav>
         </header>
 
-        <div className="md:hidden px-4 pb-3">
+        {/* <div className="xxl:hidden px-4 pb-3">
           <input
+            value={searchQuery}
+            onChange={(e) => handleSearch(e)}
             className="w-full h-[45px] pl-4 text-sm outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg"
             type="text"
             placeholder="Search here"
           />
-        </div>
+        </div> */}
       </div>
 
+     
       {menuOpen && (
         <>
           <div
@@ -374,10 +380,10 @@ const Header = () => {
                 className="py-2 rounded-[10px] text-white bg-orange-400"
                 onClick={() => {
                   setMenuOpen(false);
-                  token ? handleLogout() : handleLoginNavigate();
+                  access_token ? handleLogout() : handleLoginNavigate();
                 }}
               >
-                {token ? "Logout" : "Login"}
+                {access_token ? "Logout" : "Login"}
               </button>
             </ul>
           </div>
@@ -389,8 +395,8 @@ const Header = () => {
 
           <div className="flex flex-wrap gap-6 justify-center px-4 mt-3">
 
-            {category &&
-              category?.map((item, index) => (
+            {categoryList &&
+              categoryList?.map((item, index) => (
                 <div
                   onClick={() => navigate(`/categories/${item?.name?.toLowerCase()}`)}
                   key={index}
@@ -408,14 +414,28 @@ const Header = () => {
               ))}
           </div>
         </div>
-        <div className="hidden md:flex lg:hidden px-4 pb-3">
+
+      </div>
+
+       <div className="xxl:hidden px-4 pb-3 mt-[25px]">
           <input
+            value={searchQuery}
+            onChange={(e) => handleSearch(e)}
             className="w-full h-[45px] pl-4 text-sm outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg"
             type="text"
             placeholder="Search here"
           />
         </div>
 
+
+      <div className="hidden lg:hidden px-4 pb-3">
+        <input
+          value={searchQuery}
+          onChange={(e) => handleSearch(e)}
+          className="w-full h-[45px] pl-4 text-sm outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg"
+          type="text"
+          placeholder="Search here"
+        />
       </div>
 
     </div>

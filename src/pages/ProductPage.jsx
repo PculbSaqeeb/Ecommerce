@@ -11,18 +11,21 @@ import { fetchProductData } from "../redux/productSlice";
 
 const ProductPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [sortVisible, setSortVisible] = useState(false);
   const [filterVisible, setFilterVisible] = useState(true);
-  const dispatch = useDispatch();
   const { items, loading, error, filteredItems } = useSelector(
     (state) => state?.product
   );
+  
   const handleShowSorting = () => {
     setSortVisible(!sortVisible);
   };
 
   useEffect(() => {
-    dispatch(fetchProductData());
+    if (items.length === 0 || !items) {
+      dispatch(fetchProductData());
+    }
   }, [dispatch]);
 
   const handleShowFilter = () => {
@@ -128,7 +131,7 @@ const ProductPage = () => {
             <div className="flex items-center gap-2 sm:gap-[10px]">
               <p
                 onClick={handleShowFilter}
-                className="text-[18px] sm:text-[24px] text-textSecondary font-bold cursor-pointer"
+                className="text-[18px] sm:text-[24px] text-textPrimary font-bold cursor-pointer"
               >
                 Filters
               </p>
@@ -174,7 +177,7 @@ const ProductPage = () => {
                       className="flex-shrink-0"
                       onClick={(e) => showProductDetails(product?.id, e)}
                     >
-                      <ProductCard product={product} />
+                      <ProductCard product={product} filterVisible={filterVisible}/>
                     </div>
                   )
                 )

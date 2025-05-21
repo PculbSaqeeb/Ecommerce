@@ -6,11 +6,13 @@ import "../style/style.css";
 import { useNavigate } from "react-router";
 import Button from "./Button";
 import { getCarouselData } from "../services/crousoleServices";
+import { fetchCarousel } from "../redux/carouselSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 
-const Banner = () => {
+const Banner = ({carousel}) => {
+  const dispatch=useDispatch();
   const navigate = useNavigate();
-  const [carousel, setCarousel] = useState([]);
   const settings = {
     dots: true,
     infinite: true,
@@ -50,18 +52,7 @@ const Banner = () => {
     navigate("/products");
   };
 
-  const fetchCarousel = async () => {
-    try {
-      const data = await getCarouselData();
-      setCarousel(data);
-    } catch (error) {
-      console.error("Failed to load carousel:", error);
-    }
-  };
 
-  useEffect(() => {
-    fetchCarousel();
-  }, [])
 
 
   return (
@@ -103,13 +94,13 @@ const Banner = () => {
 
     <div className="w-full">
       <Slider {...settings}>
-        {carousel.data && carousel.data.map((item, index) => (
+        {carousel && carousel.map((item, index) => (
           <div
             key={index}
-            className="!flex w-full flex-col lg:flex-row h-[797px]"
+            className="!flex w-full flex-col lg:flex-row  lg:h-[600px] xl:h-[797px]"
           >
             {/* Left Side Image */}
-            <div className="w-full lg:w-1/2 h-full">
+            <div className="w-full sm:h-[365px] lg:w-1/2 lg:h-full h-[330px]">
               <img
                 className="w-full h-full object-cover"
                 src={item.image}
@@ -118,7 +109,7 @@ const Banner = () => {
             </div>
 
             {/* Right Side Content */}
-            <div className="bg-image1 w-full lg:w-1/2 h-full flex items-center justify-center">
+            <div className="bg-image1 w-full sm:h-[365px] lg:w-1/2 lg:h-full h-[330px] flex items-center justify-center">
               <div className="text-center">
                 {/* Brand Name */}
                 <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-widest">
@@ -141,7 +132,7 @@ const Banner = () => {
                     onClick={handleProductNavigate}
                     variant="lightOutline"
                     size="md"
-                    className="mt-6 text-sm sm:text-base md:text-lg lg:text-[24px] xl:text-[24px] w-[140px] md:w-[172px]"
+                    className="mt-6 lg:mt-[30px] xl:mt-[43px] text-sm sm:text-base md:text-lg lg:text-[24px] xl:text-[24px] w-[140px] md:w-[172px]"
                   >
                     Explore
                   </Button>

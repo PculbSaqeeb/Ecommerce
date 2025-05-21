@@ -10,7 +10,6 @@ import LoginSchema from "../constant/formErrorSchema/loginSchema";
 import { Navigate, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { loginUser } from "../services/authServices";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Input from "../components/Input";
 import "../style/style.css";
 
@@ -35,9 +34,10 @@ const Login = () => {
         return;
       }
 
-      const token = JSON.stringify(userLogin?.data?.access_token);
-      if (token) {
-        localStorage.setItem("token", token);
+      // const token = JSON.stringify(userLogin?.data?.access_token);
+      const access_token = userLogin?.data?.access_token;
+      if (access_token) {
+        localStorage.setItem("access_token", access_token);
         navigate("/");
         toast.success("Login Successfully!");
       }
@@ -45,9 +45,10 @@ const Login = () => {
       toast.error(error?.response?.data?.message);
     }
   };
-
-  const token = localStorage.getItem("token");
-  if (token) {
+  
+  const access_token = localStorage.getItem("access_token");
+  
+  if (access_token) {
     return <Navigate to="/" replace />;
   }
 
@@ -246,7 +247,7 @@ const Login = () => {
           />
 
 
-          <div className="w-full flex justify-end mt-[10px]">
+          <div className="w-full flex justify-end mt-[8px]">
             <a
               href="/forgot-password"
               className="text-sm text-textTertiary hover:underline font-bold cursor-pointer"
@@ -255,7 +256,7 @@ const Login = () => {
             </a>
           </div>
 
-          <div className="flex items-center space-x-2 mt-2">
+          <div className="flex items-center space-x-2">
             <input
               type="checkbox"
               id="remember"
@@ -271,7 +272,7 @@ const Login = () => {
             onClick={handleSubmit(onSubmit)}
             variant="blueButton"
             size="xl"
-            className="text-[18px] w-full"
+            className="text-[18px] w-full mt-[29px]"
           >
             Login
           </Button>

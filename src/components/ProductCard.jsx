@@ -4,7 +4,9 @@ import image_6 from "../assets/images/Rectangle 13.jpg";
 import star_icon from "../assets/icons/star_icon.svg";
 
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product,filterVisible }) => {
+  console.log(filterVisible);
+  
   return (
     <div>
       {/* <div className="w-[410px] rounded-[10px] flex-shrink-0 shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden pb-[13px]">
@@ -88,7 +90,7 @@ const ProductCard = ({ product }) => {
         </div>
       </div> */}
 
-      <div className="w-full max-w-[95%] sm:max-w-[400px] md:max-w-[320px] smallDesktop:max-w-[370px] lg:max-w-[410px] xl:max-w-[410px]  rounded-[10px] shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden pb-5 transition-all duration-300 hover:scale-[1.02]">
+      <div className={`w-full max-w-[95%] sm:max-w-[400px] md:max-w-[320px] smallDesktop:max-w-[370px] lg:max-w-[410px] xl:max-w-[410px]  rounded-[10px] shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden pb-5 transition-all duration-300 hover:scale-[1.02]`}>
         <img
           className="w-full h-52 sm:h-60 md:h-64 lg:h-72 xl:h-[301px] object-cover"
           src={product?.images}
@@ -112,7 +114,7 @@ const ProductCard = ({ product }) => {
             <p className="text-sm sm:text-base text-textSecondary ml-3">
               {product?.averageRating?.toFixed(1) || 0}
             </p>
-            <img className="w-4 h-4 ml-1" src={star_icon} alt="rating star" />
+            <img className="w-4 h-4 ml-1 mb-[2px]" src={star_icon} alt="rating star" />
           </div>
 
           <div className="mt-4 flex flex-wrap items-center">

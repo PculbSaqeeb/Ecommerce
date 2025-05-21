@@ -33,12 +33,12 @@ const Sliders = ({ children, slidesToShow = 4, responsive }) => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 700,
-    // centerMode:true,
+    speed: 500,
+    centerMode:true,
     slidesToShow,
     slidesToScroll: 4,
     arrows: false,
-    centerPadding: "100px",
+    centerPadding: "0px",
     autoplay: true,
     autoplaySpeed: 2000,
     responsive: responsive || [
@@ -48,7 +48,7 @@ const Sliders = ({ children, slidesToShow = 4, responsive }) => {
       },
       {
         breakpoint: 1280,
-        settings: { slidesToShow: 3, slidesToScroll: 4,  },
+        settings: { slidesToShow: 2.5, slidesToScroll: 2.5,},
       },
       {
         breakpoint: 1024,
@@ -56,7 +56,7 @@ const Sliders = ({ children, slidesToShow = 4, responsive }) => {
       },
       {
         breakpoint: 912,
-        settings: { slidesToScroll: 1, slidesToShow: 2 }
+        settings: { slidesToScroll: 2, slidesToShow: 2 }
       },
       {
         breakpoint: 768,

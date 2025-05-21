@@ -7,42 +7,76 @@ const Specifications = ({ specification }) => {
   const rightSpecs = specification?.slice(mid);
 
   return (
-    <div>
-      <p className="mt-[27px] text-[24px] font-bold text-textPrimary">
-        Specifications
-      </p>
-      <div className="flex gap-[98px]">
-        <ul>
-          {leftSpecs?.map((spec, index) => {
-            return (
-              <div key={index}>
-                <li className="mt-[12px] text-textSecondary text-[18px]">
-                  {spec?.name}
-                </li>
-                <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-                  {spec?.value}
-                </li>
-              </div>
-            )
-          })}
-        </ul>
+    // <div>
+    //   <p className="mt-[27px] text-[24px] font-bold text-textPrimary">
+    //   </p>
+    //   <div className="flex gap-[98px]">
+    //     <ul>
+    //       {leftSpecs?.map((spec, index) => {
+    //         return (
+    //           <div key={index}>
+    //             <li className="mt-[12px] text-textSecondary text-[18px]">
+    //               {spec?.name}
+    //             </li>
+    //             <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
+    //               {spec?.value}
+    //             </li>
+    //           </div>
+    //         )
+    //       })}
+    //     </ul>
 
-        <ul>
-          {rightSpecs?.map((spec, index) => {
-            return (
-              <div key={index}>
-                <li className="mt-[12px] text-textSecondary text-[18px]">
-                  {spec?.name}
-                </li>
-                <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
-                  {spec?.value}
-                </li>
-              </div>
-            )
-          })}
-        </ul>
-      </div>
-    </div>
+    //     <ul>
+    //       {rightSpecs?.map((spec, index) => {
+    //         return (
+    //           <div key={index}>
+    //             <li className="mt-[12px] text-textSecondary text-[18px]">
+    //               {spec?.name}
+    //             </li>
+    //             <li className="w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
+    //               {spec?.value}
+    //             </li>
+    //           </div>
+    //         )
+    //       })}
+    //     </ul>
+    //   </div>
+    // </div>
+
+    <div>
+  <p className="hidden md:block mt-[27px] text-[24px] font-bold text-textPrimary">
+    Specification
+  </p>
+
+  { specification.length>0 ?<div className="flex flex-col sm:flex-row sm:gap-[98px]">
+    <ul>
+      {leftSpecs?.map((spec, index) => (
+        <div key={index}>
+          <li className="mt-[12px] text-textSecondary text-[18px]">
+            {spec?.name}
+          </li>
+          <li className="w-full sm:w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
+            {spec?.value}
+          </li>
+        </div>
+      ))}
+    </ul>
+
+    <ul className="mt-6 sm:mt-0">
+      {rightSpecs?.map((spec, index) => (
+        <div key={index}>
+          <li className="mt-[12px] text-textSecondary text-[18px]">
+            {spec?.name}
+          </li>
+          <li className="w-full sm:w-[200px] text-[18px] text-textPrimary border-b border-textSecondary mt-[10px] pb-[12px]">
+            {spec?.value}
+          </li>
+        </div>
+      ))}
+    </ul>
+  </div> : <p className="mt-[20px] text-[24px]">N/A</p>}
+</div>
+
   );
 };
 

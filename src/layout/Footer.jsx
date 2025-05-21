@@ -20,7 +20,7 @@ const Footer = () => {
   <div className="flex flex-wrap gap-[40px] sm:gap-[40px] max-sm:gap-7 justify-center sm:ml-[19px] mt-[90px] max-sm:mt-10 lg:gap-20">
     <ul className="flex flex-col gap-[17px] cursor-pointer text-[18px] max-sm:text-[16px] items-start text-left">
       <li className="text-[24px] font-bold max-sm:text-[20px] ">Women</li>
-      <li>All women</li>
+      <li>All Women</li>
       <li>Skirts</li>
       <li>T-shirts</li>
       <li>Tops</li>
@@ -30,25 +30,25 @@ const Footer = () => {
     <ul className="flex flex-col gap-[17px] cursor-pointer text-[18px] max-sm:text-[16px] items-start text-left">
       <li className="text-[24px] font-bold max-sm:text-[20px]">Men</li>
       <li>All Men</li>
-      <li>Skirts</li>
+      <li>Shirts</li>
       <li>T-shirts</li>
-      <li>Tops</li>
+      <li>Shorts</li>
       <li>Jackets</li>
     </ul>
 
     <ul className="flex flex-col gap-[17px] cursor-pointer text-[18px] max-sm:text-[16px] items-start text-left">
       <li className="text-[24px] font-bold max-sm:text-[20px]">Kids</li>
       <li>All Kids</li>
-      <li>Skirts</li>
+      <li>Shirts</li>
       <li>T-shirts</li>
-      <li>Tops</li>
+      <li>Shorts</li>
       <li>Jackets</li>
     </ul>
 
     <ul className="flex flex-col gap-[17px] cursor-pointer text-[18px] max-sm:text-[16px] items-start text-left">
       <li className="text-[24px] font-bold max-sm:text-[20px]">Shopping</li>
       <li>Your cart</li>
-      <li>Your order</li>
+      <li>Your orders</li>
       <li>Compared Items</li>
       <li>Wishlist</li>
       <li>Shipping Details</li>
@@ -84,15 +84,15 @@ const Footer = () => {
   <div className="border-b border-white mt-[79px] max-sm:mt-[40px]"></div>
 
   <div className="mt-[39px] pb-[38px]">
-    <ul className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-[100px] text-[18px] max-sm:text-[14px] text-center">
+    <ul className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-[50px] text-[18px] max-sm:text-[14px] text-center">
       <li>Terms & Condition</li>
       <li>Privacy Policy</li>
       <li>
-        <div className="flex gap-[20px] sm:gap-[34px] justify-center mt-2 sm:mt-0">
-          <img src={fb_icon} alt="Facebook" className="w-6 max-sm:w-4" />
-          <img src={insta_icon} alt="Instagram" className="w-6 max-sm:w-4" />
-          <img src={whatsaap_icon} alt="WhatsApp" className="w-6 max-sm:w-4" />
-          <img src={tweeter_icon} alt="Twitter" className="w-6 max-sm:w-4" />
+        <div className="flex gap-[20px] sm:gap-[20px]  justify-center mt-2 sm:mt-0">
+          <img src={fb_icon} alt="Facebook" className="w-6 max-sm:w-4 md:w-[32px] h-[32px]" />
+          <img src={insta_icon} alt="Instagram" className="w-6 max-sm:w-4 md:w-[32px] h-[32px]" />
+          <img src={whatsaap_icon} alt="WhatsApp" className="w-6 max-sm:w-4 md:w-[32px] h-[32px]" />
+          <img src={tweeter_icon} alt="Twitter" className="w-6 max-sm:w-4 md:w-[32px] h-[32px]" />
         </div>
       </li>
     </ul>

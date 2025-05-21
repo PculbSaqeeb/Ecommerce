@@ -8,13 +8,15 @@ import right_arrow_icon from "../assets/icons/right_arrow_icon.svg";
 import { useNavigate } from "react-router";
 import Button from "./Button";
 import { getCarouselData } from "../services/crousoleServices";
+import { fetchCarousel } from "../redux/carouselSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const NextArrow = ({ onClick }) => (
   <div
     className="absolute right-[10px] z-10 top-1/2 transform -translate-y-1/2 cursor-pointer rounded-full bg-textPrimary w-[30px] h-[30px] md:w-[40px] md:h-[40px] lg:w-[56px] lg:h-[56px] text-white flex items-center justify-center"
     onClick={onClick}
   >
-    <img src={right_arrow_icon} className="w-2 md:w-3 lg:w-4"  />
+    <img src={right_arrow_icon} className="w-2 md:w-3 lg:w-4" alt="" />
   </div>
 );
 
@@ -23,19 +25,18 @@ const PrevArrow = ({ onClick }) => (
     className="absolute left-[10px] z-10 top-1/2 transform -translate-y-1/2 cursor-pointer rounded-full bg-textPrimary w-[30px] h-[30px] md:w-[40px] md:h-[40px] lg:w-[56px] lg:h-[56px] text-white flex items-center justify-center"
     onClick={onClick}
   >
-    <img src={left_arrow_icon}  className="w-2 md:w-3 lg:w-4"/>
+    <img src={left_arrow_icon} className="w-2 md:w-3 lg:w-4" alt="" />
   </div>
 );
 
 const Trending = () => {
-  const [carousel, setCarousel] = useState([]);
   const settings = {
     dots: false,
     infinite: true,
     speed: 700,
     slidesToShow: 1,
     centerMode: true,
-    centerPadding: "310px",
+    centerPadding: "380px",
     autoplay: true,
     autoplaySpeed: 3000,
     nextArrow: <NextArrow />,
@@ -45,31 +46,31 @@ const Trending = () => {
       {
         breakpoint: 1536,
         settings: {
-          centerPadding: "200px",
+          centerPadding: "0px",
         },
       },
       {
         breakpoint: 1280,
         settings: {
-          centerPadding: "150px",
+          centerPadding: "0px",
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          centerPadding: "100px",
+          centerPadding: "0px",
         },
       },
       {
         breakpoint: 768,
         settings: {
-          centerPadding: "50px",
+          centerPadding: "0px",
         },
       },
       {
         breakpoint: 640,
         settings: {
-          centerPadding: "20px",
+          centerPadding: "0px",
         },
       },
       {
@@ -81,44 +82,39 @@ const Trending = () => {
     ],
   };
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const carousel = useSelector((state) => state.crousole.crousole);
 
   const handleProductNavigate = (e) => {
     e.stopPropagation();
     navigate("/products");
   };
 
-  const fetchCarousel = async () => {
-    try {
-      const data = await getCarouselData();
-      setCarousel(data);
-    } catch (error) {
-      console.error("Failed to load carousel:", error);
-    }
-  };
 
   useEffect(() => {
-    fetchCarousel();
-  }, [])
-
+    if (!carousel || carousel.length === 0) {
+      dispatch(fetchCarousel());
+    }
+  }, []);
 
 
   return (
-    <div className="relative sm:px-8 mt-[67px]">
+    <div className="relative sm:px-8 mt-[30px] trending-slider-wrapper">
       <p className="text-[36px] font-bold text-textPrimary mb-10">
-        Trending Offer
+        Trending Offers
       </p>
 
       <Slider {...settings} className="">
-        {carousel?.data && carousel?.data?.map((item, index) => (
+        {carousel && carousel?.map((item, index) => (
           <div
             key={index}
-            className="!flex items-center justify-center mt-[54px] cursor-pointer h-[587px] mb-2"
+            className="!flex items-center justify-center cursor-pointer h-[587px] mb-2"
           >
-            <div className="max-w-[1146px] h-[500px] flex flex-col lg:flex-row xl:flex-row items-center rounded-[10px] shadow-[0_0_12px_rgba(0,0,0,0.1)] overflow-hidden ">
-              <div className="w-[300px] sm:w-[400px] md:w-[490px] lg:w-[350px] xl:w-[542px] h-full flex flex-col items-center justify-center bg-white">
-                <img className="w-[175px] h-[72px] object-cover object-center" src={item?.logoURL} alt="Offer" />
-                <p className="text-[24px] xl:text-[48px] font-bold text-textPrimary mt-[65px] text-center">
+            <div className="max-w-[1146px] xl:h-[587px] flex flex-col lg:flex-row xl:flex-row items-center rounded-[10px] shadow-[0_0_12px_rgba(0,0,0,0.1)] overflow-hidden ">
+              <div className="w-[120px] h-[300px] sm:w-[400px] md:w-[490px] lg:w-[550px] lg:h-[500px] xl:w-[542px] flex flex-col items-center justify-center bg-white">
+                <img className="w-full h-[60px] md:h-[100px] lg:h-[160px] object-cover object-center" src={item?.logoURL} alt="Offer" />
+                <p className="text-[14px] md:text-[20px] xl:text-[48px] font-bold text-textPrimary mt-[15px] lg:mt-[30px] text-center">
                   {item?.offer}
                 </p>
                 <Button
@@ -126,14 +122,14 @@ const Trending = () => {
                   onClick={(e) => handleProductNavigate(e)}
                   variant="outlineGray"
                   size="md"
-                  className="w-[172px] mt-[39px] text-[24px] border-2"
+                  className="w-[172px] mt-[19px] lg:mt-[37px] text-[24px] border-2"
                 >
                   Explore
                 </Button>
               </div>
 
               <img
-                className="w-[310px] sm:w-[400px] md:w-[490px] lg:w-[300px] xl:w-[604px]  h-full object-cover"
+                className="w-[310px] h-[300px] sm:w-[400px] md:w-[490px] lg:w-[500px] lg:h-[500px] xl:w-[604px] 2xl:h-full object-cover"
                 src={item?.image}
                 alt=""
               />

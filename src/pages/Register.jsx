@@ -226,7 +226,7 @@ const Register = () => {
             variant="blueButton"
             size="xl"
             type="submit"
-            className="w-full text-[18px]"
+            className="w-full text-[18px] mt-[29px]"
           >
             Register
           </Button>

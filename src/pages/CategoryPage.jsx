@@ -14,6 +14,7 @@ const CategoryPage = () => {
   const { category,filteredItems, loading, error } = useSelector((state) => state.category);
   
   useEffect(() => {
+    if(!filteredItems || filteredItems.length===0)
     dispatch(fetchCategoryProductData(categoryName));
   }, [dispatch,categoryName]);
 

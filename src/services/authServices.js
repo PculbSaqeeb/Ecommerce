@@ -42,12 +42,12 @@ export const googleAuth=()=>{
   return axios.get("http://192.168.1.58:5000/user/google/callback");
 }
 
-fetch('http://localhost:3001/user/google/callback', {
-  method: 'GET',
-  credentials: 'include', // if needed
-})
-  .then(res => res.json())
-  .then(data => {
-    localStorage.setItem('access_token', data.access_token);
-    console.log('User data:', data.userData);
-  });
+// fetch('http://localhost:3001/user/google/callback', {
+//   method: 'GET',
+//   credentials: 'include', // if needed
+// })
+//   .then(res => res.json())
+//   .then(data => {
+//     localStorage.setItem('access_token', data.access_token);
+//     console.log('User data:', data.userData);
+//   });

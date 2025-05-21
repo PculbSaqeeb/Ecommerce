@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosInstance from "../utils/interceptor";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 

@@ -8,6 +8,7 @@ import cartReducer from '../redux/cartSlice';
 import orderReducer from '../redux/orderSlice'
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import categoryReducer from '../redux/categorySlice';
+import crousoleReducer from '../redux/carouselSlice';
 
 const persistConfig = {
   key: 'root',
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   cart:cartReducer,
   wishlist:wishlistReducer,
   order: orderReducer,
+  crousole:crousoleReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

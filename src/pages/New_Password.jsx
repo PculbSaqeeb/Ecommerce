@@ -212,7 +212,7 @@ const New_Password = () => {
             name="confirmPassword"
             type={showPassword ? "text" : "password"}
             placeholder="Enter your confirm password"
-            isPassword
+            isConfirmPassword
             icon={lock_icon}
             showPassword={showPassword}
             togglePasswordVisibility={togglePasswordVisibility}
