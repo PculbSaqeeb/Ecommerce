@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useTransition } from "react";
+import React, {  useRef, useState} from "react";
 import black_star_icon from "../assets/icons/black_star_icon.svg";
 import yellow_star_icon from "../assets/icons/yellow_star_icon.svg";
 import empty_star from "../assets/icons/empty_star.svg";

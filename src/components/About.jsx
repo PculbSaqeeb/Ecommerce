@@ -1,4 +1,3 @@
-import React from "react";
 import image_9 from "../assets/images/Rectangle 375.jpg";
 import Button from "./Button";
 

@@ -4,7 +4,6 @@ import {
   deleteToWishlist,
   getAllWishlistItem,
 } from "../services/wishlistServices";
-import { CgLaptop } from "react-icons/cg";
 
 export const fetchWishlistProduct = createAsyncThunk(
   "wishlist/fetch",

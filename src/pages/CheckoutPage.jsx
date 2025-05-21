@@ -269,7 +269,6 @@ import { addToCart, payment, quantityDecrement, removeToCart } from "../redux/ca
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { CgLaptop } from "react-icons/cg";
 
 const checkoutSchema = z.object({
   address: z.string().min(5, "Address is required"),
@@ -282,7 +281,6 @@ const CheckoutPage = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(checkoutSchema),
@@ -292,7 +290,7 @@ const CheckoutPage = () => {
     dispatch(payment(data));
   };
 
-  const { cart, loading, paymentLink, error, coupon, discount } = useSelector(
+  const { cart, loading , coupon, discount } = useSelector(
     (state) => state.cart
   );
   

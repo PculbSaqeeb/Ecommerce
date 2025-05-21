@@ -3,13 +3,11 @@ import logo from "../assets/icons/Group 400.svg";
 import lock_icon from "../assets/icons/password_icon.svg";
 import Button from "../components/Button";
 import NewPasswordSchema from "../constant/formErrorSchema/newPasswordSchema";
-import { set, useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { resetPassword } from "../services/authServices";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Input from "../components/Input";
 
 const New_Password = () => {
@@ -21,7 +19,6 @@ const New_Password = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: zodResolver(NewPasswordSchema),
   });

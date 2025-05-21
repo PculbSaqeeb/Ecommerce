@@ -12,17 +12,3 @@ const Scroll = () => {
 };
 
 export default Scroll;
-
-"code": "SAVE80";
-"description": "Save 10% on your order";
-"discountType": "percentage";
-"discountValue": 10;
-"maxDiscountValue": 50;
-"minOrderAmount": 100;
-"perUserLimit": 1;
-"usageLimit": 500;
-"usedCount": 120;
-"isActive": true;
-"isPublic": true;
-"appliesToProductIds": Array;
-"appliesToCategoryIds": Array;

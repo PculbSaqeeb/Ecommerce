@@ -1,5 +1,4 @@
 import React from "react";
-import { CgLaptop } from "react-icons/cg";
 
 const Specifications = ({ specification }) => {
   const mid = Math.ceil(specification?.length / 2);

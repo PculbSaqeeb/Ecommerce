@@ -10,7 +10,6 @@ import RegisterSchema from "../constant/formErrorSchema/schema";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { signupUser } from "../services/authServices";
-import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlinePhone } from "react-icons/ai";
 import Input from "../components/Input";
 
 const Register = () => {

@@ -1,8 +1,6 @@
 import "../style/style.css";
 import { useNavigate } from "react-router";
-import Sliders from "../components/Sliders";
-import { fetchProductData } from "../redux/productSlice";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import ProductCard_1 from "./ProductCard_1";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

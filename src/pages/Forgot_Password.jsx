@@ -1,12 +1,9 @@
 import React from "react";
-import AuthLayout from "../layout/AuthLayout";
-import profile_icon from "../assets/icons/profile_icon.svg";
 import logo from "../assets/icons/Group 400.svg";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ForgotPasswordSchema from "../constant/formErrorSchema/forgotPassword";
-import axios from "axios";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { forgotPassword } from "../services/authServices";
@@ -20,7 +17,6 @@ const Forgot_Password = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: zodResolver(ForgotPasswordSchema),
   });

@@ -3,11 +3,8 @@ import google from '../assets/icons/google.svg';
 import iphone from '../assets/icons/iphone.svg';
 import facebook from '../assets/icons/facebook.svg';
 import logo from '../assets/icons/Group 400.svg';
-import { googleAuth } from '../services/authServices';
-import { useNavigate } from "react-router";
 
 const AuthLayout = ({ children }) => {
-  const navigate = useNavigate();
 
 
   return (

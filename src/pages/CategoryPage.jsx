@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getCategoryByName } from "../services/catogeryServices";
+import React, { useEffect } from "react";
+import {  useParams } from "react-router-dom";
 import Layout from "../layout/Index";
-import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
-import { CgLaptop } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategoryProductData, fetchSearchByCategory } from "../redux/categorySlice";
+import { fetchCategoryProductData } from "../redux/categorySlice";
 
 const CategoryPage = () => {
   const { categoryName } = useParams();
   const dispatch = useDispatch();
-  const { category,filteredItems, loading, error } = useSelector((state) => state.category);
+  const { filteredItems, loading, error } = useSelector((state) => state.category);
   
   useEffect(() => {
     if(!filteredItems || filteredItems.length===0)

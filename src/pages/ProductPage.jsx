@@ -14,7 +14,7 @@ const ProductPage = () => {
   const dispatch = useDispatch();
   const [sortVisible, setSortVisible] = useState(false);
   const [filterVisible, setFilterVisible] = useState(true);
-  const { items, loading, error, filteredItems } = useSelector(
+  const { items, loading, filteredItems } = useSelector(
     (state) => state?.product
   );
   
@@ -183,7 +183,6 @@ const ProductPage = () => {
                 )
               )}
           </div>
-
 
         </div>
       </div>

@@ -4,11 +4,9 @@ import Button from "../components/Button";
 import VerfiyOTPSchema from "../constant/formErrorSchema/VeirfySchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { verifyOTP } from "../services/authServices";
-import { CgLayoutGrid } from "react-icons/cg";
 import Input from "../components/Input";
 
 const Verification = () => {
@@ -17,7 +15,6 @@ const Verification = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: zodResolver(VerfiyOTPSchema),
   });

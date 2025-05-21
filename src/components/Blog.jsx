@@ -1,4 +1,3 @@
-import React from "react";
 import image_10 from "../assets/images/Rectangle 395 (2).jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

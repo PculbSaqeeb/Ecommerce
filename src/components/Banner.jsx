@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../style/style.css";
 import { useNavigate } from "react-router";
 import Button from "./Button";
-import { getCarouselData } from "../services/crousoleServices";
-import { fetchCarousel } from "../redux/carouselSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 
 const Banner = ({carousel}) => {
-  const dispatch=useDispatch();
   const navigate = useNavigate();
   const settings = {
     dots: true,

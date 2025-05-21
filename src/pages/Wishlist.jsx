@@ -5,16 +5,14 @@ import red_heart_icon from "../assets/icons/red_heart_icon.png";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addProductToWishlist,
   deleteProductToWishlist,
   fetchWishlistProduct,
 } from "../redux/wishlistSlice";
-import { CgLaptop } from "react-icons/cg";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { wishlist, loading, error } = useSelector((state) => state.wishlist);
+  const { wishlist, loading } = useSelector((state) => state.wishlist);
 
   useEffect(() => {
     dispatch(fetchWishlistProduct());

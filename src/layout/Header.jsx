@@ -5,18 +5,13 @@ import heart_icon from "../assets/icons/heart_icon.svg";
 import cart_icon from "../assets/icons/cart_icon.svg";
 import order_icon from "../assets/icons/order_icon.svg";
 import { NavLink, useLocation, useNavigate, useParams } from "react-router";
-import profile_icon from '../assets/icons/profile_icon.svg'
 import Button from "../components/Button";
-import { getAllCategory } from "../services/catogeryServices";
 import white_logo from '../assets/icons/white_logo_icon.png'
-import { HiMenu } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { CgLaptop, CgProfile } from "react-icons/cg";
+import {  CgProfile } from "react-icons/cg";
 import { fetchProductData, fetchSearchProducts } from "../redux/productSlice";
 import useDebounce from "../hooks/useDebounce";
 import { fetchCategories, fetchCategoryProductData, fetchSearchByCategory } from "../redux/categorySlice";
-import { LocalStorageCache } from "@auth0/auth0-react";
-import Together from "together-ai";
 
 
 const Header = () => {

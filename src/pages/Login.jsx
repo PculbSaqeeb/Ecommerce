@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import profile_icon from "../assets/icons/profile_icon.svg";
 import email_icon from '../assets/icons/emial_icon.svg'
 import lock_icon from "../assets/icons/password_icon.svg";
 import AuthLayout from "../layout/AuthLayout";
@@ -20,7 +19,6 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(LoginSchema),

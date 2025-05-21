@@ -303,14 +303,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
   applyPromoCode,
-  decrementQuantity,
   getAllCartItems,
-  incrementQuantity,
   quantityDecrement,
   removeToCart,
   removeCouponCode,
 } from "../redux/cartSlice";
-import { getPromoCode, promoCode } from "../services/cartServices";
+import { getPromoCode } from "../services/cartServices";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -324,7 +322,7 @@ const Cart = () => {
     dispatch(getAllCartItems());
   }, [dispatch]);
 
-  const { cart, coupon, discount, breakdown, totalPrice, totalQuantity } = useSelector(
+  const { cart, coupon, discount} = useSelector(
     (state) => state.cart
   );
 

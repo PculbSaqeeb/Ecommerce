@@ -1,4 +1,3 @@
-import React from "react";
 import image_8 from "../assets/images/Rectangle 383.jpg";
 import { VscArrowSmallRight } from "react-icons/vsc";
 const Category = () => {

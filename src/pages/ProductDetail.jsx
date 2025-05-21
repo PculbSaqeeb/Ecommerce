@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import image_11 from "../assets/images/Rectangle 375.jpg";
+import React, {  useState } from "react";
 import heart_icon from "../assets/icons/heart_icon.svg";
 import red_heart_icon from "../assets/icons/red_heart_icon.png";
-import ProductCard from "../components/ProductCard";
 import Rating from "../components/Rating";
 import Specifications from "../components/Specifications";
 import black_star_icon from "../assets/icons/black_star_icon.svg";
@@ -17,14 +15,10 @@ import { useNavigate, useParams } from "react-router";
 import {
   addProductToWishlist,
   deleteProductToWishlist,
-  fetchWishlistProduct,
 } from "../redux/wishlistSlice";
 import {
   addToCart,
-  getAllCartItems,
-  removeToCart,
 } from "../redux/cartSlice";
-import { fetchProductData } from "../redux/productSlice";
 import ProductCard_1 from "../components/ProductCard_1";
 
 const ProductDetail = () => {
@@ -38,8 +32,8 @@ const ProductDetail = () => {
   const [showSizeChart, setShowSizeChart] = useState(true);
   const [selectSize, setSelectSize] = useState(product?.productSize[0]?.id);
   const [selectColor, setSelectColor] = useState(product?.productColor[0]?.id);
-  const cart = useSelector((state) => state.cart.cart);
-  const isCart = cart?.some((item) => item?.productId === id || item?.id === id);
+  // const cart = useSelector((state) => state.cart.cart);
+  // const isCart = cart?.some((item) => item?.productId === id || item?.id === id);
 
   // const isCart = cart?.cartDetails?.items?.some((item) => item?.productId === id || item?.id === id);
 
@@ -81,9 +75,9 @@ const ProductDetail = () => {
     }));
   };
 
-  const handleRemoveToCart = (id) => {
-    dispatch(removeToCart(id));
-  };
+  // const handleRemoveToCart = (id) => {
+  //   dispatch(removeToCart(id));
+  // };
 
   const navigate = useNavigate();
   let startX = 0;
@@ -577,7 +571,7 @@ const ProductDetail = () => {
                 >
                   Add to Cart
                 </Button>
-                
+
               {!isWishlist ? (
                 <img
                   onClick={() => handleAddToWishlist(id)}

@@ -11,7 +11,7 @@ import OrderLayout from "../layout/OrderLayout";
 
 const Order = () => {
   const dispatch = useDispatch();
-  const { order, loading, error } = useSelector((state) => state.order);
+  const { order } = useSelector((state) => state.order);
 
   console.log(order);
   

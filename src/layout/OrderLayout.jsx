@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import React from 'react'
 import Header from './Header'
 import Footer_1 from './Footer_1'
 import ScrollToTop from '../components/ScrollToTop'

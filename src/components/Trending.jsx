@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,7 +7,6 @@ import left_arrow_icon from "../assets/icons/left_arrow_icon.svg";
 import right_arrow_icon from "../assets/icons/right_arrow_icon.svg";
 import { useNavigate } from "react-router";
 import Button from "./Button";
-import { getCarouselData } from "../services/crousoleServices";
 import { fetchCarousel } from "../redux/carouselSlice";
 import { useDispatch, useSelector } from "react-redux";
 

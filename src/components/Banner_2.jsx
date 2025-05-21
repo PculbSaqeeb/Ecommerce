@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
+
 import { useNavigate } from "react-router";
 import Button from "./Button";
-import { getCarouselData } from "../services/crousoleServices";
 import Slider from "react-slick";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCarousel } from "../redux/carouselSlice";
 
 const Banner_2 = ({carousel}) => {
   const settings = {

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getSubCategoryByName } from "../services/catogeryServices";
 import Layout from "../layout/Index";
-import CategoryCard from "../components/CategoryCard";
 import ProductCard from "../components/ProductCard";
 
 const SubCategoryPage = () => {
