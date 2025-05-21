@@ -24,7 +24,7 @@ const Rating = ({ productId }) => {
   const [hoverRating, setHoverRating] = useState(0);
   const [imageSend, setImageSend] = useState([]);
   const [showAllImages, setShowAllImages] = useState(false);
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
 
   const fileInputRef = useRef(null);
 
@@ -539,7 +539,7 @@ const Rating = ({ productId }) => {
               placeholder="Description..."
             ></textarea>
 
-            <p className="text-red-500">{error}</p>
+            {/* <p className="text-red-500">{error}</p> */}
 
             <div className="mt-[22px]">
               <input

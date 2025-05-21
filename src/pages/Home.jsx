@@ -4,7 +4,6 @@ import Banner from "../components/Banner";
 import TrendingProduct from "../components/TrendingProduct";
 import Deal from "../components/Deal";
 import Trending from "../components/Trending";
-import Banner_2 from "../components/Banner_2";
 import Category from "../components/Category";
 import Blog from "../components/Blog";
 import Services from "../components/Services";
@@ -13,6 +12,7 @@ import Invite from "../components/Invite";
 import CustomerSay from '../components/CustomerSay';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCarousel } from "../redux/carouselSlice";
+import Banner2 from "../components/Banner2";
 
 
 const Home = () => {
@@ -33,7 +33,7 @@ const Home = () => {
         <TrendingProduct />
         <Deal />
         <Trending carousel={carousel}/>
-        <Banner_2 carousel={carousel}/>
+        <Banner2 carousel={carousel}/>
         <Category />
         <CustomerSay />
         <Blog />

@@ -4,7 +4,7 @@ import image_6 from "../assets/images/Rectangle 13.jpg";
 import star_icon from "../assets/icons/star_icon.svg";
 
 
-const ProductCard_1 = ({ product }) => {
+const ProductCard1 = ({ product }) => {
     return (
         <div>
             {/* <div className="w-[410px] rounded-[10px] flex-shrink-0 shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden pb-[13px]">
@@ -101,4 +101,4 @@ const ProductCard_1 = ({ product }) => {
     );
 };
 
-export default ProductCard_1;
+export default ProductCard1;

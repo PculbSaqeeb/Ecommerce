@@ -5,7 +5,7 @@ import insta_icon from "../assets/icons/insta_icon.svg";
 import whatsaap_icon from "../assets/icons/whatsaap_icon.svg";
 import tweeter_icon from "../assets/icons/tweeter_icon.svg";
 
-const Footer_1 = () => {
+const Footer1 = () => {
   return (
     <div>
       {/* <div className="w-full h-[460.11px] bg-[#1A4242] font text-white mt-[96px] ">
@@ -107,4 +107,4 @@ const Footer_1 = () => {
   );
 };
 
-export default Footer_1;
+export default Footer1;

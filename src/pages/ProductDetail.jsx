@@ -19,7 +19,7 @@ import {
 import {
   addToCart,
 } from "../redux/cartSlice";
-import ProductCard_1 from "../components/ProductCard_1";
+import ProductCard1 from "../components/ProductCard1";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -488,7 +488,7 @@ const ProductDetail = () => {
             <h3 className="mt-6 text-xl text-[24px] lg:mt-[30px] font-bold text-textPrimary">Select Size</h3>
             <p onClick={handleShowSizeChart} className="mt-2 lg:mt-[23px] text-linkPrimary text-base cursor-pointer flex items-center gap-2">
               Size Chart
-              <img src={right_arrow_icon} className="w-5 h-5" />
+              <img src={right_arrow_icon} className="w-5 h-5" alt=""/>
             </p>
 
             {showSizeChart && (
@@ -705,7 +705,7 @@ const ProductDetail = () => {
                 onMouseUp={handleMouseUp}
                 onClick={(e) => handleProductDetailsNavigate(e, item?.id)}
               >
-                <ProductCard_1 product={item} />
+                <ProductCard1 product={item} />
               </div>
             ))}
           </Sliders>
@@ -721,7 +721,7 @@ const ProductDetail = () => {
                 onMouseUp={handleMouseUp}
                 onClick={(e) => handleProductDetailsNavigate(e, item?.id)}
               >
-                <ProductCard_1 product={item} />
+                <ProductCard1 product={item} />
               </div>
             ))}
           </Sliders>

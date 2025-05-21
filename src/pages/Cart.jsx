@@ -316,7 +316,7 @@ const Cart = () => {
   const [showCouponCode, setShowCouponCode] = useState(false);
   const [couponCode, setCoupon] = useState([]);
   const [selectedCoupon, setSelectedCoupon] = useState(null);
-  const [removeCoupon, setRemoveCoupon] = useState(false);
+  // const [removeCoupon, setRemoveCoupon] = useState(false);
 
   useEffect(() => {
     dispatch(getAllCartItems());
@@ -367,7 +367,7 @@ const Cart = () => {
 
   const handleRemoveCoupon = () => {
     dispatch(removeCouponCode());
-    setRemoveCoupon(false);
+    // setRemoveCoupon(false);
     setSelectedCoupon(null);
     setShowCouponCode(false);
   };

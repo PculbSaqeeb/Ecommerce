@@ -9,12 +9,11 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { persistor } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
-import { Auth0Provider } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const domain = "dev-m5qp4wpw7rmyj1od.us.auth0.com";
-const clientId = "y2kthfe8kJTde1owBGwmHMCG6wK52BhV";
+// const domain = "dev-m5qp4wpw7rmyj1od.us.auth0.com";
+// const clientId = "y2kthfe8kJTde1owBGwmHMCG6wK52BhV";
 
 
 root.render(

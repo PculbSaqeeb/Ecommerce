@@ -75,6 +75,7 @@ const Blog = () => {
                 <img
                   src={arrow}
                   className="w-[20px] h-[20px] text-textSecondary"
+                  alt=""
                 />
               </div>
             </div>

@@ -1,10 +1,11 @@
 import "../style/style.css";
 import { useNavigate } from "react-router";
 import {  useSelector } from "react-redux";
-import ProductCard_1 from "./ProductCard_1";
+import ProductCard_1 from "./ProductCard1";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ProductCard1 from "./ProductCard1";
 
 const TrendingProduct = () => {
 
@@ -27,7 +28,6 @@ const TrendingProduct = () => {
     }
   };
 
-  // const dispatch = useDispatch();
   const { items, loading } = useSelector((state) => state.product);
   const settings = {
     infinite: false,
@@ -55,7 +55,6 @@ const TrendingProduct = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          initialSlide: 2
         }
       },
       {
@@ -63,7 +62,6 @@ const TrendingProduct = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          arrows: true,
         }
       }
     ]
@@ -116,7 +114,7 @@ const TrendingProduct = () => {
                 onClick={(e) => handleProductDetailsNavigate(e, product?.id)}
                 key={index}
               >
-                <ProductCard_1 product={product} />
+                <ProductCard1 product={product} />
               </div>
             ))}
         </Slider>

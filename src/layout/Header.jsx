@@ -83,7 +83,7 @@ const Header = () => {
         dispatch(fetchProductData());
       }
     }
-  }, [debouncedQuery, categoryName, dispatch]);
+  }, [debouncedQuery, categoryName, dispatch,location.pathname]);
 
   useEffect(() => {
     if (!hasFetchedCategory.current && (categoryList.length === 0 || !categoryList)) {

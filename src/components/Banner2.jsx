@@ -3,7 +3,9 @@ import { useNavigate } from "react-router";
 import Button from "./Button";
 import Slider from "react-slick";
 
-const Banner_2 = ({carousel}) => {
+const Banner2 = ({carousel}) => {
+  // console.log(carousel);
+  
   const settings = {
     dots: false,
     infinite: true,
@@ -101,4 +103,4 @@ const Banner_2 = ({carousel}) => {
   );
 };
 
-export default Banner_2;
+export default Banner2;

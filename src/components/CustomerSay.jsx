@@ -103,7 +103,7 @@ const NextArrow = ({ onClick }) => (
     className="absolute right-[0px]  z-10 top-1/2 transform -translate-y-1/2 cursor-pointer rounded-full bg-textPrimary w-[30px] h-[30px] md:w-[40px] md:h-[40px] lg:w-[56px] lg:h-[56px] text-white flex items-center justify-center"
     onClick={onClick}
   >
-    <img src={right_arrow_icon} className="w-2 md:w-3 lg:w-4" />
+    <img src={right_arrow_icon} className="w-2 md:w-3 lg:w-4" alt=""/>
   </div>
 );
 

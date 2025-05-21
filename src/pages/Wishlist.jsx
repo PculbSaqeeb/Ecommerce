@@ -16,7 +16,7 @@ const Wishlist = () => {
 
   useEffect(() => {
     dispatch(fetchWishlistProduct());
-  }, []);
+  }, [dispatch]);
 
   const handleDeleteToWishlist = (e, id) => {
     e.stopPropagation();

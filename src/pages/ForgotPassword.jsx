@@ -11,7 +11,7 @@ import Input from "../components/Input";
 import email_icon from '../assets/icons/emial_icon.svg'
 
 
-const Forgot_Password = () => {
+const ForgotPassword = () => {
   const navigate = useNavigate();
   const {
     register,
@@ -129,4 +129,4 @@ const Forgot_Password = () => {
   );
 };
 
-export default Forgot_Password;
+export default ForgotPassword;

@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { resetPassword } from "../services/authServices";
 import Input from "../components/Input";
 
-const New_Password = () => {
+const NewPassword = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
@@ -231,4 +231,4 @@ const New_Password = () => {
   );
 };
 
-export default New_Password;
+export default NewPassword;

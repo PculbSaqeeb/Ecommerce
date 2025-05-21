@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
-import Footer_1 from './Footer_1'
 import ScrollToTop from '../components/ScrollToTop'
+import Footer1 from './Footer1'
 
 const OrderLayout = ({children}) => {
   return (
@@ -9,7 +9,7 @@ const OrderLayout = ({children}) => {
       <ScrollToTop/>
         <Header/>
         {children}
-        <Footer_1/>
+        <Footer1/>
     </div>
   )
 }

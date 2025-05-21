@@ -34,7 +34,7 @@ export const deleteProductToWishlist = createAsyncThunk(
   "wishlist/deleteToWishlist",
   async (productId, { rejectWithValue }) => {
     try {
-      const response = await deleteToWishlist(productId);
+      await deleteToWishlist(productId);
       return productId;
     } catch (error) {
       return rejectWithValue(error?.response?.data?.message || error.message);

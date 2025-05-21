@@ -26,7 +26,7 @@ const ProductPage = () => {
     if (items.length === 0 || !items) {
       dispatch(fetchProductData());
     }
-  }, [dispatch]);
+  }, []);
 
   const handleShowFilter = () => {
     setFilterVisible(!filterVisible);

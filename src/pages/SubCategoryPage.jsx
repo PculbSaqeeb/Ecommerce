@@ -29,7 +29,7 @@ const SubCategoryPage = () => {
     if(!products || products.length===0){
       fetchProducts();
     }
-  }, [subCategory]);
+  }, []);
 
   return (
     <Layout>

@@ -95,7 +95,7 @@ const Trending = () => {
     if (!carousel || carousel.length === 0) {
       dispatch(fetchCarousel());
     }
-  }, []);
+  }, [dispatch]);
 
 
   return (

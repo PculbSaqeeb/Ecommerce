@@ -7,13 +7,15 @@ import Wishlist from "../pages/Wishlist";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Verification from "../pages/Verification";
-import Forgot_Password from "../pages/Forgot_Password";
-import New_Password from "../pages/New_Password";
+import Forgot_Password from "../pages/ForgotPassword";
+import New_Password from "../pages/NewPassword";
 import CategoryPage from "../pages/CategoryPage";
 import SubCategoryPage from "../pages/SubCategoryPage";
 import Cart from "../pages/Cart";
 import CheckoutPage from "../pages/CheckoutPage";
 import Category from "../pages/Category";
+import ForgotPassword from "../pages/ForgotPassword";
+import NewPassword from "../pages/NewPassword";
 
 const router = createBrowserRouter([
   {
@@ -46,7 +48,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/forgot-password",
-    element: <Forgot_Password />,
+    element: <ForgotPassword />,
   },
   {
     path: "/verification",
@@ -54,7 +56,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/new-password",
-    element: <New_Password />,
+    element: <NewPassword />,
   },
   {
     path:"/categories/:categoryName",

@@ -490,8 +490,8 @@ const cartSlice = createSlice({
 
       .addCase(quantityDecrement.fulfilled, (state, action) => {
         state.loading = false;
-        const { cart } = action.payload;
-        const { cartDetails, breakdown } = action.payload;
+        // const { cart } = action.payload;
+        const { cartDetails } = action.payload;
 
         state.cart = cartDetails.items.map((item) => ({
           ...item,
