@@ -13,20 +13,23 @@ const ProductPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [sortVisible, setSortVisible] = useState(false);
+  const [sortOption, setSortOption] = useState("");
   const [filterVisible, setFilterVisible] = useState(true);
   const { items, loading, filteredItems } = useSelector(
     (state) => state?.product
   );
-  
+
+  // console.log(filteredItems);
+
   const handleShowSorting = () => {
     setSortVisible(!sortVisible);
   };
 
   useEffect(() => {
-    if (items.length === 0 || !items) {
+    if (items?.length === 0 || !items) {
       dispatch(fetchProductData());
     }
-  }, []);
+  }, [dispatch,items]);
 
   const handleShowFilter = () => {
     setFilterVisible(!filterVisible);
@@ -36,8 +39,6 @@ const ProductPage = () => {
     e.stopPropagation();
     navigate(`/product-detail/${id}`);
   };
-
-  const [sortOption, setSortOption] = useState("");
 
   const handleSortChange = (option) => {
     setSortOption(option);
@@ -163,10 +164,10 @@ const ProductPage = () => {
 
 
           <div
-            className={`grid grid-cols-1 ${!filterVisible ? " grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3" : " grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-              } gap-[60px]  mt-[38px] ml-[50px] mr-[52px]`}
+            className={`grid grid-cols-1 ${!filterVisible ? " grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3" : " grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              } gap-[30px]  mt-[38px] ml-[50px] mr-[52px] lg:mr-6`}
           >
-            {loading ? (
+            {/* {loading ? (
               <p>Loading products...</p>
             )
               : (
@@ -181,7 +182,41 @@ const ProductPage = () => {
                     </div>
                   )
                 )
-              )}
+              )} */}
+
+            {loading ? (
+              <p>Loading products...</p>
+            ) : (
+              <>
+                {filteredItems ? (
+                  filteredItems.length > 0 ? (
+                    sortProducts(filteredItems).map((product, index) => (
+                      <div
+                        key={index}
+                        className="flex-shrink-0"
+                        onClick={(e) => showProductDetails(product?.id, e)}
+                      >
+                        <ProductCard product={product} filterVisible={filterVisible} />
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-center text-xl text-red-500 col-span-full">No products found</p>
+                  )
+                ) : (
+                  sortProducts(items).map((product, index) => (
+                    <div
+                      key={index}
+                      className="flex-shrink-0"
+                      onClick={(e) => showProductDetails(product?.id, e)}
+                    >
+                      <ProductCard product={product} filterVisible={filterVisible} />
+                    </div>
+                  ))
+                )}
+              </>
+            )}
+
+
           </div>
 
         </div>

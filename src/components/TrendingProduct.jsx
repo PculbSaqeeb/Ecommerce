@@ -1,7 +1,6 @@
 import "../style/style.css";
 import { useNavigate } from "react-router";
 import {  useSelector } from "react-redux";
-import ProductCard_1 from "./ProductCard1";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -37,30 +36,84 @@ const TrendingProduct = () => {
     initialSlide: 0,
     responsive: [
       {
+        breakpoint: 1450,
+        settings:{
+          slidesToShow:3
+        }
+      },
+       {
+        breakpoint:1380,
+        settings:{
+          slidesToShow:2.6
+        }
+      },
+      {
         breakpoint: 1280, // xl
         settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
+          slidesToShow: 2.3,
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 1180, // xl
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
         }
       },
       {
         breakpoint: 1024, // lg
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2.3,
           slidesToScroll: 1,
         }
       },
       {
-        breakpoint: 768, // md
+        breakpoint: 986, // lg
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
         }
       },
       {
-        breakpoint: 640, // sm
+        breakpoint: 868, 
+        settings: {
+          slidesToShow: 2.3,
+          slidesToScroll: 1,
+        }
+      },
+      // {
+      //   breakpoint: 768, 
+      //   settings: {
+      //     slidesToShow: 1.7,
+      //     slidesToScroll: 1,
+      //   }
+      // },
+      {
+        breakpoint: 768, 
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 640, 
+        settings: {
+          slidesToShow: 1.7,
+          slidesToScroll: 1,
+        }
+      },
+        {
+        breakpoint: 534, 
+        settings: {
+          slidesToShow: 1.1,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 450, 
+        settings: {
+          slidesToShow: 1,
           slidesToScroll: 1,
         }
       }
@@ -76,26 +129,6 @@ const TrendingProduct = () => {
       <p className="text-textPrimary text-2xl sm:text-3xl md:text-[36px] font-bold">
         Trending Now
       </p>
-
-      {/* <div className=" mt-[79px]">
-        <p className="text-textPrimary text-[36px] font-bold ml-[50px]">Trending Now</p>
-        <div className="mt-[27px]">
-          <Sliders slidesToShow={4}>
-            {loading && <p className="text-center mt-3 text-xl">Loading...</p>}
-            {items &&
-              items.map((product, index) => (
-                <div
-                  onMouseDown={handleMouseDown}
-                  onMouseUp={handleMouseUp}
-                  onClick={(e) => handleProductDetailsNavigate(e, product.id)}
-                  key={index}
-                >
-                  <ProductCard product={product} />
-                </div>
-              ))}
-          </Sliders>
-        </div>
-      </div> */}
 
 
       <div className="mt-6 md:mt-[27px]">

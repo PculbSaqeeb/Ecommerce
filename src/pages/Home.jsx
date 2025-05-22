@@ -23,7 +23,7 @@ const Home = () => {
     if (!carousel || carousel.length === 0) {
       dispatch(fetchCarousel());
     }
-  }, [dispatch]);
+  }, [dispatch,carousel]);
 
   return (
     

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { searchProduct, showAllProduct } from "../services/productServices"
 import { applyFilters } from '../services/filterServices'
+import { toast } from "react-toastify";
 
 export const fetchProductData = createAsyncThunk("product/fetch", async () => {
   const response = await showAllProduct();
@@ -9,17 +10,27 @@ export const fetchProductData = createAsyncThunk("product/fetch", async () => {
 
 export const fetchFilteredProducts = createAsyncThunk(
   "product/fetchFiltered",
-  async (filters) => {
-    const response = await applyFilters(filters);
-    return response?.data;
+  async (filters,{rejectWithValue}) => {
+
+    try {
+      const response = await applyFilters(filters);
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error?.response?.data?.message || "Remove failed");
+    }
   }
 );
 
 export const fetchSearchProducts = createAsyncThunk(
   "product/fetchsearchProduct",
-  async ({search,category}) => {
-    const response = await searchProduct(search,category);
-    return response?.data;
+  async ({ search, category },rejectWithValue) => {
+    try {
+      const response = await searchProduct(search, category);
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error?.response?.data?.message || "Remove failed");
+    }
   }
 );
 

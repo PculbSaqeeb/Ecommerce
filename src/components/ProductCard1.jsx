@@ -49,7 +49,7 @@ const ProductCard1 = ({ product }) => {
                 </div>
             </div> */}
 
-            <div className="w-[280px] sm:w-[300px] smallDesktop:w-[360px] lg:w-[410px] xl rounded-[10px] flex-shrink-0 shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden pb-4">
+            <div className="w-[280px] sm:w-[300px] md:w-[300px] smallDesktop:w-[360px] lg:w-[340px] xl:w-[410px] rounded-[10px] flex-shrink-0 shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden pb-4">
                 <img
                     className="w-full aspect-[4/3] object-cover"
                     src={product?.images}

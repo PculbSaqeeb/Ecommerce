@@ -11,6 +11,7 @@ const SubCategoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
@@ -18,18 +19,14 @@ const SubCategoryPage = () => {
       setProducts(response.data);
       setError(null);
     } catch (error) {
-      // setError(error.message);
       setProducts([]);
-    }  finally{
+    } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if(!products || products.length===0){
-      fetchProducts();
-    }
-  }, []);
+  fetchProducts();
+}, [categoryName, subCategory]);
 
   return (
     <Layout>

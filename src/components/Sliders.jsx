@@ -40,6 +40,7 @@ const Sliders = ({ children, slidesToShow = 4, responsive }) => {
     arrows: false,
     centerPadding: "0px",
     autoplay: true,
+    lazyLoad:"ondemand",
     autoplaySpeed: 2000,
     responsive: responsive || [
       {

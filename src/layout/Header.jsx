@@ -90,7 +90,7 @@ const Header = () => {
       dispatch(fetchCategories());
       hasFetchedCategory.current = true;
     }
-  }, []);
+  }, [dispatch,categoryList]);
 
   return (
     // <div className="sticky top-0 z-10 h-20 bg-white text-[18px] ">
@@ -217,10 +217,10 @@ const Header = () => {
 
 
 
-    <div className="sticky top-0 z-50 overflow-visible">
-      <div className=" bg-white text-[18px] shadow-sm">
+    <div className="sticky 2xl:top-0 2xl:z-50 ">
+      <div className=" bg-white text-[18px] shadow-sm overflow-visible">
         <header className="h-20 w-full px-4 md:px-[50px]">
-          <nav className="flex items-center  h-20 relative">
+          <nav className="flex items-center h-20 relative">
             <div className="md:hidden">
               <button onClick={() => setMenuOpen(true)}>
                 <svg
@@ -432,11 +432,11 @@ const Header = () => {
           placeholder="Search here"
         />
       </div>
-
     </div>
-
-
   );
 };
 
 export default Header;
+
+
+

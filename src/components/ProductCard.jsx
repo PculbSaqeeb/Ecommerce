@@ -4,8 +4,7 @@ import image_6 from "../assets/images/Rectangle 13.jpg";
 import star_icon from "../assets/icons/star_icon.svg";
 
 
-const ProductCard = ({ product,filterVisible }) => {
-  console.log(filterVisible);
+const ProductCard = ({ product,filterVisible }) => {  
   
   return (
     <div>
@@ -90,9 +89,9 @@ const ProductCard = ({ product,filterVisible }) => {
         </div>
       </div> */}
 
-      <div className={`w-full max-w-[95%] sm:max-w-[400px] md:max-w-[320px] smallDesktop:max-w-[370px] lg:max-w-[410px] xl:max-w-[410px]  rounded-[10px] shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden pb-5 transition-all duration-300 hover:scale-[1.02]`}>
+      <div className={`w-full max-w-[95%] sm:max-w-[400px] md:max-w-[320px] smallDesktop:max-w-[370px] lg:max-w-[570px] xl:max-w-[410px]  rounded-[10px] shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden pb-5 transition-all duration-300 hover:scale-[1.02] ${!filterVisible? "" : ""}`}>
         <img
-          className="w-full h-52 sm:h-60 md:h-64 lg:h-72 xl:h-[301px] object-cover"
+          className={`w-full h-52 sm:h-60 md:h-64 lg:h-72 xl:h-[301px] object-cover ${!filterVisible ? "lg:h-[230px]":""}`}
           src={product?.images}
           onError={(e) => {
             if (e.currentTarget.src !== image_6) {

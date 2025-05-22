@@ -137,10 +137,10 @@ const Filter = ({ filterVisible }) => {
   const [showBrandList, setShowBrandList] = useState(false);
   const [showColorList, setShowColorList] = useState(false);
   const [showDiscountList, setShowDiscountList] = useState(false);
-
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedDiscounts, setSelectedDiscounts] = useState([]);
+  const [priceRange, setPriceRange] = useState([0, 3000]);
 
   const handleCheckboxChange = (item, list, setList) => {
     setList((prev) =>
@@ -148,10 +148,9 @@ const Filter = ({ filterVisible }) => {
     );
   };
 
-  const [priceRange, setPriceRange] = useState([0, 3000]);
   const min = 0;
   const max = 3000;
-  const step = Math.round((max - min) / 60); 
+  const step = Math.round((max - min) / 90); 
 
   const handleValueChange = (newValues) => {
     setPriceRange(newValues);
@@ -215,11 +214,11 @@ const Filter = ({ filterVisible }) => {
             minStepsBetweenThumbs={1}
             aria-label="Price Range"
           >
-            <Slider.Track className="bg-[#939393] relative grow rounded-full h-2 border ">
+            <Slider.Track className="bg-[#939393] relative grow rounded-full h-2 border cursor-pointer">
               <Slider.Range className="absolute bg-[#0081DE] rounded-full h-full" />
             </Slider.Track>
 
-            <div className="absolute w-full top-[28px] left-[7px]">
+            <div className="absolute w-full top-[28px] left-[7px] cursor-pointer">
               {Array.from({ length: 9 }).map((_, i) => (
                 <div
                   key={i}
@@ -229,8 +228,8 @@ const Filter = ({ filterVisible }) => {
               ))}
             </div>
 
-            <Slider.Thumb className="block w-[20px] h-[20px] bg-white border border-[#898989] rounded-full" />
-            <Slider.Thumb className="block w-[20px] h-[20px] bg-white border border-[#898989] rounded-full " />
+            <Slider.Thumb className="block w-[20px] h-[20px] bg-white border border-[#898989] rounded-full cursor-pointer" />
+            <Slider.Thumb className="block w-[20px] h-[20px] bg-white border border-[#898989] rounded-full cursor-pointer " />
           </Slider.Root>
         </div>
 
