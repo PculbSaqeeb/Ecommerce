@@ -119,7 +119,7 @@
 
 // export default Filter;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import down_arrow_icon from "../assets/icons/down_arrow_icon.svg";
 import up_arrow_icon from "../assets/icons/up_arrow_icon.svg";
 import "../style/style.css";
@@ -127,9 +127,10 @@ import Button from "./Button";
 import { useDispatch } from "react-redux";
 import { fetchFilteredProducts, fetchProductData } from "../redux/productSlice";
 import * as Slider from "@radix-ui/react-slider"
+import { brandName, colorName } from "../services/filterServices";
 
-const allBrands = ["Levi's", "Reebok", "H&M", "Under Armour"];
-const allColors = ["Red", "Blue", "Green", "Black", "White"];
+// const allBrands = ["Levi's", "Reebok", "H&M", "Under Armour"];
+// const allColors = ["Red", "Blue", "Green", "Black", "White"];
 const allDiscounts = ["10", "20", "30", "40", "50", "60"];
 
 const Filter = ({ filterVisible }) => {
@@ -141,6 +142,43 @@ const Filter = ({ filterVisible }) => {
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedDiscounts, setSelectedDiscounts] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 3000]);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
+  const [allBrands, setAllBrand] = useState([]);
+  const [allColors, setAllColor] = useState([]);
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        // setLoading(true);
+        const response = await brandName();
+        setAllBrand(response.data);
+        // setError(null);
+      } catch (error) {
+        setAllBrand([]);
+      } finally {
+        // setLoading(false);
+      }
+    };
+
+    fetchBrands();
+  }, []);
+
+  useEffect(() => {
+    const fetchColors = async () => {
+      try {
+        // setLoading(true);
+        const response = await colorName();
+        setAllColor(response.data);
+        // setError(null);
+      } catch (error) {
+        setAllColor([]);
+      } finally {
+        // setLoading(false);
+      }
+    };
+    fetchColors();
+  }, []);
 
   const handleCheckboxChange = (item, list, setList) => {
     setList((prev) =>
@@ -150,7 +188,7 @@ const Filter = ({ filterVisible }) => {
 
   const min = 0;
   const max = 3000;
-  const step = Math.round((max - min) / 90); 
+  const step = Math.round((max - min) / 90);
 
   const handleValueChange = (newValues) => {
     setPriceRange(newValues);
@@ -178,7 +216,7 @@ const Filter = ({ filterVisible }) => {
   };
 
   const handleClearAll = () => {
-    setPriceRange([0,3000])
+    setPriceRange([0, 3000])
     setSelectedBrands([]);
     setSelectedColors([]);
     setSelectedDiscounts([]);
@@ -255,21 +293,21 @@ const Filter = ({ filterVisible }) => {
         </div>
         {showBrandList && (
           <div className="mt-2 space-y-2">
-            {allBrands.map((brand) => (
-              <label key={brand} className="block text-[18px] text-textPrimary">
+            {allBrands.map((brand, index) => (
+              <label key={index} className="block text-[18px] text-textPrimary">
                 <input
                   type="checkbox"
                   className="mr-2 accent-textSecondary"
-                  checked={selectedBrands.includes(brand)}
+                  checked={selectedBrands.includes(brand.id)}
                   onChange={() =>
                     handleCheckboxChange(
-                      brand,
+                      brand.id,
                       selectedBrands,
                       setSelectedBrands
                     )
                   }
                 />
-                {brand}  <span className="text-textSecondary">(30)</span>
+                {brand.name}  <span className="text-textSecondary">(30)</span>
               </label>
             ))}
           </div>
@@ -286,21 +324,21 @@ const Filter = ({ filterVisible }) => {
         </div>
         {showColorList && (
           <div className="mt-2 space-y-2">
-            {allColors.map((color) => (
-              <label key={color} className="block text-[18px] text-textPrimary">
+            {allColors.map((color,index) => (
+              <label key={index} className="block text-[18px] text-textPrimary">
                 <input
                   type="checkbox"
                   className="mr-2 accent-textSecondary"
-                  checked={selectedColors.includes(color)}
+                  checked={selectedColors.includes(color.id)}
                   onChange={() =>
                     handleCheckboxChange(
-                      color,
+                      color.id,
                       selectedColors,
                       setSelectedColors
                     )
                   }
                 />
-                {color}
+                {color.name}
               </label>
             ))}
           </div>
@@ -349,168 +387,168 @@ const Filter = ({ filterVisible }) => {
       </div>
     </div>
 
-//     <div
-//   className={`${!filterVisible ? "block" : "hidden"} w-full md:w-[460px] mb-[80px] px-4 md:px-0 mt-[30px]`}
-// >
-//   <div className="rounded-[10px] px-4 md:pl-[22px] md:pr-[23px] ml-0 md:ml-[50px] mt-[30px] md:mt-[58px] shadow-[0_0_30px_rgba(0,0,0,0.07)] pb-[25px] bg-white">
-//     <div className="pt-[31px] flex justify-between">
-//       <p className="text-textPrimary text-[28px] md:text-[36px] font-bold">Filters</p>
-//       <Button
-//         onClick={handleClearAll}
-//         variant="textOnly"
-//         className="text-[16px] md:text-[18px]"
-//       >
-//         Clear All
-//       </Button>
-//     </div>
+    //     <div
+    //   className={`${!filterVisible ? "block" : "hidden"} w-full md:w-[460px] mb-[80px] px-4 md:px-0 mt-[30px]`}
+    // >
+    //   <div className="rounded-[10px] px-4 md:pl-[22px] md:pr-[23px] ml-0 md:ml-[50px] mt-[30px] md:mt-[58px] shadow-[0_0_30px_rgba(0,0,0,0.07)] pb-[25px] bg-white">
+    //     <div className="pt-[31px] flex justify-between">
+    //       <p className="text-textPrimary text-[28px] md:text-[36px] font-bold">Filters</p>
+    //       <Button
+    //         onClick={handleClearAll}
+    //         variant="textOnly"
+    //         className="text-[16px] md:text-[18px]"
+    //       >
+    //         Clear All
+    //       </Button>
+    //     </div>
 
-//     <p className="mt-[17px] text-[20px] md:text-[24px]">Price</p>
+    //     <p className="mt-[17px] text-[20px] md:text-[24px]">Price</p>
 
-//     <div className="relative pb-6 mt-[27px]">
-//       <Slider.Root
-//         className="relative flex items-center select-none touch-none w-full max-w-[297px] h-5"
-//         value={priceRange}
-//         onValueChange={handleValueChange}
-//         min={min}
-//         max={max}
-//         step={step}
-//         minStepsBetweenThumbs={1}
-//         aria-label="Price Range"
-//       >
-//         <Slider.Track className="bg-[#939393] relative grow rounded-full h-2 border ">
-//           <Slider.Range className="absolute bg-[#0081DE] rounded-full h-full" />
-//         </Slider.Track>
+    //     <div className="relative pb-6 mt-[27px]">
+    //       <Slider.Root
+    //         className="relative flex items-center select-none touch-none w-full max-w-[297px] h-5"
+    //         value={priceRange}
+    //         onValueChange={handleValueChange}
+    //         min={min}
+    //         max={max}
+    //         step={step}
+    //         minStepsBetweenThumbs={1}
+    //         aria-label="Price Range"
+    //       >
+    //         <Slider.Track className="bg-[#939393] relative grow rounded-full h-2 border ">
+    //           <Slider.Range className="absolute bg-[#0081DE] rounded-full h-full" />
+    //         </Slider.Track>
 
-//         <div className="absolute w-full top-[28px] left-[7px]">
-//           {Array.from({ length: 9 }).map((_, i) => (
-//             <div
-//               key={i}
-//               className="absolute w-1.5 h-1.5 rounded-full bg-[#6D6D6D]"
-//               style={{ left: `${i * 11}%` }}
-//             />
-//           ))}
-//         </div>
+    //         <div className="absolute w-full top-[28px] left-[7px]">
+    //           {Array.from({ length: 9 }).map((_, i) => (
+    //             <div
+    //               key={i}
+    //               className="absolute w-1.5 h-1.5 rounded-full bg-[#6D6D6D]"
+    //               style={{ left: `${i * 11}%` }}
+    //             />
+    //           ))}
+    //         </div>
 
-//         <Slider.Thumb className="block w-[20px] h-[20px] bg-white border border-[#898989] rounded-full" />
-//         <Slider.Thumb className="block w-[20px] h-[20px] bg-white border border-[#898989] rounded-full " />
-//       </Slider.Root>
-//     </div>
+    //         <Slider.Thumb className="block w-[20px] h-[20px] bg-white border border-[#898989] rounded-full" />
+    //         <Slider.Thumb className="block w-[20px] h-[20px] bg-white border border-[#898989] rounded-full " />
+    //       </Slider.Root>
+    //     </div>
 
-//     <div className="flex justify-between mt-[29px]">
-//       <div>
-//         <div className="text-lg text-[#636363]">Min</div>
-//         <div className="text-lg mt-[9px]">Rs. {priceRange[0]}</div>
-//       </div>
-//       <div className="text-right">
-//         <div className="text-lg text-[#636363]">Max</div>
-//         <div className="text-lg mt-[9px]">Rs. {priceRange[1]}</div>
-//       </div>
-//     </div>
+    //     <div className="flex justify-between mt-[29px]">
+    //       <div>
+    //         <div className="text-lg text-[#636363]">Min</div>
+    //         <div className="text-lg mt-[9px]">Rs. {priceRange[0]}</div>
+    //       </div>
+    //       <div className="text-right">
+    //         <div className="text-lg text-[#636363]">Max</div>
+    //         <div className="text-lg mt-[9px]">Rs. {priceRange[1]}</div>
+    //       </div>
+    //     </div>
 
-//     <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
-//       <p className="text-[20px] md:text-[24px] text-textPrimary font-bold">Brand</p>
-//       <img
-//         onClick={() => setShowBrandList(!showBrandList)}
-//         className="pr-[6.5px] cursor-pointer"
-//         src={showBrandList ? up_arrow_icon : down_arrow_icon}
-//         alt="Toggle Brand Filter"
-//       />
-//     </div>
-//     {showBrandList && (
-//       <div className="mt-2 space-y-2">
-//         {allBrands.map((brand) => (
-//           <label key={brand} className="block text-[16px] md:text-[18px] text-[#333]">
-//             <input
-//               type="checkbox"
-//               className="mr-2"
-//               checked={selectedBrands.includes(brand)}
-//               onChange={() =>
-//                 handleCheckboxChange(
-//                   brand,
-//                   selectedBrands,
-//                   setSelectedBrands
-//                 )
-//               }
-//             />
-//             {brand}
-//           </label>
-//         ))}
-//       </div>
-//     )}
+    //     <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
+    //       <p className="text-[20px] md:text-[24px] text-textPrimary font-bold">Brand</p>
+    //       <img
+    //         onClick={() => setShowBrandList(!showBrandList)}
+    //         className="pr-[6.5px] cursor-pointer"
+    //         src={showBrandList ? up_arrow_icon : down_arrow_icon}
+    //         alt="Toggle Brand Filter"
+    //       />
+    //     </div>
+    //     {showBrandList && (
+    //       <div className="mt-2 space-y-2">
+    //         {allBrands.map((brand) => (
+    //           <label key={brand} className="block text-[16px] md:text-[18px] text-[#333]">
+    //             <input
+    //               type="checkbox"
+    //               className="mr-2"
+    //               checked={selectedBrands.includes(brand)}
+    //               onChange={() =>
+    //                 handleCheckboxChange(
+    //                   brand,
+    //                   selectedBrands,
+    //                   setSelectedBrands
+    //                 )
+    //               }
+    //             />
+    //             {brand}
+    //           </label>
+    //         ))}
+    //       </div>
+    //     )}
 
-//     <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
-//       <p className="text-[20px] md:text-[24px] text-textPrimary font-bold">Color</p>
-//       <img
-//         onClick={() => setShowColorList(!showColorList)}
-//         className="pr-[6.5px] cursor-pointer"
-//         src={showColorList ? up_arrow_icon : down_arrow_icon}
-//         alt="Toggle Color Filter"
-//       />
-//     </div>
-//     {showColorList && (
-//       <div className="mt-2 space-y-2">
-//         {allColors.map((color) => (
-//           <label key={color} className="block text-[16px] md:text-[18px] text-[#333]">
-//             <input
-//               type="checkbox"
-//               className="mr-2"
-//               checked={selectedColors.includes(color)}
-//               onChange={() =>
-//                 handleCheckboxChange(
-//                   color,
-//                   selectedColors,
-//                   setSelectedColors
-//                 )
-//               }
-//             />
-//             {color}
-//           </label>
-//         ))}
-//       </div>
-//     )}
+    //     <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
+    //       <p className="text-[20px] md:text-[24px] text-textPrimary font-bold">Color</p>
+    //       <img
+    //         onClick={() => setShowColorList(!showColorList)}
+    //         className="pr-[6.5px] cursor-pointer"
+    //         src={showColorList ? up_arrow_icon : down_arrow_icon}
+    //         alt="Toggle Color Filter"
+    //       />
+    //     </div>
+    //     {showColorList && (
+    //       <div className="mt-2 space-y-2">
+    //         {allColors.map((color) => (
+    //           <label key={color} className="block text-[16px] md:text-[18px] text-[#333]">
+    //             <input
+    //               type="checkbox"
+    //               className="mr-2"
+    //               checked={selectedColors.includes(color)}
+    //               onChange={() =>
+    //                 handleCheckboxChange(
+    //                   color,
+    //                   selectedColors,
+    //                   setSelectedColors
+    //                 )
+    //               }
+    //             />
+    //             {color}
+    //           </label>
+    //         ))}
+    //       </div>
+    //     )}
 
-//     <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
-//       <p className="text-[20px] md:text-[24px] text-textPrimary font-bold">
-//         Discount Range
-//       </p>
-//       <img
-//         onClick={() => setShowDiscountList(!showDiscountList)}
-//         className="pr-[6.5px] cursor-pointer"
-//         src={showDiscountList ? up_arrow_icon : down_arrow_icon}
-//         alt="Toggle Discount Filter"
-//       />
-//     </div>
-//     {showDiscountList && (
-//       <div className="mt-2 space-y-2">
-//         {allDiscounts.map((discount) => (
-//           <label key={discount} className="block text-[16px] md:text-[18px] text-[#333]">
-//             <input
-//               type="checkbox"
-//               className="mr-2"
-//               checked={selectedDiscounts.includes(discount)}
-//               onChange={() =>
-//                 handleCheckboxChange(
-//                   discount,
-//                   selectedDiscounts,
-//                   setSelectedDiscounts
-//                 )
-//               }
-//             />
-//             {discount} % and above
-//           </label>
-//         ))}
-//       </div>
-//     )}
-//     <div className="flex justify-center">
-//       <Button
-//         onClick={handleApplyFilter}
-//         className="mt-[20px] flex items-center"
-//       >
-//         Apply Filters
-//       </Button>
-//     </div>
-//   </div>
-// </div>
+    //     <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
+    //       <p className="text-[20px] md:text-[24px] text-textPrimary font-bold">
+    //         Discount Range
+    //       </p>
+    //       <img
+    //         onClick={() => setShowDiscountList(!showDiscountList)}
+    //         className="pr-[6.5px] cursor-pointer"
+    //         src={showDiscountList ? up_arrow_icon : down_arrow_icon}
+    //         alt="Toggle Discount Filter"
+    //       />
+    //     </div>
+    //     {showDiscountList && (
+    //       <div className="mt-2 space-y-2">
+    //         {allDiscounts.map((discount) => (
+    //           <label key={discount} className="block text-[16px] md:text-[18px] text-[#333]">
+    //             <input
+    //               type="checkbox"
+    //               className="mr-2"
+    //               checked={selectedDiscounts.includes(discount)}
+    //               onChange={() =>
+    //                 handleCheckboxChange(
+    //                   discount,
+    //                   selectedDiscounts,
+    //                   setSelectedDiscounts
+    //                 )
+    //               }
+    //             />
+    //             {discount} % and above
+    //           </label>
+    //         ))}
+    //       </div>
+    //     )}
+    //     <div className="flex justify-center">
+    //       <Button
+    //         onClick={handleApplyFilter}
+    //         className="mt-[20px] flex items-center"
+    //       >
+    //         Apply Filters
+    //       </Button>
+    //     </div>
+    //   </div>
+    // </div>
 
   );
 };

@@ -7,8 +7,6 @@ import Wishlist from "../pages/Wishlist";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Verification from "../pages/Verification";
-import Forgot_Password from "../pages/ForgotPassword";
-import New_Password from "../pages/NewPassword";
 import CategoryPage from "../pages/CategoryPage";
 import SubCategoryPage from "../pages/SubCategoryPage";
 import Cart from "../pages/Cart";

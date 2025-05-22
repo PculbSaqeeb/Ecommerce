@@ -2,15 +2,18 @@ import axios from "axios";
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
 
+
 export const applyFilters = (filters) => {
+  console.log(filters);
+
   const params = new URLSearchParams();
 
   if (filters.brands?.length > 0) {
-    filters?.brands?.forEach((brand) => params.append("brand", brand));
+    filters?.brands?.forEach((brand) => params.append("brandIds", brand));
   }
 
   if (filters.colors?.length > 0) {
-    filters?.colors?.forEach((color) => params.append("color", color));
+    filters?.colors?.forEach((color) => params.append("colorIds", color));
   }
 
   if (filters.discounts?.length > 0) {
@@ -30,13 +33,22 @@ export const applyFilters = (filters) => {
   // });
 
 
-  return axios.get('http://192.168.1.58:5000/product/filter',{
+  return axios.get('http://192.168.1.58:5000/product/filter', {
     params,
   })
 
 
 };
 
+// export axios.get('');
+
+export const brandName = () => {
+  return axios.get("http://192.168.1.58:5000/brand")
+}
+
+export const colorName = () => {
+  return axios.get("http://192.168.1.58:5000/color")
+}
 
 // export const filterEndpoint = (filters) => {
 //   return axios.get("http://192.168.1.58:5000/filter", {
