@@ -271,10 +271,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const checkoutSchema = z.object({
-  address: z.string().min(5, "Address is required"),
-  postalCode: z.string().min(1, "Postal Code is required"),
-  city: z.string().min(5, "City is required"),
-  country: z.string().min(5, "Country is required"),
+  address: z.string().nonempty("Address is required"),
+  postalCode: z.string().nonempty("Postal Code is required"),
+  city: z.string().nonempty("City is required"),
+  country: z.string().nonempty("Country is required"),
 });
 
 const CheckoutPage = () => {
@@ -344,7 +344,7 @@ const CheckoutPage = () => {
                     className="w-full px-4 py-2 focus:outline-gray-400 bg-gray-200 rounded-md"
                   />
                   {errors?.address && (
-                    <p className="text-red-500 text-sm">
+                    <p className="text-red-500 text-xs mt-[3px]">
                       {errors?.address?.message}
                     </p>
                   )}
@@ -362,7 +362,7 @@ const CheckoutPage = () => {
                       className="w-full px-4 py-2 focus:outline-gray-400 bg-gray-200 rounded-md"
                     />
                     {errors?.postalCode && (
-                      <p className="text-red-500 text-sm">
+                      <p className="text-red-500  text-xs mt-[3px]">
                         {errors?.postalCode?.message}
                       </p>
                     )}
@@ -379,7 +379,7 @@ const CheckoutPage = () => {
                       className="w-full px-4 py-2 focus:outline-gray-400 bg-gray-200 rounded-md"
                     />
                     {errors.city && (
-                      <p className="text-red-500 text-sm">
+                      <p className="text-red-500  text-xs mt-[3px]">
                         {errors?.city?.message}
                       </p>
                     )}
@@ -396,7 +396,7 @@ const CheckoutPage = () => {
                       className="w-full px-4 py-2 focus:outline-gray-400 bg-gray-200 rounded-md "
                     />
                     {errors.country && (
-                      <p className="text-red-500 text-sm">
+                      <p className="text-red-500  text-xs mt-[3px]">
                         {errors?.country?.message}
                       </p>
                     )}

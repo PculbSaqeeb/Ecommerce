@@ -44,7 +44,7 @@ const CategoryCard = ({ product }) => {
     // </div>
 
     <div
-      className="w-full max-w-[400px] mx-auto sm:mx-0 rounded-[10px] shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden mt-5 pb-5"
+      className="w-full max-w-[400px] mx-auto sm:mx-0 rounded-[10px] shadow-[0_0_30px_rgba(0,0,0,0.05)] cursor-pointer overflow-hidden mt-5 pb-5 "
       onClick={() =>
         navigate(`/categories/${categoryName}/${product?.name?.toLowerCase()}`)
       }

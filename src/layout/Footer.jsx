@@ -8,18 +8,18 @@ import logo_white from '../assets/icons/white_logo_icon.png'
 
 const Footer = () => {
   return (
- <div className="w-full bg-[#00071B] text-white px-4 overflow-x-hidden">
+ <div className="w-full bg-[#00071B] text-white px-4 overflow-x-hidden ">
 
 
        
   <div className="flex max-sm:items-center sm:flex-row items-center gap-[30px] pl-[50px] max-sm:pl-10 max-sm:pt-6">
     <img className="w-[76px] h-[64px] mt-[44px] max-sm:mt-2" src={logo_white} alt="" />
-    <p className="text-[64px] font-bold text-white mt-[36px] max-sm:mt-2 max-sm:text-[32px]">Globex</p>
+    <p className="text-[64px] font-bold text-white mt-[30px] max-sm:mt-2 max-sm:text-[32px]">Globex</p>
   </div>
 
-  <div className="flex flex-wrap gap-[40px] sm:gap-[40px] max-sm:gap-7 justify-center sm:ml-[19px] mt-[90px] max-sm:mt-10 lg:gap-20">
+  <div className="flex flex-wrap gap-[40px] sm:gap-[40px] max-sm:gap-7 justify-center sm:ml-[19px] mt-[30px] max-sm:mt-10 lg:gap-20">
     <ul className="flex flex-col gap-[17px] cursor-pointer text-[18px] max-sm:text-[16px] items-start text-left">
-      <li className="text-[24px] font-bold max-sm:text-[20px] ">Women</li>
+      <li className="text-[24px] font-bold max-sm:text-[20px]">Women</li>
       <li>All Women</li>
       <li>Skirts</li>
       <li>T-shirts</li>
@@ -81,18 +81,18 @@ const Footer = () => {
     </ul>
   </div>
 
-  <div className="border-b border-white mt-[79px] max-sm:mt-[40px]"></div>
+  <div className="border-b border-white mt-[30px] max-sm:mt-[40px]"></div>
 
-  <div className="mt-[39px] pb-[38px]">
+  <div className="my-[20px]">
     <ul className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-[50px] text-[18px] max-sm:text-[14px] text-center">
       <li>Terms & Condition</li>
       <li>Privacy Policy</li>
       <li>
         <div className="flex gap-[20px] sm:gap-[20px]  justify-center mt-2 sm:mt-0">
-          <img src={fb_icon} alt="Facebook" className="w-6 max-sm:w-4 md:w-[32px] h-[32px]" />
-          <img src={insta_icon} alt="Instagram" className="w-6 max-sm:w-4 md:w-[32px] h-[32px]" />
-          <img src={whatsaap_icon} alt="WhatsApp" className="w-6 max-sm:w-4 md:w-[32px] h-[32px]" />
-          <img src={tweeter_icon} alt="Twitter" className="w-6 max-sm:w-4 md:w-[32px] h-[32px]" />
+          <img src={fb_icon} alt="Facebook" className="w-6 max-sm:w-4 md:w-[25px] h-[25px]" />
+          <img src={insta_icon} alt="Instagram" className="w-6 max-sm:w-4 md:w-[25px] h-[25px]" />
+          <img src={whatsaap_icon} alt="WhatsApp" className="w-6 max-sm:w-4 md:w-[25px] h-[25px]" />
+          <img src={tweeter_icon} alt="Twitter" className="w-6 max-sm:w-4 md:w-[25px] h-[25px]" />
         </div>
       </li>
     </ul>

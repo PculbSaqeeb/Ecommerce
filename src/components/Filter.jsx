@@ -195,6 +195,7 @@ const Filter = ({ filterVisible }) => {
   };
 
   const handleApplyFilter = () => {
+     window.scrollTo({ top: 0, behavior: "smooth" });
     if (
       selectedBrands?.length === 0 &&
       selectedColors?.length === 0 &&

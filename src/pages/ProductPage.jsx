@@ -29,7 +29,7 @@ const ProductPage = () => {
     if (items?.length === 0 || !items) {
       dispatch(fetchProductData());
     }
-  }, [dispatch,items]);
+  }, [dispatch, items]);
 
   const handleShowFilter = () => {
     setFilterVisible(!filterVisible);
@@ -161,8 +161,6 @@ const ProductPage = () => {
           </div>
 
           {sortVisible && <SortBy onSortChange={handleSortChange} />}
-
-
           <div
             className={`grid grid-cols-1 ${!filterVisible ? " grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3" : " grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
               } gap-[30px]  mt-[38px] ml-[50px] mr-[52px] lg:mr-6`}
@@ -200,7 +198,9 @@ const ProductPage = () => {
                       </div>
                     ))
                   ) : (
-                    <p className="text-center text-xl text-red-500 col-span-full">No products found</p>
+                    <div className="flex items-center justify-center min-h-[60vh] col-span-full">
+                      <p className="text-[28px] text-red-500">No products found.</p>
+                    </div>
                   )
                 ) : (
                   sortProducts(items).map((product, index) => (
@@ -215,10 +215,7 @@ const ProductPage = () => {
                 )}
               </>
             )}
-
-
           </div>
-
         </div>
       </div>
     </Layout>

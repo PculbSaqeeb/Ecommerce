@@ -102,7 +102,7 @@ const Order = () => {
 
             <div className="flex flex-col sm:flex-row gap-6 sm:gap-[39px]">
               <img
-                className="w-full h-[200px] sm:w-[220px] sm:h-[210px] md:w-[260px] md:h-[240px] lg:w-[223px] lg:h-[248px] object-cover bg-slate-100"
+                className="w-full h-[200px] sm:w-[220px] sm:h-[210px] md:w-[260px] md:h-[240px] lg:w-[223px] lg:h-[248px] xl:w-[223px] xl:h-[248px] object-cover bg-slate-100"
               src={item?.productImage}
               alt={item?.productName}
               />
@@ -122,14 +122,14 @@ const Order = () => {
                 <h5 className="mt-[10px] text-sm sm:text-base md:text-lg">
                   Order Placed on:
                   <span className="text-sm sm:text-base font-normal text-textSecondary font-lato">
-                    {item.placeOn}
+                    {order.createdAt}
                   </span>
                 </h5>
 
                 <h6 className="mt-1 text-sm sm:text-base md:text-lg">
                   Ship To:
                   <span className="text-sm sm:text-base font-normal text-textSecondary font-lato">
-                    {item?.address || "N/A"}
+                    {order?.address || "N/A"}
                   </span>
                 </h6>
 
@@ -152,14 +152,13 @@ const Order = () => {
 
             <div className="font-lato mt-4 md:mt-0 md:text-left">
               <p className="text-sm sm:text-base md:text-lg text-textPrimary">
-                Order Number:
-                <span className="text-textSecondary">
-                  #{item?.orderNumber || "N/A"}
+                Order Number: <span className="text-textSecondary">
+                  #{order?.id || "N/A"}
                 </span>
               </p>
 
               <p className="mt-[14px] text-linkPrimary">
-                Transaction ID: {item?.transactionId}
+                Transaction ID: {order?.transactionId}
               </p>
             </div>
           </div>

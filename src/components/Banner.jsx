@@ -87,12 +87,65 @@ const Banner = ({carousel}) => {
     //   </Slider>
     // </div>
 
-    <div className="w-full">
+    // <div className="w-full">
+    //   <Slider {...settings}>
+    //     {carousel && carousel.map((item, index) => (
+    //       <div
+    //         key={index}
+    //         className="!flex w-full flex-col lg:flex-row  lg:h-[600px] xl:h-[797px]"
+    //       >
+    //         {/* Left Side Image */}
+    //         <div className="w-full sm:h-[365px] lg:w-1/2 lg:h-full h-[330px]">
+    //           <img
+    //             className="w-full h-full object-cover"
+    //             src={item.image}
+    //             alt={item.brand}
+    //           />
+    //         </div>
+
+    //         {/* Right Side Content */}
+    //         <div className="bg-image1 w-full sm:h-[365px] lg:w-1/2 lg:h-full h-[330px] flex items-center justify-center">
+    //           <div className="text-center">
+    //             {/* Brand Name */}
+    //             <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-widest">
+    //               {item.brand.toUpperCase()}
+    //             </p>
+
+    //             {/* Festival Text */}
+    //             <p className="font-bold text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl text-textMuted bg-transparent mt-6 lg:mt-[66px]">
+    //               Big Fashion Festival
+    //             </p>
+
+    //             {/* Offer Text */}
+    //             <p className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[48px] text-textMuted mt-4 lg:mt-[22px] xl:mt-[22px]">
+    //               {item.offer}
+    //             </p>
+
+    //             {/* Explore Button */}
+    //             <div className="flex justify-center">
+    //               <Button
+    //                 onClick={handleProductNavigate}
+    //                 variant="lightOutline"
+    //                 size="md"
+    //                 className="mt-6 lg:mt-[30px] xl:mt-[43px] text-sm sm:text-base md:text-lg lg:text-[24px] xl:text-[24px] w-[140px] md:w-[172px]"
+    //               >
+    //                 Explore
+    //               </Button>
+    //             </div>
+    //           </div>
+
+    //         </div>
+    //       </div>
+    //     ))}
+    //   </Slider>
+    // </div>
+
+      <div className="w-full">
       <Slider {...settings}>
         {carousel && carousel.map((item, index) => (
           <div
             key={index}
-            className="!flex w-full flex-col lg:flex-row  lg:h-[600px] xl:h-[797px]"
+            className="!flex w-full flex-col lg:flex-row lg:h-[550px] xl:h-[697px] "
           >
             {/* Left Side Image */}
             <div className="w-full sm:h-[365px] lg:w-1/2 lg:h-full h-[330px]">

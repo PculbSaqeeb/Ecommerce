@@ -50,8 +50,12 @@ const Wishlist = () => {
             ))}
         </div> */}
 
-          {!loading && wishlist?.length === 0 && <p className="text-red-500 text-lg mt-[16px]">Wishlist is empty!</p>}
- 
+        {!loading && wishlist?.length === 0 && (
+          <div className="flex items-center justify-center h-[30vh] w-full">
+            <p className="text-red-500 text-[28px]">Your Wishlist is empty!</p>
+          </div>
+        )}
+
         <div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[60px] mt-[26px] "
         >
@@ -61,13 +65,13 @@ const Wishlist = () => {
             wishlist?.map((product, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 relative"
+                className="flex-shrink-0 relative mb-[96px]"
                 onClick={() => showProductDetails(product?.id)}
               >
                 <ProductCard product={product} />
 
-                 <img
-                  onClick={(e) => handleDeleteToWishlist(e,product?.id)}
+                <img
+                  onClick={(e) => handleDeleteToWishlist(e, product?.id)}
                   src={red_heart_icon}
                   alt="Remove from wishlist"
                   className="w-[30px] h-[27px] cursor-pointer absolute top-3 right-6 md:right-5 lg:right-3 xl:right-2"

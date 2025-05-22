@@ -40,8 +40,9 @@ const SubCategoryPage = () => {
         {error && <p className="text-center text-red-500 py-10">{error}</p>}
 
         {!loading && !error && products.length === 0 && (
-          <p className="text-center py-10">
-            No products found in this category.
+          <p className="text-center text-red-500 text-[28px] py-10">
+            {/* No products found in this category. */}
+            Coming soon...
           </p>
         )}
 

@@ -556,7 +556,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { setCoupon, setDiscount, incrementQuantity, decrementQuantity, setQuantity, paymentLink, removeCouponCode } = cartSlice.actions;
+export const { setCoupon, setDiscount , removeCouponCode } = cartSlice.actions;
 export default cartSlice.reducer;
 
 

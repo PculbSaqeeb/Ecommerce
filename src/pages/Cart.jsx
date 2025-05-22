@@ -322,7 +322,7 @@ const Cart = () => {
     dispatch(getAllCartItems());
   }, [dispatch]);
 
-  const { cart, coupon, discount} = useSelector(
+  const { cart, coupon, discount } = useSelector(
     (state) => state.cart
   );
 
@@ -601,13 +601,20 @@ const Cart = () => {
         )}
       </div> */}
 
-      <div className="flex-grow md:mx-[50px]">
-        <p className="mt-6 md:mt-[56px] text-2xl md:text-[36px] font-bold mx-4">
+      <div className="flex-grow md:mx-[50px] mb-[96px]">
+        <p className="mt-6 md:mt-[56px] text-[36px] md:text-[36px] font-bold mx-4">
           My <span className="text-[#002482]">Cart</span>
         </p>
+        {/* {cart?.length === 0 && (
+          <p className="text-lg text-red-500 mx-4 mt-4 md:mt-[20px]">Your Cart is Empty!</p>
+        )} */}
+
         {cart?.length === 0 && (
-          <p className="text-lg text-red-500 mx-4 mt-4 md:mt-[20px]">Cart is Empty!</p>
+          <div className="flex items-center justify-center h-[30vh] w-full">
+            <p className="text-red-500 text-[28px]">Your Cart is empty!</p>
+          </div>
         )}
+
         {cart?.length > 0 && (
           <div className="flex flex-col lg:flex-row flex-wrap gap-4 md:gap-8 p-4 mt-[20px]">
             <div className="max-w-[1100px] lg:flex-1">

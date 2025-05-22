@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// const BASE_URL = process.env.REACT_APP_BASE_URL;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 
 export const applyFilters = (filters) => {
@@ -28,14 +28,14 @@ export const applyFilters = (filters) => {
     params.append("priceMax", filters?.priceRange[1]);
   }
 
-  // return axios.get(`${BASE_URL}product/filter`, {
-  //   params,
-  // });
-
-
-  return axios.get('http://192.168.1.58:5000/product/filter', {
+  return axios.get(`${BASE_URL}product/filter`, {
     params,
-  })
+  });
+
+
+  // return axios.get('http://192.168.1.58:5000/product/filter', {
+  //   params,
+  // })
 
 
 };
@@ -43,11 +43,17 @@ export const applyFilters = (filters) => {
 // export axios.get('');
 
 export const brandName = () => {
-  return axios.get("http://192.168.1.58:5000/brand")
+  // return axios.get("http://192.168.1.58:5000/brand")
+
+  return axios.get(`${BASE_URL}brand`);
+
 }
 
 export const colorName = () => {
-  return axios.get("http://192.168.1.58:5000/color")
+  // return axios.get("http://192.168.1.58:5000/color")
+  
+  return axios.get(`${BASE_URL}color`);
+
 }
 
 // export const filterEndpoint = (filters) => {

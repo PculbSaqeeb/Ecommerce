@@ -53,8 +53,8 @@ const Footer1 = () => {
         </div>
       </div>  */}
 
-      <div className="w-full bg-[#1A4242] text-white mt-[96px] font">
-        <div className="max-w-screen-xl mx-auto  py-[111px] flex flex-col md:flex-row md:justify-between">
+      <div className="w-full bg-[#1A4242] text-white font">
+        <div className="max-w-screen-xl mx-auto py-[30px] flex flex-col md:flex-row md:justify-between">
 
           <div>
             <div className="flex items-center gap-[38px] mb-10 md:mb-0">
@@ -87,8 +87,8 @@ const Footer1 = () => {
           </div>
 
           <div>
-            <ul>
-              <li className="text-[20px] md:text-[24px] font-bold mb-4">Connect</li>
+            <ul className="flex flex-col justify-end items-end h-full">
+              <li className="text-[20px] md:text-[24px] font-bold mb-4">Social Media</li>
               <li>
                 <div className="flex gap-4">
                   <img src={fb_icon} alt="Facebook" className="w-6 h-6 cursor-pointer" />
