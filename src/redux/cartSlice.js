@@ -278,7 +278,6 @@ export const getAllCartItems = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await getCartItems();
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error?.response?.data?.message || "Failed to fetch cart items");
@@ -349,8 +348,6 @@ export const applyPromoCode = createAsyncThunk(
   async (couponCode, { rejectWithValue }) => {
     try {
       const res = await promoCode(couponCode);
-      console.log(res.data);
-      
       return {
         discount: res.data.discount,
         coupon: couponCode,

@@ -30,7 +30,7 @@ const Wishlist = () => {
   return (
     <OrderLayout>
       <div className="mx-[50px] flex-grow">
-        <p className="mt-[56px] text-[36px] font-bold font">
+        <p className="mt-[12px] text-[36px] font-bold font">
           My <span className="text-[#002482]">Wishlist</span>
         </p>
         {/* <div className="flex flex-wrap gap-[60px] mt-[38px]">
@@ -57,7 +57,7 @@ const Wishlist = () => {
         )}
 
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[60px] mt-[26px] "
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[60px] mt-[20px] "
         >
           {loading ? (
             <p>Loading products...</p>
@@ -65,7 +65,7 @@ const Wishlist = () => {
             wishlist?.map((product, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 relative mb-[96px]"
+                className="flex-shrink-0 relative mb-[20px]"
                 onClick={() => showProductDetails(product?.id)}
               >
                 <ProductCard product={product} />

@@ -26,6 +26,7 @@ const Header = () => {
   const cart = useSelector((state) => state.cart.cart || []);
   const { wishlist } = useSelector((state) => state.wishlist);
   const categoryList = useSelector((state) => state.category.categoryList);
+  
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedQuery = useDebounce(searchQuery, 500);
@@ -76,8 +77,6 @@ const Header = () => {
       }
     } else {
       if (location.pathname !== '/products' && categoryName) {
-        console.log(categoryName);
-
         dispatch(fetchCategoryProductData(categoryName));
       } else if (location.pathname === '/products') {
         dispatch(fetchProductData());
@@ -85,8 +84,9 @@ const Header = () => {
     }
   }, [debouncedQuery, categoryName, dispatch,location.pathname]);
 
+
   useEffect(() => {
-    if (!hasFetchedCategory.current && (categoryList.length === 0 || !categoryList)) {
+    if (!hasFetchedCategory.current && (categoryList?.length === 0 || !categoryList)) {
       dispatch(fetchCategories());
       hasFetchedCategory.current = true;
     }
@@ -248,18 +248,18 @@ const Header = () => {
 
 
             <ul className="hidden lg:flex lg:text-[15px] xl:text-[18px] items-center ml-10 gap-10 text-textPrimary cursor-pointer text-[18px]">
-              <li className={`hover:text-blue-600 ${location.pathname === '/products' ? "text-red-400 font-semibold underline" : "text-textPrimary"}`} onClick={() => navigate("/products")}>All</li>
-              {categoryList.map((item) => (
+              <li className={`hover:text-blue-600 ${location?.pathname === '/products' ? "text-red-400 font-semibold underline" : "text-textPrimary"}`} onClick={() => navigate("/products")}>All</li>
+              {categoryList?.map((item) => (
                 <NavLink
-                  key={item.name}
-                  to={`/categories/${item.name.toLowerCase()}`}
+                  key={item?.name}
+                  to={`/categories/${item?.name?.toLowerCase()}`}
                   className={({ isActive }) =>
                     isActive
                       ? "text-red-400 font-semibold underline"
                       : "text-textPrimary hover:text-blue-600"
                   }
                 >
-                  {item.name}
+                  {item?.name}
                 </NavLink>
               ))}
             </ul>

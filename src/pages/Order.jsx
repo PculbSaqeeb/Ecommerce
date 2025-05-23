@@ -89,14 +89,14 @@ const Order = () => {
       </div> */}
 
       <div className="ml-0 md:mx-[10px] font flex-grow px-4 sm:px-6 md:px-10 lg:px-[80px] 2xl:mx-[240px]">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-[40px] md:mt-[76px] text-textPrimary">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-[40px] md:mt-[26px] text-textPrimary">
           My <span className="text-[#002482]">Order</span>
         </h1>
 
         {order?.items?.map((item) => (
         <div
           key={item?.id}
-          className="my-[32px] w-full max-w-[1260px] shadow-[0_0_10px_rgba(0,0,0,0.1)] mb-[89px] rounded-[5px] mx-auto"
+          className="my-[32px] w-full max-w-[1260px] shadow-[0_0_10px_rgba(0,0,0,0.1)] mb-[0px] rounded-[5px] mx-auto"
         >
           <div className="flex flex-col md:flex-row justify-between p-4 sm:p-6 gap-4">
 

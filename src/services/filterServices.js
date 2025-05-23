@@ -4,7 +4,6 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 
 export const applyFilters = (filters) => {
-  console.log(filters);
 
   const params = new URLSearchParams();
 

@@ -61,10 +61,12 @@ const ProductDetail = () => {
 
   const handleAddToWishlist = (id) => {
     dispatch(addProductToWishlist(id));
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleDeleteToWishlist = (id) => {
     dispatch(deleteProductToWishlist(id));
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleAddToCart = (id, selectColorId, selectSizeId) => {
@@ -73,6 +75,8 @@ const ProductDetail = () => {
       productColorId: selectColorId,
       productSizeId: selectSizeId
     }));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
   };
 
   // const handleRemoveToCart = (id) => {

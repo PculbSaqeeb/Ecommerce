@@ -8,12 +8,13 @@ const Layout = ({ children }) => {
   return (
     <div className="w-full overflow-x-hidden flex flex-col min-h-screen">
       <ScrollToTop />
+      <Header />
       <div className="flex-grow">
-        <Header />
         {children}
-        <Footer />
       </div>
+      <Footer />
     </div>
+
   );
 };
 

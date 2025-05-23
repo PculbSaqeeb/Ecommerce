@@ -8,10 +8,7 @@ import logo_white from '../assets/icons/white_logo_icon.png'
 
 const Footer = () => {
   return (
- <div className="w-full bg-[#00071B] text-white px-4 overflow-x-hidden ">
-
-
-       
+ <div className="w-full bg-[#00071B] text-white px-4 overflow-x-hidden">       
   <div className="flex max-sm:items-center sm:flex-row items-center gap-[30px] pl-[50px] max-sm:pl-10 max-sm:pt-6">
     <img className="w-[76px] h-[64px] mt-[44px] max-sm:mt-2" src={logo_white} alt="" />
     <p className="text-[64px] font-bold text-white mt-[30px] max-sm:mt-2 max-sm:text-[32px]">Globex</p>
@@ -83,8 +80,8 @@ const Footer = () => {
 
   <div className="border-b border-white mt-[30px] max-sm:mt-[40px]"></div>
 
-  <div className="my-[20px]">
-    <ul className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-[50px] text-[18px] max-sm:text-[14px] text-center">
+  <div className="">
+    <ul className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-[50px] text-[18px] max-sm:text-[14px] text-center my-[20px]">
       <li>Terms & Condition</li>
       <li>Privacy Policy</li>
       <li>

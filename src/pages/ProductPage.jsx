@@ -198,7 +198,7 @@ const ProductPage = () => {
                       </div>
                     ))
                   ) : (
-                    <div className="flex items-center justify-center min-h-[60vh] col-span-full">
+                    <div className={`flex items-center justify-center ${!filterVisible?" min-h-[54vh]" :""} col-span-full`}>
                       <p className="text-[28px] text-red-500">No products found.</p>
                     </div>
                   )

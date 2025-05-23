@@ -6,7 +6,7 @@ import Button from "../components/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import LoginSchema from "../constant/formErrorSchema/loginSchema";
-import { Navigate, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { loginUser } from "../services/authServices";
 import Input from "../components/Input";
@@ -43,9 +43,9 @@ const Login = () => {
       toast.error(error?.response?.data?.message);
     }
   };
-  
+
   const access_token = localStorage.getItem("access_token");
-  
+
   if (access_token) {
     return <Navigate to="/" replace />;
   }
@@ -246,12 +246,12 @@ const Login = () => {
 
 
           <div className="w-full flex justify-end mt-[8px]">
-            <a
-              href="/forgot-password"
+            <Link
+              to="/forgot-password"
               className="text-sm text-textTertiary hover:underline font-bold cursor-pointer"
             >
               Forgot Password?
-            </a>
+            </Link>
           </div>
 
           <div className="flex items-center space-x-2">
@@ -290,12 +290,12 @@ const Login = () => {
 
       <div className="text-center text-[12px] mt-[20px] lg:mt-[42px] xl:mt-[42px] text-textSecondary">
         Don't have an account?
-        <a
-          href="/register"
+        <Link
+          to="/register"
           className="text-[#5C61F4] font-medium hover:underline ml-1"
         >
           Register
-        </a>
+        </Link>
       </div>
     </div>
 

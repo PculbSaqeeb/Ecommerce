@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import RegisterSchema from "../constant/formErrorSchema/schema";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { signupUser } from "../services/authServices";
 import Input from "../components/Input";
@@ -241,9 +241,15 @@ const Register = () => {
       </AuthLayout>
       <div className="text-center text-[12px] lg:mt-[40px] xl:mt-[40px] mt-[20px] text-textSecondary">
         Already have an account?
-        <a href="/login" className="text-[#5C61F4] hover:underline ml-1">
+        {/* <a href="/login" className="text-[#5C61F4] hover:underline ml-1">
           Log In
-        </a>
+        </a> */}
+        <Link
+          to="/login"
+          className="text-[#5C61F4] font-medium hover:underline ml-1"
+        >
+          log in
+        </Link>
       </div>
     </div>
   );

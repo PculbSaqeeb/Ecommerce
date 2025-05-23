@@ -18,8 +18,7 @@ const Banner2 = ({ carousel }) => {
 
   const handleProductNavigate = () => {
     navigate("/products");
-  };
-  console.log({ dd: carousel.image })
+  }
   return (
 
 
