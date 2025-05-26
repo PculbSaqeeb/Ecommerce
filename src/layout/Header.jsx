@@ -217,7 +217,7 @@ const Header = () => {
 
 
 
-    <div className="sticky 2xl:top-0 2xl:z-50 ">
+    <div className="sticky top-0 z-50">
       <div className=" bg-white text-[18px] shadow-sm overflow-visible">
         <header className="h-20 w-full px-4 md:px-[50px]">
           <nav className="flex items-center h-20 relative">
@@ -412,7 +412,7 @@ const Header = () => {
 
       </div>
 
-       <div className="xxl:hidden px-4 pb-3 mt-[25px]">
+       <div className="xxl:hidden px-4 pb-3 bg-white">
           <input
             value={searchQuery}
             onChange={(e) => handleSearch(e)}

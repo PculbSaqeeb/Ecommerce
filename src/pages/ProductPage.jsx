@@ -61,111 +61,79 @@ const ProductPage = () => {
 
   return (
     <Layout>
-      <div className="flex">
-        <Filter filterVisible={filterVisible} />
-        <div className="flex-1 mb-[80px]">
-          {/* <div className="flex gap-[44px] justify-end items-center mr-[50px] mt-[56px]">
-            <div className="flex items-center gap-[10px]">
-              <p
-                onClick={handleShowFilter}
-                className="text-[24px] text-textSecondary font-bold cursor-pointer"
-              >
-                Filters
-              </p>
-              <img
-                onClick={handleShowFilter}
-                className="w-[30px] h-[30px] cursor-pointer"
-                src={filter_icon}
-                alt=""
-              />
+      <div>
+         <div className="flex justify-end sm:flex-row sm:justify-end items-start sm:items-center gap-4 sm:gap-[20px] md:gap-[44px] mr-[20px] sm:mr-[50px] mt-[30px] sm:mt-[56px]">
+              <div className="sm:hidden flex items-center gap-2 md:gap-[10px] mx-[20px]">
+                <p
+                  onClick={handleShowFilter}
+                  className="text-[18px] md:text-[24px] text-textPrimary font-bold cursor-pointer"
+                >
+                  Filters
+                </p>
+                <img
+                  onClick={handleShowFilter}
+                  className="w-[24px] sm:w-[30px] h-[24px] sm:h-[30px] cursor-pointer"
+                  src={filter_icon}
+                  alt=""
+                />
+              </div>
+
+              <div className="sm:hidden flex items-center gap-2 md:gap-[17.5px]">
+                <p
+                  onClick={handleShowSorting}
+                  className="text-[18px] md:text-[24px] text-textPrimary font-bold cursor-pointer"
+                >
+                  Sort By
+                </p>
+                <img
+                  onClick={handleShowSorting}
+                  className="w-[12px] sm:w-[15px] h-[6px] sm:h-[7.5px] cursor-pointer"
+                  src={down_arrow_icon}
+                  alt=""
+                />
+              </div>
+            </div>
+        <div className="flex">
+          <Filter filterVisible={filterVisible} setFilterVisible={setFilterVisible}/>
+          <div className="flex-1 mb-[80px]">
+            <div className="hidden sm:flex sm:flex-row sm:justify-end items-start sm:items-center gap-4 sm:gap-[20px] md:gap-[44px] mr-[20px] sm:mr-[50px] mt-[30px] sm:mt-[56px]">
+              <div className="flex items-center gap-2 md:gap-[10px]">
+                <p
+                  onClick={handleShowFilter}
+                  className="text-[18px] md:text-[24px] text-textPrimary font-bold cursor-pointer"
+                >
+                  Filters
+                </p>
+                <img
+                  onClick={handleShowFilter}
+                  className="w-[24px] sm:w-[30px] h-[24px] sm:h-[30px] cursor-pointer"
+                  src={filter_icon}
+                  alt=""
+                />
+              </div>
+
+              <div className="flex items-center gap-2 md:gap-[17.5px]">
+                <p
+                  onClick={handleShowSorting}
+                  className="text-[18px] md:text-[24px] text-textPrimary font-bold cursor-pointer"
+                >
+                  Sort By
+                </p>
+                <img
+                  onClick={handleShowSorting}
+                  className="w-[12px] sm:w-[15px] h-[6px] sm:h-[7.5px] cursor-pointer"
+                  src={down_arrow_icon}
+                  alt=""
+                />
+              </div>
             </div>
 
-            <div className="flex items-center gap-[17.5px] ">
-              <p
-                onClick={handleShowSorting}
-                className="text-[24px] text-textPrimary font-bold cursor-pointer"
-              >
-                Sort By
-              </p>
-              <img
-                onClick={handleShowSorting}
-                className="w-[15px] h-[7.5px] cursor-pointer"
-                src={down_arrow_icon}
-                alt=""
-              />
-            </div>
-          </div> */}
-          {/* 
-          <div className="flex sm:flex-row justify-end sm:justify-end items-start sm:items-center gap-4 sm:gap-[44px] mr-[20px] sm:mr-[50px] mt-[30px] sm:mt-[56px]">
-            <div className="flex items-center gap-2 sm:gap-[10px]">
-              <p
-                onClick={handleShowFilter}
-                className="text-[18px] sm:text-[24px] text-textSecondary font-bold cursor-pointer"
-              >
-                Filters
-              </p>
-              <img
-                onClick={handleShowFilter}
-                className="w-[24px] sm:w-[30px] h-[24px] sm:h-[30px] cursor-pointer"
-                src={filter_icon}
-                alt=""
-              />
-            </div>
-
-            <div className="flex items-center gap-2 sm:gap-[17.5px]">
-              <p
-                onClick={handleShowSorting}
-                className="text-[18px] sm:text-[24px] text-textPrimary font-bold cursor-pointer"
-              >
-                Sort By
-              </p>
-              <img
-                onClick={handleShowSorting}
-                className="w-[12px] sm:w-[15px] h-[6px] sm:h-[7.5px] cursor-pointer"
-                src={down_arrow_icon}
-                alt=""
-              />
-            </div>
-          </div> */}
-
-          <div className="flex justify-end sm:flex-row sm:justify-end items-start sm:items-center gap-4 sm:gap-[44px] mr-[20px] sm:mr-[50px] mt-[30px] sm:mt-[56px]">
-            <div className="flex items-center gap-2 sm:gap-[10px]">
-              <p
-                onClick={handleShowFilter}
-                className="text-[18px] sm:text-[24px] text-textPrimary font-bold cursor-pointer"
-              >
-                Filters
-              </p>
-              <img
-                onClick={handleShowFilter}
-                className="w-[24px] sm:w-[30px] h-[24px] sm:h-[30px] cursor-pointer"
-                src={filter_icon}
-                alt=""
-              />
-            </div>
-
-            <div className="flex items-center gap-2 sm:gap-[17.5px]">
-              <p
-                onClick={handleShowSorting}
-                className="text-[18px] sm:text-[24px] text-textPrimary font-bold cursor-pointer"
-              >
-                Sort By
-              </p>
-              <img
-                onClick={handleShowSorting}
-                className="w-[12px] sm:w-[15px] h-[6px] sm:h-[7.5px] cursor-pointer"
-                src={down_arrow_icon}
-                alt=""
-              />
-            </div>
-          </div>
-
-          {sortVisible && <SortBy onSortChange={handleSortChange} />}
-          <div
-            className={`grid grid-cols-1 ${!filterVisible ? " grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3" : " grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-              } gap-[30px]  mt-[38px] ml-[50px] mr-[52px] lg:mr-6`}
-          >
-            {/* {loading ? (
+            {sortVisible && <SortBy onSortChange={handleSortChange} />}
+            <div
+              className={`grid grid-cols-1 ${!filterVisible ? " grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3" : " grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                } gap-[30px]  mt-[38px] ml-[50px] mr-[52px] lg:mr-6`}
+            >
+              {/* {loading ? (
               <p>Loading products...</p>
             )
               : (
@@ -182,13 +150,28 @@ const ProductPage = () => {
                 )
               )} */}
 
-            {loading ? (
-              <p>Loading products...</p>
-            ) : (
-              <>
-                {filteredItems ? (
-                  filteredItems.length > 0 ? (
-                    sortProducts(filteredItems).map((product, index) => (
+              {loading ? (
+                <p>Loading products...</p>
+              ) : (
+                <>
+                  {filteredItems ? (
+                    filteredItems.length > 0 ? (
+                      sortProducts(filteredItems).map((product, index) => (
+                        <div
+                          key={index}
+                          className="flex-shrink-0"
+                          onClick={(e) => showProductDetails(product?.id, e)}
+                        >
+                          <ProductCard product={product} filterVisible={filterVisible} />
+                        </div>
+                      ))
+                    ) : (
+                      <div className={`flex items-center justify-center ${!filterVisible ? " min-h-[54vh]" : ""} col-span-full`}>
+                        <p className=" text-[18px] md:text-[28px] text-red-500">No products found.</p>
+                      </div>
+                    )
+                  ) : (
+                    sortProducts(items).map((product, index) => (
                       <div
                         key={index}
                         className="flex-shrink-0"
@@ -197,24 +180,10 @@ const ProductPage = () => {
                         <ProductCard product={product} filterVisible={filterVisible} />
                       </div>
                     ))
-                  ) : (
-                    <div className={`flex items-center justify-center ${!filterVisible?" min-h-[54vh]" :""} col-span-full`}>
-                      <p className="text-[28px] text-red-500">No products found.</p>
-                    </div>
-                  )
-                ) : (
-                  sortProducts(items).map((product, index) => (
-                    <div
-                      key={index}
-                      className="flex-shrink-0"
-                      onClick={(e) => showProductDetails(product?.id, e)}
-                    >
-                      <ProductCard product={product} filterVisible={filterVisible} />
-                    </div>
-                  ))
-                )}
-              </>
-            )}
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

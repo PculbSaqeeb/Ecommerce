@@ -48,28 +48,28 @@ const TrendingProduct = () => {
         }
       },
       {
-        breakpoint: 1280, // xl
+        breakpoint: 1280,
         settings: {
           slidesToShow: 2.3,
           slidesToScroll: 2,
         }
       },
       {
-        breakpoint: 1180, // xl
+        breakpoint: 1180,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
         }
       },
       {
-        breakpoint: 1024, // lg
+        breakpoint: 1024, 
         settings: {
           slidesToShow: 2.3,
           slidesToScroll: 1,
         }
       },
       {
-        breakpoint: 986, // lg
+        breakpoint: 986, 
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,

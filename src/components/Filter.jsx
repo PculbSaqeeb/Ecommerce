@@ -128,13 +128,15 @@ import { useDispatch } from "react-redux";
 import { fetchFilteredProducts, fetchProductData } from "../redux/productSlice";
 import * as Slider from "@radix-ui/react-slider"
 import { brandName, colorName } from "../services/filterServices";
+import { useNavigate } from "react-router";
 
 // const allBrands = ["Levi's", "Reebok", "H&M", "Under Armour"];
 // const allColors = ["Red", "Blue", "Green", "Black", "White"];
 const allDiscounts = ["10", "20", "30", "40", "50", "60"];
 
-const Filter = ({ filterVisible }) => {
+const Filter = ({ filterVisible, setFilterVisible }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showBrandList, setShowBrandList] = useState(false);
   const [showColorList, setShowColorList] = useState(false);
   const [showDiscountList, setShowDiscountList] = useState(false);
@@ -161,8 +163,10 @@ const Filter = ({ filterVisible }) => {
       }
     };
 
-    fetchBrands();
-  }, []);
+    if (!allBrands || allBrands.length === 0) {
+      fetchBrands();
+    }
+  }, [allBrands]);
 
   useEffect(() => {
     const fetchColors = async () => {
@@ -177,7 +181,10 @@ const Filter = ({ filterVisible }) => {
         // setLoading(false);
       }
     };
-    fetchColors();
+    if (!allColors || allColors.length === 0) {
+      fetchColors();
+    }
+    // fetchColors();
   }, []);
 
   const handleCheckboxChange = (item, list, setList) => {
@@ -195,7 +202,10 @@ const Filter = ({ filterVisible }) => {
   };
 
   const handleApplyFilter = () => {
-     window.scrollTo({ top: 0, behavior: "smooth" });
+    if (window.innerWidth < 640) {
+      navigate("/products")
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
     if (
       selectedBrands?.length === 0 &&
       selectedColors?.length === 0 &&
@@ -214,6 +224,7 @@ const Filter = ({ filterVisible }) => {
         })
       );
     }
+    setFilterVisible(!filterVisible)
   };
 
   const handleClearAll = () => {
@@ -226,9 +237,9 @@ const Filter = ({ filterVisible }) => {
 
   return (
     <div
-      className={`${!filterVisible ? "block" : "hidden"}  w-[350px] md:w-[460px] xl:w-[460px] lg:w-[460px] mb-[80px] `}
+      className={`${!filterVisible ? "block" : "hidden"}  w-[350px] md:w-[420px] xl:w-[460px] lg:w-[460px] mb-[80px] `}
     >
-      <div className="rounded-[10px] pl-[22px] pr-[23px] ml-4 lg:ml-[50px] xl:ml-[50px]  mt-[58px] shadow-[0_0_30px_rgba(0,0,0,0.07)] pb-[25px] bg-white">
+      <div className="rounded-[10px] pl-[22px] pr-[23px] ml-4 lg:ml-[50px] xl:ml-[50px] mt-[20px] md:mt-[58px] shadow-[0_0_30px_rgba(0,0,0,0.07)] pb-[25px] bg-white">
         <div className="pt-[31px] flex justify-between">
           <p className="text-textPrimary text-[36px] font-bold">Filters</p>
           <Button
@@ -325,7 +336,7 @@ const Filter = ({ filterVisible }) => {
         </div>
         {showColorList && (
           <div className="mt-2 space-y-2">
-            {allColors.map((color,index) => (
+            {allColors.map((color, index) => (
               <label key={index} className="block text-[18px] text-textPrimary">
                 <input
                   type="checkbox"

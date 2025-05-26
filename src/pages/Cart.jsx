@@ -601,7 +601,7 @@ const Cart = () => {
         )}
       </div> */}
 
-      <div className="flex-grow md:mx-[50px] mb-[96px]">
+      <div className="flex-grow md:mx-[10px] lg:mx-[50px] mb-[96px]">
         <p className="mt-6 md:mt-[56px] text-[36px] md:text-[36px] font-bold mx-4">
           My <span className="text-[#002482]">Cart</span>
         </p>

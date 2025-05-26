@@ -15,7 +15,75 @@ import Category from "../pages/Category";
 import ForgotPassword from "../pages/ForgotPassword";
 import NewPassword from "../pages/NewPassword";
 
-// const router = createBrowserRouter([
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/products",
+    element: <ProductPage />,
+  },
+  {
+    path: "/product-detail/:id",
+    element: <ProductDetail />,
+  },
+  {
+    path: "/order",
+    element: <Order />,
+  },
+  {
+    path: "/wishlist",
+    element: <Wishlist />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
+  },
+  {
+    path: "/verification",
+    element: <Verification />,
+  },
+  {
+    path: "/new-password",
+    element: <NewPassword />,
+  },
+  {
+    path:"/categories/:categoryName",
+    element:<CategoryPage />
+  },
+  {
+    path:"/categories/:categoryName/:subCategory",
+    element:<SubCategoryPage/>
+  },
+  {
+    path:"/cart",
+    element:<Cart/>
+  },
+  {
+    path:"/checkout",
+    element:<CheckoutPage/>
+  },
+  {
+    path:"/categories/:categoryName/:subCategory/product-detail/:id",
+    element:<ProductDetail />
+  },
+
+  {
+    path:"/category",
+    element:<Category />
+  },
+]);
+
+// const router = createHashRouter([
 //   {
 //     path: "/",
 //     element: <Home />,
@@ -84,75 +152,5 @@ import NewPassword from "../pages/NewPassword";
 
   
 // ]);
-
-const router = createHashRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/products",
-    element: <ProductPage />,
-  },
-  {
-    path: "/product-detail/:id",
-    element: <ProductDetail />,
-  },
-  {
-    path: "/order",
-    element: <Order />,
-  },
-  {
-    path: "/wishlist",
-    element: <Wishlist />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/forgot-password",
-    element: <ForgotPassword />,
-  },
-  {
-    path: "/verification",
-    element: <Verification />,
-  },
-  {
-    path: "/new-password",
-    element: <NewPassword />,
-  },
-  {
-    path:"/categories/:categoryName",
-    element:<CategoryPage />
-  },
-  {
-    path:"/categories/:categoryName/:subCategory",
-    element:<SubCategoryPage/>
-  },
-  {
-    path:"/cart",
-    element:<Cart/>
-  },
-  {
-    path:"/checkout",
-    element:<CheckoutPage/>
-  },
-  {
-    path:"/categories/:categoryName/:subCategory/product-detail/:id",
-    element:<ProductDetail />
-  },
-
-  {
-    path:"/category",
-    element:<Category />
-  },
-
-  
-]);
 
 export default router;

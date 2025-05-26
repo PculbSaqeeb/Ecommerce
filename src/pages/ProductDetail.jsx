@@ -75,8 +75,7 @@ const ProductDetail = () => {
       productColorId: selectColorId,
       productSizeId: selectSizeId
     }));
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
+    window.scrollTo({ top: 0, behavior: "smooth" });  
   };
 
   // const handleRemoveToCart = (id) => {
@@ -420,7 +419,7 @@ const ProductDetail = () => {
           <div className="flex flex-col-reverse lg:flex-row gap-4">
             <div className="flex flex-wrap lg:flex-col gap-4 items-center">
               <img
-                className="w-[100px] h-[100px] md:w-[180px] md:h-[180px]  rounded-[10px] object-cover cursor-pointer bg-slate-50"
+                className="w-[100px] h-[100px] md:w-[180px] md:h-[180px] rounded-[10px] object-cover cursor-pointer bg-slate-50"
                 src={product?.images[0]}
                 alt=""
               />

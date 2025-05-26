@@ -46,10 +46,7 @@ const Banner = ({carousel}) => {
   const handleProductNavigate = () => {
     navigate("/products");
   };
-
-
-
-
+  
   return (
     // <div className="w-full">
     //   <Slider {...settings}>
