@@ -40,10 +40,10 @@ const DealCard = () => {
           src={image_7}
           alt="Brand"
         />
-        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-textPrimary mt-4 sm:mt-5 md:mt-6 lg:mt-[43px] text-center">
+        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-textPrimary dark:text-white mt-4 sm:mt-5 md:mt-6 lg:mt-[43px] text-center">
           Best of Styles
         </p>
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-textPrimary mt-2 sm:mt-3 md:mt-4 lg:mt-[23px] pb-4 sm:pb-5 md:pb-6 lg:pb-[38px] text-center">
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-textPrimary dark:text-white mt-2 sm:mt-3 md:mt-4 lg:mt-[23px] pb-4 sm:pb-5 md:pb-6 lg:pb-[38px] text-center">
           Under Rs.799
         </p>
       </div>

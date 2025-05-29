@@ -6,7 +6,7 @@ import ScrollToTop from "../components/ScrollToTop";
 const Layout = ({ children }) => {
 
   return (
-    <div className="w-full overflow-x-hidden flex flex-col min-h-screen">
+    <div className="w-full  flex flex-col min-h-screen">
       <ScrollToTop />
       <Header />
       <div className="flex-grow">

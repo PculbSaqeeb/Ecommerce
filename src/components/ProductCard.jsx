@@ -102,26 +102,26 @@ const ProductCard = ({ product,filterVisible }) => {
         />
 
         <div className="px-4 sm:px-5">
-          <h5 className="font-bold text-lg sm:text-xl lg:text-2xl text-textPrimary mt-3 truncate">
+          <h5 className="font-bold text-lg sm:text-xl lg:text-2xl text-textPrimary dark:text-white mt-3 truncate">
             {product?.title}
           </h5>
 
           <div className="flex items-center mt-1">
-            <p className="text-sm sm:text-base text-textPrimary">
+            <p className="text-sm sm:text-base text-textPrimary dark:text-white">
               {product?.brand?.name}
             </p>
-            <p className="text-sm sm:text-base text-textSecondary ml-3">
+            <p className="text-sm sm:text-base text-textSecondary dark:text-white ml-3">
               {product?.averageRating?.toFixed(1) || 0}
             </p>
             <img className="w-4 h-4 ml-1 mb-[2px]" src={star_icon} alt="rating star" />
           </div>
 
           <div className="mt-4 flex flex-wrap items-center">
-            <p className="text-base sm:text-lg lg:text-xl font-bold text-textPrimary">
-              Rs. {product?.price}
-            </p>
-            <span className="text-sm sm:text-base text-textSecondary ml-3 line-through">
+            <p className="text-base sm:text-lg lg:text-xl font-bold text-textPrimary dark:text-white">
               Rs. {product?.discountPrice}
+            </p>
+            <span className="text-sm sm:text-base text-textSecondary dark:text-white ml-3 line-through">
+              Rs. {product?.price}
             </span>
             <span className="text-sm sm:text-base text-success font-bold ml-3">
               ({product?.discountPercentage || 0}% off)

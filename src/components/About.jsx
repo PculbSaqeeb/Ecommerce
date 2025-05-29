@@ -50,22 +50,22 @@ const About = () => {
     <div className="flex flex-col lg:flex-row gap-[28px] mb-[78px] px-4 lg:px-8">
       {/* Text Section */}
       <div className="lg:mx-[50px] mx-3">
-        <p className="text-[28px] sm:text-[32px] lg:text-[36px] text-textPrimary mt-[40px] lg:mt-[80px]">
+        <p className="text-[28px] sm:text-[32px] lg:text-[36px] text-textPrimary dark:text-white mt-[40px] lg:mt-[80px]">
           About Us
         </p>
-        <p className="mt-[20px] sm:mt-[25px] text-2xl sm:text-3xl lg:text-4xl font-bold text-textPrimary">
+        <p className="mt-[20px] sm:mt-[25px] text-2xl sm:text-3xl lg:text-4xl font-bold text-textPrimary dark:text-white">
           Business Name
         </p>
-        <p className="mt-[20px] sm:mt-[24px] w-full lg:w-[882px] text-textPrimary text-[16px] sm:text-[20px] lg:text-[24px] text-justify">
+        <p className="mt-[20px] sm:mt-[24px] w-full lg:w-[882px] text-textPrimary dark:text-white text-[16px] sm:text-[20px] lg:text-[24px] text-justify">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui vel morbi cursus sed sodales molestie proin dictum gravida. Porttitor maecenas tincidunt ipsum semper malesuada. In sapien feugiat laoreet convallis eu sed. Sapien et montes, duis tempor euismod augue cras eu eget. Risus suspendisse mauris ullamcorper felis a, quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui vel morbi cursus sed sodales molestie proin dictum gravida. Porttitor maecenas tincidunt ipsum semper malesuada. In sapien feugiat laoreet convallis eu sed. Sapien et montes, duis tempor euismod augue cras eu eget. Risus suspendisse mauris ullamcorper felis a, quam.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui vel morbi cursus sed sodales molestie proin dictum gravida. Porttitor maecenas
         </p>
-        <p className="text-[18px] sm:text-[20px] lg:text-[24px] font-bold mt-[20px] lg:mt-[26px] text-textPrimary">
+        <p className="text-[18px] sm:text-[20px] lg:text-[24px] font-bold mt-[20px] lg:mt-[26px] text-textPrimary dark:text-white">
           Contact Information
         </p>
-        <p className="mt-[10px] text-textPrimary text-[16px] sm:text-[20px] lg:text-[24px]">
+        <p className="mt-[10px] text-textPrimary dark:text-white text-[16px] sm:text-[20px] lg:text-[24px]">
           +91 1234567890
         </p>
-        <p className="mt-[10px] text-textPrimary text-[16px] sm:text-[20px] lg:text-[24px]">
+        <p className="mt-[10px] text-textPrimary dark:text-white text-[16px] sm:text-[20px] lg:text-[24px]">
           Somthing@gamil.com
         </p>
 

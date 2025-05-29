@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { persistor } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { ThemeProvider } from "./context/themeContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -17,24 +18,26 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 
 root.render(
-   
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <ToastContainer
-            position="top-right"
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-          />
-          <App />
-        </PersistGate>
-      </Provider>
+
+  <Provider store={store}>
+    <ThemeProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+        <App />
+      </PersistGate>
+    </ThemeProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

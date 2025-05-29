@@ -155,19 +155,19 @@ const Banner = ({carousel}) => {
 
             {/* Right Side Content */}
             <div className="bg-image1 w-full sm:h-[365px] lg:w-1/2 lg:h-full h-[330px] flex items-center justify-center">
-              <div className="text-center">
+              <div className="text-center text-textMuted dark:text-white">
                 {/* Brand Name */}
-                <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-widest">
+                <p className="text-3xl sm:text-4xl text-textPrimary dark:text-white md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-widest">
                   {item.brand.toUpperCase()}
                 </p>
 
                 {/* Festival Text */}
-                <p className="font-bold text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl text-textMuted bg-transparent mt-6 lg:mt-[66px]">
+                <p className="font-bold text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl bg-transparent mt-6 lg:mt-[66px]">
                   Big Fashion Festival
                 </p>
 
                 {/* Offer Text */}
-                <p className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[48px] text-textMuted mt-4 lg:mt-[22px] xl:mt-[22px]">
+                <p className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[48px] mt-4 lg:mt-[22px] xl:mt-[22px]">
                   {item.offer}
                 </p>
 

@@ -30,7 +30,7 @@ const Wishlist = () => {
   return (
     <OrderLayout>
       <div className="mx-[50px] flex-grow">
-        <p className="mt-[12px] text-[36px] font-bold font">
+        <p className="mt-[12px] text-[36px] font-bold font dark:text-white">
           My <span className="text-[#002482]">Wishlist</span>
         </p>
         {/* <div className="flex flex-wrap gap-[60px] mt-[38px]">

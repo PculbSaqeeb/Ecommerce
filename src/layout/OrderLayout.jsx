@@ -5,7 +5,7 @@ import Footer1 from './Footer1'
 
 const OrderLayout = ({children}) => {
   return (
-    <div className="w-full overflow-x-hidden flex flex-col min-h-screen">
+    <div className="w-full flex flex-col min-h-screen">
       <ScrollToTop/>
         <Header/>
         {children}

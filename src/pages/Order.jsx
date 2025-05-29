@@ -89,7 +89,7 @@ const Order = () => {
       </div> */}
 
       <div className="ml-0 md:mx-[10px] font flex-grow px-4 sm:px-6 md:px-10 lg:px-[80px] 2xl:mx-[240px]">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-[40px] md:mt-[26px] text-textPrimary">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-[40px] md:mt-[26px] text-textPrimary dark:text-white">
           My <span className="text-[#002482]">Order</span>
         </h1>
 
@@ -107,7 +107,7 @@ const Order = () => {
               alt={item?.productName}
               />
 
-              <div className="text-textPrimary">
+              <div className="text-textPrimary dark:text-white">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mt-[3px]">
                   {item?.productName}
                   sdcsdc
@@ -116,19 +116,17 @@ const Order = () => {
                 <h3 className="text-sm sm:text-base md:text-lg mt-[11px]">Brand name</h3>
 
                 <h4 className="text-base sm:text-lg md:text-xl lg:text-2xl mt-3">
-                  ${item?.price}
+                  &#x20B9; {item?.price}
                 </h4>
 
                 <h5 className="mt-[10px] text-sm sm:text-base md:text-lg">
-                  Order Placed on:
-                  <span className="text-sm sm:text-base font-normal text-textSecondary font-lato">
+                  Order Placed on: <span className="text-sm sm:text-base font-normal text-textSecondary font-lato">
                     {order.createdAt}
                   </span>
                 </h5>
 
                 <h6 className="mt-1 text-sm sm:text-base md:text-lg">
-                  Ship To:
-                  <span className="text-sm sm:text-base font-normal text-textSecondary font-lato">
+                  Ship To: <span className="text-sm sm:text-base font-normal text-textSecondary font-lato">
                     {order?.address || "N/A"}
                   </span>
                 </h6>
@@ -151,7 +149,7 @@ const Order = () => {
             </div>
 
             <div className="font-lato mt-4 md:mt-0 md:text-left">
-              <p className="text-sm sm:text-base md:text-lg text-textPrimary">
+              <p className="text-sm sm:text-base md:text-lg text-textPrimary dark:text-white">
                 Order Number: <span className="text-textSecondary">
                   #{order?.id || "N/A"}
                 </span>

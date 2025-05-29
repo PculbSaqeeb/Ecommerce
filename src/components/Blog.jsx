@@ -11,7 +11,7 @@ const Blog = () => {
 
   return (
     <div className="w-full mt-[80px] px-[50px]">
-      <p className="text-[36px] font-bold text-textPrimary mb-[27px]">
+      <p className="text-[36px] font-bold text-textPrimary dark:text-white mb-[27px]">
         Featured Blogs
       </p>
 

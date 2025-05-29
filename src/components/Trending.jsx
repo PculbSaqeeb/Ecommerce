@@ -100,7 +100,7 @@ const Trending = () => {
 
   return (
     <div className="relative sm:px-8 mt-[30px] trending-slider-wrapper">
-      <p className="text-[36px] font-bold text-textPrimary mb-10">
+      <p className="text-[36px] font-bold text-textPrimary dark:text-white mb-10">
         Trending Offers
       </p>
 
@@ -121,14 +121,14 @@ const Trending = () => {
                   onClick={(e) => handleProductNavigate(e)}
                   variant="outlineGray"
                   size="md"
-                  className="w-[172px] mt-[19px] lg:mt-[37px] text-[24px] border-2"
+                  className="w-[172px] mt-[19px] lg:mt-[37px] text-[24px] border-2 dark:text-textPrimary "
                 >
                   Explore
                 </Button>
               </div>
 
               <img
-                className="w-[310px] h-[300px] sm:w-[400px] md:w-[490px] lg:w-[500px] lg:h-[500px] xl:w-[604px] 2xl:h-full object-cover"
+                className="w-[310px] h-[300px] sm:w-[400px] md:w-[490px] lg:w-[500px] lg:h-[500px] xl:w-[604px]  object-cover"
                 src={item?.image}
                 alt=""
               />

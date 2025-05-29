@@ -22,7 +22,7 @@ const Banner2 = ({ carousel }) => {
   return (
 
 
-    <div className="mt-20 bg-red-100">
+    <div className="mt-20 bg-red-100 dark:text-white">
       <Slider {...settings}>
         {carousel &&
           carousel.map((item, index) => {

@@ -34,8 +34,6 @@ main, body, html {
 }
 
 .slick-dots li.slick-active div {
-  /* width: 20px !important;
-    height: 20px !important; */
   background-color: #002482 !important;
 }
 
@@ -44,18 +42,15 @@ main, body, html {
   color: red;
 }
 
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
 }
-
 
 .trending-slider-wrapper .slick-slide {
   transition: transform 0.3s ease;
@@ -66,39 +61,6 @@ input[type=number] {
   transform: scale(1);
   z-index: 10;
 }
-
-
-
-/* input.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background: white;
-  cursor: pointer;
-  margin-top: -5px; 
-}
-
-input.slider::-webkit-slider-runnable-track {
-  height: 8px;
-  background: #0081DE;
-  border-radius: 5px;
-}
-
-input.slider::-moz-range-thumb {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background: white;
-  cursor: pointer;
-}
-
-input.slider::-moz-range-track {
-  height: 8px;
-  background: #939393;
-  border-radius: 5px;
-} */
-
 
 input[type='range'].range-thumb {
   -webkit-appearance: none;
@@ -128,7 +90,6 @@ input[type='range'].range-thumb::-moz-range-thumb {
   background: white;
   border: 1px solid #939393;
   cursor: pointer;
-  /* position: ; */
   z-index: 30;
 }
 

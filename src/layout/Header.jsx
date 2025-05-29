@@ -4,42 +4,34 @@ import search_icon from "../assets/icons/search_icon.svg";
 import heart_icon from "../assets/icons/heart_icon.svg";
 import cart_icon from "../assets/icons/cart_icon.svg";
 import order_icon from "../assets/icons/order_icon.svg";
+import order from "../assets/icons/icons8-order-50.png"
+import white_logo from '../assets/icons/white_logo_icon.png'
 import { NavLink, useLocation, useNavigate, useParams } from "react-router";
 import Button from "../components/Button";
-import white_logo from '../assets/icons/white_logo_icon.png'
 import { useDispatch, useSelector } from "react-redux";
-import {  CgProfile } from "react-icons/cg";
 import { fetchProductData, fetchSearchProducts } from "../redux/productSlice";
 import useDebounce from "../hooks/useDebounce";
 import { fetchCategories, fetchCategoryProductData, fetchSearchByCategory } from "../redux/categorySlice";
-
+import { useTheme } from "../context/themeContext";
+import { CiHeart, CiLight } from "react-icons/ci";
+import { CgProfile } from "react-icons/cg";
+import { GrCart } from "react-icons/gr";
+import { MdDarkMode } from "react-icons/md";
 
 const Header = () => {
   const { categoryName } = useParams();
   const location = useLocation();
-
-  // console.log(location.search);
-  // localStorage.setItem("token", location.search)
-
+  const { darkMode, toggleDarkMode } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.cart || []);
   const { wishlist } = useSelector((state) => state.wishlist);
   const categoryList = useSelector((state) => state.category.categoryList);
-  
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedQuery = useDebounce(searchQuery, 500);
   const hasFetchedCategory = useRef(false);
-
-  // const fetchCategory = async () => {
-  //   try {
-  //     const response = await getAllCategory();
-  //     setCategory(response?.data);
-  //   } catch (error) {
-  //     throw new Error(error.message);
-  //   }
-  // };
 
   const handleLoginNavigate = () => {
     navigate("/login");
@@ -82,7 +74,7 @@ const Header = () => {
         dispatch(fetchProductData());
       }
     }
-  }, [debouncedQuery, categoryName, dispatch,location.pathname]);
+  }, [debouncedQuery, categoryName, dispatch, location.pathname]);
 
 
   useEffect(() => {
@@ -90,136 +82,12 @@ const Header = () => {
       dispatch(fetchCategories());
       hasFetchedCategory.current = true;
     }
-  }, [dispatch,categoryList]);
+  }, [dispatch, categoryList]);
 
   return (
-    // <div className="sticky top-0 z-10 h-20 bg-white text-[18px] ">
-    //   <header className="h-20 w-full shadow-[0_0_15px_rgba(0,0,0,0.07)] px-[50px]">
-    //     <nav className="flex items-center h-20">
-
-    //     <div className="md:hidden">
-    //         <button onClick={() => setMenuOpen(!menuOpen)}>
-    //           <svg
-    //             className="w-8 h-8 text-gray-700"
-    //             fill="none"
-    //             stroke="currentColor"
-    //             viewBox="0 0 24 24"
-    //           >
-    //             <path
-    //               strokeLinecap="round"
-    //               strokeLinejoin="round"
-    //               strokeWidth={2}
-    //               d="M4 6h16M4 12h16M4 18h16"
-    //             />
-    //           </svg>
-    //         </button>
-    //       </div>
-
-    //       <img
-    //       onClick={()=>navigate('/')}
-    //         className="w-[57px] h-[48px]  cursor-pointer"
-    //         src={image_1}
-    //         alt="image_1"
-    //       />
-
-    //       <div>
-    //         <ul className="flex items-center text-[18px] ml-[80px] gap-10 text-textPrimary cursor-pointer">
-
-    //           <li className="hover:text-blue-600" onClick={()=>navigate('/products')}>All</li>
-
-    //           {category.map((item) => (
-    //             <NavLink
-    //               key={item.name}
-    //               to={`/categories/${item.name.toLowerCase()}`}
-    //               className={({ isActive }) =>
-    //                 `  ${
-    //                   isActive
-    //                     ? "text-red-400 font-semibold underline"
-    //                     : "text-gray-700 hover:text-blue-600"
-    //                 }`
-    //               }
-    //             >
-    //               {item.name}
-    //             </NavLink>
-    //           ))}
-    //         </ul>
-    //       </div>
-
-    //       <div className="flex ml-[80px] relative">
-    //         <input
-    //           className="w-[534px] h-[52px] pl-8 text-textPrimary outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg text-[18px]"
-    //           type="text"
-    //           placeholder="Search here"
-    //         />
-    //         <img
-    //           className="absolute text-textPrimary right-6 top-[14px] cursor-pointer "
-    //           src={search_icon}
-    //           alt=""
-    //         />
-    //       </div>
-
-    //       <div className="flex items-center gap-8 ml-[60px]">
-    //         <div className="flex items-start relative">
-    //           <img
-    //             onClick={handleWishlistNavigate}
-    //             className="w-[29px] h-[29px] text-textPrimary cursor-pointer"
-    //             src={heart_icon}
-    //             alt=""
-    //           />
-    //           <p className="absolute -top-2 -right-3 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
-    //             {wishlist?.length || 0} 
-    //           </p>
-    //         </div>
-    //         <div className="flex items-start relative">
-    //           <img
-    //             onClick={handleCartNavigate}
-    //             className="w-[29px] h-[29px] text-textPrimary cursor-pointer"
-    //             src={cart_icon}
-    //             alt=""
-    //           />
-    //           <p className="absolute -top-2 -right-3 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px]">
-    //             {cart?.length}
-    //           </p>
-    //         </div>
-    //         <img
-    //           onClick={handleOrderNavigate}
-    //           className="w-[25px] h-[25px] text-textPrimary cursor-pointer"
-    //           src={order_icon}
-    //           alt=""
-    //         />
-    //       </div>
-
-    //       <div className="ml-[40px]">
-    //         {token ? (
-    //           <Button
-    //             onClick={handleLogout}
-    //             variant="outlineDark"
-    //             size="md"
-    //             className="w-[132px]"
-    //           >
-    //             Logout
-    //           </Button>
-    //         ) : (
-    //           <Button
-    //             onClick={handleLoginNavigate}
-    //             variant="outlineDark"
-    //             size="md"
-    //             className="w-[132px]"
-    //           >
-    //             Login
-    //           </Button>
-    //         )}
-    //       </div>
-    //     </nav>
-    //   </header>
-    // </div>
-
-
-
-
-    <div className="sticky top-0 z-50">
+    <div className="sticky top-0 z-50 dark:text-white">
       <div className=" bg-white text-[18px] shadow-sm overflow-visible">
-        <header className="h-20 w-full px-4 md:px-[50px]">
+        <header className="h-20 dark:bg-black w-full px-4 md:px-[50px]">
           <nav className="flex items-center h-20 relative">
             <div className="md:hidden">
               <button onClick={() => setMenuOpen(true)}>
@@ -247,8 +115,8 @@ const Header = () => {
             />
 
 
-            <ul className="hidden lg:flex lg:text-[15px] xl:text-[18px] items-center ml-10 gap-10 text-textPrimary cursor-pointer text-[18px]">
-              <li className={`hover:text-blue-600 ${location?.pathname === '/products' ? "text-red-400 font-semibold underline" : "text-textPrimary"}`} onClick={() => navigate("/products")}>All</li>
+            <ul className="hidden lg:flex lg:text-[15px] xl:text-[18px] items-center ml-10 gap-10  cursor-pointer text-[18px]">
+              <li className={`hover:text-blue-600 ${location?.pathname === '/products' ? "text-red-400 font-semibold underline" : "text-textPrimary dark:text-white"}`} onClick={() => navigate("/products")}>All</li>
               {categoryList?.map((item) => (
                 <NavLink
                   key={item?.name}
@@ -256,7 +124,7 @@ const Header = () => {
                   className={({ isActive }) =>
                     isActive
                       ? "text-red-400 font-semibold underline"
-                      : "text-textPrimary hover:text-blue-600"
+                      : "text-textPrimary dark:text-white hover:text-blue-600"
                   }
                 >
                   {item?.name}
@@ -279,37 +147,49 @@ const Header = () => {
               />
             </div>
 
-            <div className="flex items-center gap-4 md:gap-8 ml-auto">
-              <div onClick={handleWishlistNavigate} className="relative hidden md:block">
-                <img
-                  onClick={handleWishlistNavigate}
-                  className="md:w-[29px] md:h-[29px] w-[25px] h-[25px] cursor-pointer"
-                  src={heart_icon}
-                  alt="wishlist"
-                />
+
+
+            <div className="flex items-center gap-4 md:gap-8 ml-auto cursor-pointer">
+              <div onClick={toggleDarkMode}>
+                {darkMode ? <CiLight size={30} /> : <MdDarkMode size={28} />}
+              </div>
+
+              <div onClick={handleWishlistNavigate} className="relative hidden md:block cursor-pointer">
+                {darkMode ? <CiHeart size={35} color="white" /> : (
+                  <img
+                    onClick={handleWishlistNavigate}
+                    className="md:w-[29px] md:h-[29px] w-[25px] h-[25px] "
+                    src={heart_icon}
+                    alt="wishlist"
+                  />
+                )}
                 {wishlist?.length > 0 && <p className="absolute -top-2 -right-2 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px] cursor-pointer">
                   {wishlist?.length || 0}
                 </p>}
               </div>
 
 
-              <div onClick={handleCartNavigate} className="relative">
-                <img
-                  className="md:w-[29px] md:h-[29px] w-[25px] h-[25px] cursor-pointer"
-                  src={cart_icon}
-                  alt="cart"
-                />
+              <div onClick={handleCartNavigate} className="relative cursor-pointer">
+                {darkMode ? <GrCart size={28} color="white" /> : (
+                  <img
+                    className="md:w-[29px] md:h-[29px] w-[25px] h-[25px]"
+                    src={cart_icon}
+                    alt="cart"
+                  />
+                )}
                 {cart?.length > 0 && <p className="absolute -top-2 -right-2 bg-yellow-400 rounded-full w-5 h-5 text-sm text-center pt-[1px] cursor-pointer">
                   {cart?.length || 0}
                 </p>}
               </div>
 
-              <img
-                onClick={handleOrderNavigate}
-                className="w-[25px] h-[25px] cursor-pointer hidden md:block"
-                src={order_icon}
-                alt="order"
-              />
+              {darkMode ? <img onClick={handleOrderNavigate} className="w-[25px] h-[25px] cursor-pointer" src={order} alt="" /> : (
+                <img
+                  onClick={handleOrderNavigate}
+                  className="w-[25px] h-[25px] cursor-pointer hidden md:block"
+                  src={order_icon}
+                  alt="order"
+                />
+              )}
 
               <div>
                 {access_token ? (
@@ -335,23 +215,13 @@ const Header = () => {
             </div>
           </nav>
         </header>
-
-        {/* <div className="xxl:hidden px-4 pb-3">
-          <input
-            value={searchQuery}
-            onChange={(e) => handleSearch(e)}
-            className="w-full h-[45px] pl-4 text-sm outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg"
-            type="text"
-            placeholder="Search here"
-          />
-        </div> */}
       </div>
 
-     
+
       {menuOpen && (
         <>
           <div
-            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10"
+            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 dark:text-white"
             onClick={() => setMenuOpen(false)}
           />
           <div className="fixed top-0 left-0 w-[80%] sm:w-[60%] md:w-[40%] lg:w-[20%] h-screen bg-white z-20 shadow-lg transition-transform duration-300 text-textPrimary">
@@ -395,7 +265,7 @@ const Header = () => {
                 <div
                   onClick={() => navigate(`/categories/${item?.name?.toLowerCase()}`)}
                   key={index}
-                  className="w-[120px] flex flex-col items-center bg-white rounded-lg  hover:shadow-md transition duration-200 p-2"
+                  className="w-[120px] flex flex-col items-center bg-white rounded-lg hover:shadow-md transition duration-200 p-2"
                 >
                   <img
                     src={item?.image}
@@ -412,15 +282,15 @@ const Header = () => {
 
       </div>
 
-       <div className="xxl:hidden px-4 pb-3 bg-white">
-          <input
-            value={searchQuery}
-            onChange={(e) => handleSearch(e)}
-            className="w-full h-[45px] pl-4 text-sm outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg"
-            type="text"
-            placeholder="Search here"
-          />
-        </div>
+      <div className="xxl:hidden px-4 pb-3 bg-white">
+        <input
+          value={searchQuery}
+          onChange={(e) => handleSearch(e)}
+          className="w-full h-[45px] pl-4 text-sm outline-none placeholder-textPlaceholder bg-inputBackground rounded-lg"
+          type="text"
+          placeholder="Search here"
+        />
+      </div>
 
 
       <div className="hidden lg:hidden px-4 pb-3">

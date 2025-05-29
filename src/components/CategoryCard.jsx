@@ -55,10 +55,10 @@ const CategoryCard = ({ product }) => {
         alt={product?.name}
       />
       <div className="px-5">
-        <h5 className="font-bold text-xl md:text-2xl text-textPrimary mt-3">
+        <h5 className="font-bold text-xl md:text-2xl text-textPrimary dark:text-white mt-3">
           {product?.name}
         </h5>
-        <p className="font-normal text-base md:text-lg mt-3">
+        <p className="font-normal dark:text-white text-base md:text-lg mt-3">
           {displayedText}
           {shouldTruncate && (
             <span

@@ -95,62 +95,6 @@ const Footer = () => {
     </ul>
   </div>
 </div>  
-
-
-// {/* <div className="w-full bg-[#1A4242] text-white px-4 py-10">
-//   {/* Logo and Title */}
-//   <div className="flex flex-col sm:flex-row items-center sm:justify-start gap-4 sm:gap-[38px] px-4 sm:px-[139px]">
-//     <img src={logo_white} alt="Globex Logo" className="w-[76px] h-auto" />
-//     <p className="text-[48px] sm:text-[72px] font-bold">Globex</p>
-//   </div>
-
-//   {/* Links Section */}
-//   <div className="flex flex-wrap justify-center sm:justify-start gap-10 sm:gap-[100px] mt-12 sm:mt-16 px-4 sm:px-[139px]">
-//     {/* Shopping */}
-//     <ul className="flex flex-col gap-[12px] text-[16px] sm:text-[18px] text-left">
-//       <li className="text-[20px] sm:text-[24px] font-bold">Shopping</li>
-//       <li>Your cart</li>
-//       <li>Your order</li>
-//       <li>Compared Items</li>
-//       <li>Wishlist</li>
-//       <li>Shipping Details</li>
-//     </ul>
-
-//     {/* More links */}
-//     <ul className="flex flex-col gap-[12px] text-[16px] sm:text-[18px] text-left">
-//       <li className="text-[20px] sm:text-[24px] font-bold">More links</li>
-//       <li>Blog</li>
-//       <li>Gift Center</li>
-//       <li>Buying guides</li>
-//       <li>New arrival</li>
-//       <li>Clearance</li>
-//     </ul>
-
-//     {/* Social Media */}
-//     <ul className="flex flex-col gap-[12px] text-[16px] sm:text-[18px] text-left">
-//       <li className="text-[20px] sm:text-[24px] font-bold">Connect With Us</li>
-//       <li>
-//         <div className="flex gap-4 sm:gap-[34px] mt-2 sm:mt-[15.96px] cursor-pointer">
-//           <img src={fb_icon} alt="Facebook" className="w-6 max-sm:w-5" />
-//           <img src={insta_icon} alt="Instagram" className="w-6 max-sm:w-5" />
-//           <img src={whatsaap_icon} alt="WhatsApp" className="w-6 max-sm:w-5" />
-//           <img src={tweeter_icon} alt="Twitter" className="w-6 max-sm:w-5" />
-//         </div>
-//       </li>
-//     </ul>
-//   </div>
-
-//   {/* Divider */}
-//   <div className="border-t border-white mt-10 sm:mt-16 mx-4 sm:mx-[139px]"></div>
-
-//   {/* Bottom Footer */}
-//   <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-[100px] text-[14px] sm:text-[18px] text-center">
-//     <p>Terms & Conditions</p>
-//     <p>Privacy Policy</p>
-//   </div>
-// </div> */}
-
-
   );
 };
 

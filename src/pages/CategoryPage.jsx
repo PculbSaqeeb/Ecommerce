@@ -20,7 +20,7 @@ const CategoryPage = () => {
   return (
     <Layout>
       <div className="mx-[50px] mt-[30px] mb-[80px]">
-        <h1 className="text-3xl text-textPrimary font-bold mb-6 capitalize">
+        <h1 className="text-3xl text-textPrimary dark:text-white font-bold mb-6 capitalize">
           {categoryName} Products
         </h1>
 

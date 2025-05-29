@@ -97,7 +97,7 @@ const Category = () => {
       </div>  */}
 
       <div className="mx-[20px] sm:mx-[30px] md:mx-[40px] lg:mx-[50px] mt-[40px] sm:mt-[60px] lg:mt-[80px]">
-        <p className="text-[24px] sm:text-[30px] lg:text-[36px] text-textPrimary font-bold">
+        <p className="text-[24px] sm:text-[30px] lg:text-[36px] text-textPrimary dark:text-white font-bold">
           Shop by Categories
         </p>
 

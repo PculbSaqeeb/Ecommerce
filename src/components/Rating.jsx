@@ -1,15 +1,17 @@
-import React, {  useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import black_star_icon from "../assets/icons/black_star_icon.svg";
 import yellow_star_icon from "../assets/icons/yellow_star_icon.svg";
 import empty_star from "../assets/icons/empty_star.svg";
-import { FaStarHalfAlt } from "react-icons/fa";
+import { FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 import { BiSolidImageAdd } from "react-icons/bi";
 import { reviewEndpoint, reviewImageEndpoint } from "../services/reviewServices";
 import { useDispatch, useSelector } from "react-redux";
 import cross from '../assets/icons/cross.png';
 import { fetchProductData } from "../redux/productSlice";
 import { toast } from "react-toastify";
-
+import { GoStarFill } from "react-icons/go";
+import { useTheme } from "../context/themeContext";
+import yellow_icon from '../assets/icons/yellow_star_icon.svg'
 
 const Rating = ({ productId }) => {
   const dispatch = useDispatch();
@@ -24,6 +26,8 @@ const Rating = ({ productId }) => {
   const [hoverRating, setHoverRating] = useState(0);
   const [imageSend, setImageSend] = useState([]);
   const [showAllImages, setShowAllImages] = useState(false);
+  const { darkMode } = useTheme();
+
   // const [error, setError] = useState(false);
 
   const fileInputRef = useRef(null);
@@ -32,7 +36,7 @@ const Rating = ({ productId }) => {
 
   const totalReviews = product?.reviews?.length || 0;
   console.log(totalReviews);
-  
+
 
   product.reviews?.forEach((review) => {
     const rating = Math.round(review.rating);
@@ -490,7 +494,7 @@ const Rating = ({ productId }) => {
 
     <div className="px-4">
       <div className="flex justify-between">
-        <p className="hidden md:block text-[24px] text-textPrimary font-bold ">Ratings</p>
+        <p className="hidden md:block text-[24px] text-textPrimary dark:text-white font-bold ">Ratings</p>
         <button
           onClick={() => setShowReview(true)}
           className="border px-5 py-3 text-sm rounded-[5px]"
@@ -500,7 +504,7 @@ const Rating = ({ productId }) => {
         showReview ? (
           <div className="top-0 bg-white w-full border pt-4 px-4 sm:px-6 pb-6 z-10 mt-[27px]">
             <div className="flex justify-between items-center">
-              <p className="text-[20px] font-bold">Rate this product</p>
+              <p className="text-[20px] font-bold text-textPrimary">Rate this product</p>
               <img
                 onClick={handleCloseRating}
                 className="w-5 cursor-pointer"
@@ -535,7 +539,7 @@ const Rating = ({ productId }) => {
               onChange={(e) => setDescription(e.target.value)}
               cols={30}
               rows={5}
-              className="border mt-[20px] p-3 w-full"
+              className="border mt-[20px] p-3 w-full text-textPrimary"
               placeholder="Description..."
             ></textarea>
 
@@ -554,7 +558,7 @@ const Rating = ({ productId }) => {
                 onClick={() => fileInputRef.current.click()}
                 className="w-16 h-16 bg-gray-200 flex items-center justify-center cursor-pointer hover:bg-gray-300 transition rounded"
               >
-                <BiSolidImageAdd size={35} />
+                <BiSolidImageAdd size={35} color="black" />
               </div>
 
               <div className="flex flex-wrap gap-4 mt-4">
@@ -584,13 +588,14 @@ const Rating = ({ productId }) => {
             </button>
           </div>
         ) : (
-          <div className="relative text-textPrimary mt-6">
+          <div className="relative text-textPrimary dark:text-white mt-6">
             <div className="flex flex-col md:flex-row items-start gap-6 md:items-center ">
               <div className="flex gap-3 items-center">
                 <p className="text-[36px] font-semibold pt-2">
                   {product.averageRating || 0}
                 </p>
-                <img src={black_star_icon} alt="star" className="w-[32px]" />
+                {/* <img src={black_star_icon} alt="star" className="w-[32px]" /> */}
+                {darkMode ? <GoStarFill size={32} color={'#f2c94c'} /> : <GoStarFill size={32} />}
               </div>
 
               <div className="flex flex-col gap-2 w-full max-w-[300px]">
@@ -600,14 +605,15 @@ const Rating = ({ productId }) => {
                   return (
                     <div key={star} className="flex items-center gap-2">
                       <p className="text-sm w-[12px]">{star}</p>
-                      <img src={black_star_icon} alt="star" className="w-[14px]" />
+                      {/* <img src={black_star_icon} alt="star" className="w-[14px]" /> */}
+                      {darkMode ? <GoStarFill size={22} color={'#f2c94c'} /> : <GoStarFill size={22} />}
                       <div className="w-full h-[10px] bg-gray-200 rounded overflow-hidden">
                         <div
                           className="h-full bg-yellow-500 rounded"
                           style={{ width: `${percent}%` }}
                         ></div>
                       </div>
-                      <p className="text-sm text-gray-600 min-w-[32px] text-right">
+                      <p className="text-sm text-gray-600 dark:text-white min-w-[32px] text-right">
                         {percent}%
                       </p>
                     </div>
@@ -639,25 +645,26 @@ const Rating = ({ productId }) => {
                             return (
                               <img
                                 key={i}
-                                src={yellow_star_icon}
+                                src={darkMode ? yellow_icon : black_star_icon}
                                 alt="full star"
                                 className="w-[20px] h-[19px]"
                               />
                             );
                           } else if (rating >= i + 0.5) {
-                            return <FaStarHalfAlt key={i} size={22} />;
+                            return darkMode ? (
+                              <FaStarHalfAlt key={i} size={18} color={'#f2c94c'} />
+                            ) : (
+                              <FaStarHalfAlt key={i} size={18} />
+                            );
                           } else {
-                            return (
-                              <img
-                                key={i}
-                                src={empty_star}
-                                alt="empty star"
-                                className="w-[20px] h-[19px]"
-                              />
+                            return darkMode ? (
+                              <FaRegStar key={i} size={18} color={'#f2c94c'} />
+                            ) : (
+                              <FaRegStar key={i} size={18} />
                             );
                           }
                         })}
-                        <p className="ml-[10px]">{review.rating}</p>
+                        <p className="ml-[10px] dark:text-white">{review.rating}</p>
                       </div>
 
                       <p className="mt-[16px]">
@@ -692,7 +699,7 @@ const Rating = ({ productId }) => {
                         ))}
                       </div>
 
-                      <div className="mt-[15px] flex flex-wrap text-sm sm:text-base gap-2">
+                      <div className="mt-[15px] flex flex-wrap text-sm sm:text-base gap-2 dark:text-white">
                         <span>Annoe</span>
                         <span className="text-textSecondary">|</span>
                         <span>28 September</span>

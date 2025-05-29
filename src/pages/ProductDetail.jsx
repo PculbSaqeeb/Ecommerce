@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import heart_icon from "../assets/icons/heart_icon.svg";
 import red_heart_icon from "../assets/icons/red_heart_icon.png";
 import Rating from "../components/Rating";
@@ -20,6 +20,10 @@ import {
   addToCart,
 } from "../redux/cartSlice";
 import ProductCard1 from "../components/ProductCard1";
+import { useTheme } from "../context/themeContext";
+import { FaRegStar } from "react-icons/fa";
+import yellow_icon from '../assets/icons/yellow_star_icon.svg'
+
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -32,6 +36,9 @@ const ProductDetail = () => {
   const [showSizeChart, setShowSizeChart] = useState(true);
   const [selectSize, setSelectSize] = useState(product?.productSize[0]?.id);
   const [selectColor, setSelectColor] = useState(product?.productColor[0]?.id);
+  const { darkMode } = useTheme();
+
+
   // const cart = useSelector((state) => state.cart.cart);
   // const isCart = cart?.some((item) => item?.productId === id || item?.id === id);
 
@@ -75,7 +82,7 @@ const ProductDetail = () => {
       productColorId: selectColorId,
       productSizeId: selectSizeId
     }));
-    window.scrollTo({ top: 0, behavior: "smooth" });  
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // const handleRemoveToCart = (id) => {
@@ -440,11 +447,11 @@ const ProductDetail = () => {
             />
           </div>
           <div className="flex-1">
-            <h1 className="text-2xl md:text-4xl mt-[25px] xl:mt-0 font-bold text-textPrimary">
+            <h1 className="text-2xl md:text-4xl mt-[25px] xl:mt-0 font-bold text-textPrimary dark:text-white">
               {product?.title}
             </h1>
-            <h2 className="text-xl md:text-2xl text-textPrimary lg:mt-[23px]">{product?.brand?.name}</h2>
-            <p className="mt-3 lg:mt-[22px] text-[18px] text-base text-textPrimary">
+            <h2 className="text-xl md:text-2xl text-textPrimary dark:text-white lg:mt-[23px]">{product?.brand?.name}</h2>
+            <p className="mt-3 lg:mt-[22px] text-[18px] text-base text-textPrimary dark:text-white">
               Sold By: <span>Seller Name</span>
             </p>
 
@@ -455,32 +462,43 @@ const ProductDetail = () => {
                   return (
                     <img
                       key={i}
-                      src={black_star_icon}
+                      src={darkMode ? yellow_icon : black_star_icon}
                       alt="star"
                       className="w-5 h-5"
                     />
                   );
                 } else if (rating >= i + 0.5) {
-                  return <FaStarHalfAlt key={i} size={18} />;
-                } else {
-                  return (
-                    <img
-                      key={i}
-                      src={empty_star}
-                      alt="empty"
-                      className="w-5 h-5"
-                    />
+                  return darkMode ? (
+                    <FaStarHalfAlt key={i} size={18} color={'#f2c94c'}/>
+                  ) : (
+                    <FaStarHalfAlt key={i} size={18} />
                   );
+                  // return <FaStarHalfAlt key={i} size={18}/>
+
+                } else {
+                
+                    // <img
+                    //   key={i}
+                    //   src={empty_star}
+                    //   alt="empty"
+                    //   className="w-5 h-5"
+                    // />
+                    return darkMode ? (
+                    <FaRegStar key={i} size={18} color={'#f2c94c'}/>
+                  ) : (
+                    <FaRegStar key={i} size={18} />
+                  );
+                  
                 }
               })}
-              <p className="ml-2 text-[18px] text-textPrimary">
+              <p className="ml-2 text-[18px] text-textPrimary dark:text-white">
                 {product?.averageRating?.toFixed(1) || 0} | {product?.reviews?.length || 0} Reviews
               </p>
             </div>
 
-            <p className="text-2xl lg:mt-[28px] font-bold mt-5 text-textPrimary">
+            <p className="text-2xl lg:mt-[28px] font-bold mt-5 text-textPrimary dark:text-white">
               ₹ {product?.price}
-              <span className="ml-3 line-through text-lg text-[#646464]">
+              <span className="ml-3 line-through text-lg text-[#646464] dark:text-white">
                 ₹ {product?.discountPrice}
               </span>
               <span className="ml-3 text-xl text-success">
@@ -488,10 +506,10 @@ const ProductDetail = () => {
               </span>
             </p>
 
-            <h3 className="mt-6 text-xl text-[24px] lg:mt-[30px] font-bold text-textPrimary">Select Size</h3>
+            <h3 className="mt-6 text-xl text-[24px] lg:mt-[30px] font-bold text-textPrimary dark:text-white">Select Size</h3>
             <p onClick={handleShowSizeChart} className="mt-2 lg:mt-[23px] text-linkPrimary text-base cursor-pointer flex items-center gap-2">
               Size Chart
-              <img src={right_arrow_icon} className="w-5 h-5" alt=""/>
+              <img src={right_arrow_icon} className="w-5 h-5" alt="" />
             </p>
 
             {showSizeChart && (
@@ -500,7 +518,7 @@ const ProductDetail = () => {
                   <div
                     key={i}
                     onClick={() => handleSelectSize(size.id)}
-                    className={`w-[50px] h-[50px] border ${selectSize === size.id ? "border-[#002482]" : "border-[#BABABA]"} rounded-full flex items-center justify-center cursor-pointer`}
+                    className={`w-[50px] h-[50px] border ${selectSize === size.id ? "border-[#002482] dark:text-white" : "border-[#BABABA] dark:text-white"} rounded-full flex items-center justify-center cursor-pointer`}
                   >
                     {size?.name}
                   </div>
@@ -508,7 +526,7 @@ const ProductDetail = () => {
               </div>
             )}
 
-            <h4 className="mt-6 text-xl lg:text-[24px] lg:mt-[20px] font-bold text-textPrimary">Select Color</h4>
+            <h4 className="mt-6 text-xl lg:text-[24px] lg:mt-[20px] font-bold text-textPrimary dark:text-white  ">Select Color</h4>
             <div className="flex gap-3 mt-4 lg:mt-[22px] flex-wrap">
               {product?.productColor?.map((color, i) => (
                 <div
@@ -525,8 +543,8 @@ const ProductDetail = () => {
               ))}
             </div>
 
-            <h5 className="mt-6 text-xl lg:text-[24px] lg:mt-[20px] font-bold text-textPrimary">Best Offer</h5>
-            <div className="text-[18px] mt-3 space-y-4 text-textPrimary">
+            <h5 className="mt-6 text-xl lg:text-[24px] lg:mt-[20px] font-bold text-textPrimary dark:text-white">Best Offer</h5>
+            <div className="text-[18px] mt-3 space-y-4 text-textPrimary dark:text-white">
               <p className="font-bold">
                 Special offer <span className="font-normal">get 25% off</span>
                 <button className="text-textTertiary ml-2">T&C</button>
@@ -565,15 +583,15 @@ const ProductDetail = () => {
                 </Button>
               )} */}
 
-               <Button
-                  onClick={() =>
-                    handleAddToCart(product?.id, selectColor, selectSize)
-                  }
-                  variant="blueButton"
-                  className="text-lg w-[168px]"
-                >
-                  Add to Cart
-                </Button>
+              <Button
+                onClick={() =>
+                  handleAddToCart(product?.id, selectColor, selectSize)
+                }
+                variant="blueButton"
+                className="text-lg w-[168px]"
+              >
+                Add to Cart
+              </Button>
 
               {!isWishlist ? (
                 <img
@@ -631,7 +649,7 @@ const ProductDetail = () => {
         </div> */}
 
         {/* Tabs visible only on desktop */}
-        <div className="hidden sm:flex flex-row justify-center gap-10 sm:gap-[70px] md:gap-[120px] lg:gap-[140px] xl:gap-[170px] 2xl:gap-[290px] mt-10 xl:mt-[80px] text-textSecondary text-lg border-b border-gray-300 pb-6 px-0 lg:mx-[75px] xl:mx-[130px] 2xl:mx-[220px]">
+        <div className="hidden sm:flex flex-row justify-center gap-10 sm:gap-[70px] md:gap-[120px] lg:gap-[140px] xl:gap-[170px] 2xl:gap-[290px] mt-10 xl:mt-[80px] text-textSecondary dark:text-white text-lg border-b border-gray-300 pb-6 px-0 lg:mx-[75px] xl:mx-[130px] 2xl:mx-[220px]">
           <p
             onClick={() => handleTabClick("details")}
             className={`cursor-pointer ${tabList === "details" ? "text-textTertiary border-b-2 border-textTertiary" : ""}`}
@@ -653,7 +671,7 @@ const ProductDetail = () => {
         </div>
 
         {/* Content */}
-        <div className="mt-6 sm:px-0 text-textPrimary">
+        <div className="mt-6 sm:px-0 text-textPrimary dark:text-white">
 
           {/* MOBILE: Show all three sections stacked */}
           <div className="sm:hidden space-y-10">
@@ -669,7 +687,7 @@ const ProductDetail = () => {
 
             {/* Specification */}
             <div>
-              <h2 className="text-2xl lg:text-[24px] font-bold mb-4">Specification</h2>
+              <h2 className="text-2xl lg:text-[24px] font-bold mb-4 ">Specification</h2>
               <Specifications specification={product?.specifications} />
             </div>
 
@@ -699,7 +717,7 @@ const ProductDetail = () => {
 
 
         <div className="mt-16 md:mx-[50px]">
-          <p className="text-2xl lg:text-[36px] font-bold text-textPrimary mb-[27px]">Similar Products</p>
+          <p className="text-2xl lg:text-[36px] font-bold text-textPrimary mb-[27px] dark:text-white">Similar Products</p>
           <Sliders slidesToShow={4}>
             {items.map((item, index) => (
               <div
@@ -715,7 +733,7 @@ const ProductDetail = () => {
         </div>
 
         <div className="mt-16 px-4 md:mx-[50px]">
-          <p className="text-2xl lg:text-[36px] font-bold text-textPrimary mb-[27px]">Customer Also Like</p>
+          <p className="text-2xl lg:text-[36px] font-bold text-textPrimary mb-[27px] dark:text-white">Customer Also Like</p>
           <Sliders slidesToShow={4}>
             {items.map((item, index) => (
               <div

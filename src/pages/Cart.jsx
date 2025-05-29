@@ -602,7 +602,7 @@ const Cart = () => {
       </div> */}
 
       <div className="flex-grow md:mx-[10px] lg:mx-[50px] mb-[96px]">
-        <p className="mt-6 md:mt-[56px] text-[36px] md:text-[36px] font-bold mx-4">
+        <p className="mt-6 md:mt-[56px] text-[36px] md:text-[36px] font-bold mx-4 dark:text-white">
           My <span className="text-[#002482]">Cart</span>
         </p>
         {/* {cart?.length === 0 && (
@@ -633,10 +633,10 @@ const Cart = () => {
                       return (
                         <tr
                           key={item?.productId}
-                          className="hover:bg-gray-50 border-b"
+                          className=" border-b"
                         >
                           <td className="px-4 md:px-6 py-4 flex items-center gap-3 md:gap-5">
-                            <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white rounded-md shadow-[0px_0px_1px_rgba(0,0,0,0.7)]">
+                            <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center  rounded-md shadow-[0px_0px_1px_rgba(0,0,0,0.7)]">
                               <img
                                 className="w-full h-full object-cover"
                                 src={item?.productImage[0] || "/placeholder.svg"}
@@ -647,7 +647,7 @@ const Cart = () => {
                                 }}
                               />
                             </div>
-                            <div className="text-sm md:text-base font-bold">
+                            <div className="text-sm md:text-base font-bold dark:text-white">
                               {item?.productName}
                               <div className="leading-5 mt-[3px] font-normal">
                                 <p className="text-[12px]">Size: {item?.productSize}</p>
@@ -655,7 +655,7 @@ const Cart = () => {
                               </div>
                             </div>
                           </td>
-                          <td className="pl-8 md:pl-16 lg:pl-36 py-4 text-sm md:text-lg font-medium">
+                          <td className="pl-8 md:pl-16 lg:pl-36 py-4 text-sm md:text-lg font-medium dark:text-white">
                             &#x20B9; {item?.price?.toFixed(2)}
                           </td>
                           <td className="pl-4 md:pl-16 py-4 align-middle">
@@ -664,7 +664,7 @@ const Cart = () => {
                                 onClick={() =>
                                   dispatch(quantityDecrement(item?.productId))
                                 }
-                                className="px-2 text-xl hover:bg-gray-300 w-7 rounded-md"
+                                className="px-2 text-xl hover:bg-gray-300 w-7 rounded-md dark:text-white"
                               >
                                 −
                               </button>
@@ -679,14 +679,14 @@ const Cart = () => {
                                     productSizeId: item?.productSizeId
                                   }))
                                 }
-                                className="px-2 text-xl hover:bg-gray-300 w-7 rounded-md"
+                                className="px-2 text-xl hover:bg-gray-300 w-7 rounded-md dark:text-white"
                               >
                                 +
                               </button>
                             </div>
                           </td>
 
-                          <td className="pl-4 md:pl-16 py-4 text-sm md:text-lg pr-4 md:pr-10">
+                          <td className="pl-4 md:pl-16 py-4 text-sm md:text-lg pr-4 md:pr-10 dark:text-white">
                             <div className="flex items-center gap-3">
                               <span>
                                 &#x20B9; {(item?.price * item?.quantity)?.toFixed(2)}
@@ -768,7 +768,7 @@ const Cart = () => {
 
             <div className="max-w-[800px]">
               {showCouponCode ? (
-                <div className="rounded-md p-4 md:p-6 h-max max-w-full md:max-w-[300px] relative shadow-[1px_1px_3px_rgba(0,0,0,0.1)]">
+                <div className="rounded-md p-4 md:p-6 h-max max-w-full md:max-w-[300px] relative shadow-[1px_1px_3px_rgba(0,0,0,0.1)] dark:shadow-[1px_1px_3px_rgba(255,255,255,0.3)]">
                   <p className="font-medium mb-2">All Coupon Codes</p>
                   {couponCode?.length === 0 ? (
                     <p className="text-sm text-gray-500">Loading coupons...</p>
@@ -898,7 +898,7 @@ const Cart = () => {
                 //   </div>
                 // </div>    
 
-                <div className="rounded-md p-4 md:p-6 h-max relative shadow-[1px_1px_3px_rgba(0,0,0,0.1)]">
+                <div className="rounded-md p-4 md:p-6 h-max relative shadow-[1px_1px_3px_rgba(0,0,0,0.1)] ">
                   <h1 className="text-xl font-bold">Order Summary</h1>
                   <div className="space-y-4 md:space-y-6">
                     {/* For larger screens - Normal table layout */}
@@ -906,34 +906,34 @@ const Cart = () => {
                       <table className="w-full text-sm">
                         <tbody>
                           <tr>
-                            <td className="py-2 font-medium text-gray-600">
+                            <td className="py-2 font-medium text-gray-600 dark:text-white">
                               Sub total
                             </td>
-                            <td className="py-2 text-right font-semibold text-gray-800">
+                            <td className="py-2 text-right font-semibold text-gray-800 dark:text-white">
                               &#x20B9; {subtotal?.toFixed(2)}
                             </td>
                           </tr>
 
                           <tr>
-                            <td className="py-2 font-medium text-gray-600">
+                            <td className="py-2 font-medium text-gray-600 dark:text-white">
                               Shipping Charges
                             </td>
-                            <td className="py-2 text-right font-semibold text-gray-800">
+                            <td className="py-2 text-right font-semibold text-gray-800 dark:text-white">
                               &#x20B9; {shippingPrice?.toFixed(2)}
                             </td>
                           </tr>
 
                           <tr>
-                            <td className="py-2 font-medium text-gray-600">
+                            <td className="py-2 font-medium text-gray-600 dark:text-white">
                               GST (18%)
                             </td>
-                            <td className="py-2 text-right font-semibold text-gray-800">
+                            <td className="py-2 text-right font-semibold text-gray-800 dark:text-white">
                               &#x20B9; {gstAmount?.toFixed(2)}
                             </td>
                           </tr>
 
                           <tr>
-                            <td className="font-medium text-gray-600">
+                            <td className="font-medium text-gray-600 dark:text-white">
                               Coupon Code
                             </td>
                             <td className="text-right font-semibold">
@@ -952,7 +952,7 @@ const Cart = () => {
                               ) : (
                                 <button
                                   onClick={handleCoupon}
-                                  className="px-2 border text-xs py-2 rounded hover:bg-gray-50"
+                                  className="px-2 border text-xs py-2 rounded dark:text-white"
                                 >
                                   All Coupons
                                 </button>
@@ -961,16 +961,16 @@ const Cart = () => {
                           </tr>
 
                           <tr>
-                            <td className="text-gray-600 py-2 md:py-4 font-medium">
+                            <td className="text-gray-600 dark:text-white py-2 md:py-4 font-medium">
                               Discount
                             </td>
-                            <td className="py-2 text-right font-semibold text-gray-800">
+                            <td className="py-2 text-right font-semibold text-gray-800 dark:text-white">
                               - &#x20B9; {discount?.toFixed(2)}
                             </td>
                           </tr>
 
                           <tr className="border-t border-gray-300">
-                            <td className="py-3 font-bold text-base md:text-lg text-gray-800">
+                            <td className="py-3 font-bold text-base md:text-lg text-gray-800 dark:text-white">
                               Total amount to Pay
                             </td>
                             <td className="py-3 text-right font-extrabold text-base md:text-lg text-blue-600">
@@ -984,22 +984,22 @@ const Cart = () => {
                     {/* For mobile screens - Flex layout with labels on left, values on right */}
                     <div className="sm:hidden space-y-3">
                       <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-600">Sub total</span>
-                        <span className="font-semibold text-gray-800">&#x20B9; {subtotal?.toFixed(2)}</span>
+                        <span className="font-medium text-gray-600 dark:text-white">Sub total</span>
+                        <span className="font-semibold text-gray-800 dark:text-white">&#x20B9; {subtotal?.toFixed(2)}</span>
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-600">Shipping Charges</span>
-                        <span className="font-semibold text-gray-800">&#x20B9; {shippingPrice?.toFixed(2)}</span>
+                        <span className="font-medium text-gray-600 dark:text-white">Shipping Charges</span>
+                        <span className="font-semibold text-gray-800 dark:text-white">&#x20B9; {shippingPrice?.toFixed(2)}</span>
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-600">GST (18%)</span>
-                        <span className="font-semibold text-gray-800">&#x20B9; {gstAmount?.toFixed(2)}</span>
+                        <span className="font-medium text-gray-600 dark:text-white">GST (18%)</span>
+                        <span className="font-semibold text-gray-800 dark:text-white">&#x20B9; {gstAmount?.toFixed(2)}</span>
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-600">Coupon Code</span>
+                        <span className="font-medium text-gray-600 dark:text-white">Coupon Code</span>
                         <div>
                           {coupon ? (
                             <div className="text-green-600 font-medium">
@@ -1025,12 +1025,12 @@ const Cart = () => {
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-600">Discount</span>
-                        <span className="font-semibold text-gray-800">- &#x20B9; {discount?.toFixed(2)}</span>
+                        <span className="font-medium text-gray-600 dark:text-white">Discount</span>
+                        <span className="font-semibold text-gray-800 dark:text-white">- &#x20B9; {discount?.toFixed(2)}</span>
                       </div>
 
                       <div className="flex justify-between items-center pt-3 border-t border-gray-300">
-                        <span className="font-bold text-base text-gray-800">Total amount to Pay</span>
+                        <span className="font-bold text-base text-gray-800 dark:text-white">Total amount to Pay</span>
                         <span className="font-extrabold text-base text-blue-600">&#x20B9; {Math.round(totalPayable - discount)}</span>
                       </div>
                     </div>

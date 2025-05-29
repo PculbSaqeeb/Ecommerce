@@ -91,7 +91,7 @@ const Deal = () => {
 
   return (
     <div className="mx-4 sm:mx-6 md:mx-8 lg:mx-[50px]">
-      <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-textPrimary mt-10 sm:mt-[50px] md:mt-[80px]">
+      <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-textPrimary dark:text-white mt-10 sm:mt-[50px] md:mt-[80px]">
         Deals of the Day
       </p>
       <div className="mt-4 sm:mt-5 md:mt-[27px]">

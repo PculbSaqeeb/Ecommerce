@@ -224,7 +224,9 @@ const Filter = ({ filterVisible, setFilterVisible }) => {
         })
       );
     }
-    setFilterVisible(!filterVisible)
+    if(window.innerWidth<640){
+      setFilterVisible(!filterVisible)
+    }
   };
 
   const handleClearAll = () => {
@@ -294,11 +296,10 @@ const Filter = ({ filterVisible, setFilterVisible }) => {
           </div>
         </div>
 
-        <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
-          <p className="text-[24px] text-textPrimary font-bold">Brand</p>
+        <div onClick={() => setShowBrandList(!showBrandList)} className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px] cursor-pointer">
+          <p className="text-[24px] text-textPrimary font-bold ">Brand</p>
           <img
-            onClick={() => setShowBrandList(!showBrandList)}
-            className="pr-[6.5px] cursor-pointer"
+            className="pr-[6.5px]"
             src={showBrandList ? up_arrow_icon : down_arrow_icon}
             alt="Toggle Brand Filter"
           />
@@ -325,11 +326,10 @@ const Filter = ({ filterVisible, setFilterVisible }) => {
           </div>
         )}
 
-        <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
+        <div onClick={() => setShowColorList(!showColorList)} className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px] cursor-pointer">
           <p className="text-[24px] text-textPrimary font-bold">Color</p>
           <img
-            onClick={() => setShowColorList(!showColorList)}
-            className="pr-[6.5px] cursor-pointer"
+            className="pr-[6.5px]"
             src={showColorList ? up_arrow_icon : down_arrow_icon}
             alt="Toggle Color Filter"
           />
@@ -356,13 +356,12 @@ const Filter = ({ filterVisible, setFilterVisible }) => {
           </div>
         )}
 
-        <div className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px]">
+        <div onClick={() => setShowDiscountList(!showDiscountList)} className="flex justify-between border-t border-[#84848480] pt-[25px] mt-[25px] cursor-pointer">
           <p className="text-[24px] text-textPrimary font-bold">
             Discount Range
           </p>
           <img
-            onClick={() => setShowDiscountList(!showDiscountList)}
-            className="pr-[6.5px] cursor-pointer"
+            className="pr-[6.5px]"
             src={showDiscountList ? up_arrow_icon : down_arrow_icon}
             alt="Toggle Discount Filter"
           />

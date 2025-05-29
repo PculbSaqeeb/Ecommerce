@@ -63,10 +63,10 @@ const ProductPage = () => {
     <Layout>
       <div>
          <div className="flex justify-end sm:flex-row sm:justify-end items-start sm:items-center gap-4 sm:gap-[20px] md:gap-[44px] mr-[20px] sm:mr-[50px] mt-[30px] sm:mt-[56px]">
-              <div className="sm:hidden flex items-center gap-2 md:gap-[10px] mx-[20px]">
+              <div className="sm:hidden flex items-center gap-2 md:gap-[10px] mx-[20px] ">
                 <p
                   onClick={handleShowFilter}
-                  className="text-[18px] md:text-[24px] text-textPrimary font-bold cursor-pointer"
+                  className="text-[18px] md:text-[24px] text-textPrimary dark:text-white font-bold cursor-pointer"
                 >
                   Filters
                 </p>
@@ -81,7 +81,7 @@ const ProductPage = () => {
               <div className="sm:hidden flex items-center gap-2 md:gap-[17.5px]">
                 <p
                   onClick={handleShowSorting}
-                  className="text-[18px] md:text-[24px] text-textPrimary font-bold cursor-pointer"
+                  className="text-[18px] md:text-[24px] text-textPrimary dark:text-white font-bold cursor-pointer"
                 >
                   Sort By
                 </p>
@@ -100,7 +100,7 @@ const ProductPage = () => {
               <div className="flex items-center gap-2 md:gap-[10px]">
                 <p
                   onClick={handleShowFilter}
-                  className="text-[18px] md:text-[24px] text-textPrimary font-bold cursor-pointer"
+                  className="text-[18px] md:text-[24px] text-textPrimary dark:text-white font-bold cursor-pointer"
                 >
                   Filters
                 </p>
@@ -115,7 +115,7 @@ const ProductPage = () => {
               <div className="flex items-center gap-2 md:gap-[17.5px]">
                 <p
                   onClick={handleShowSorting}
-                  className="text-[18px] md:text-[24px] text-textPrimary font-bold cursor-pointer"
+                  className="text-[18px] md:text-[24px] text-textPrimary dark:text-white font-bold cursor-pointer"
                 >
                   Sort By
                 </p>

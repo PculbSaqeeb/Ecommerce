@@ -167,7 +167,7 @@ const Trending = () => {
 
   return (
     <div className="relative sm:px-8 mt-[80px]">
-      <p className="text-[36px] font-bold text-textPrimary">What Our Customer Says</p>
+      <p className="text-[36px] font-bold text-textPrimary dark:text-white">What Our Customer Says</p>
 
       <Slider {...settings}>
         {[1, 2, 3, 4].map((_, index) => (

@@ -126,7 +126,7 @@ const TrendingProduct = () => {
 
 
     <div className="mx-10 sm:mx-[20px] md:mx-[50px] mt-14 md:mt-[79px]">
-      <p className="text-textPrimary text-2xl sm:text-3xl md:text-[36px] font-bold">
+      <p className="text-textPrimary dark:text-white text-2xl sm:text-3xl md:text-[36px] font-bold">
         Trending Now
       </p>
 

@@ -62,16 +62,16 @@ const ProductCard1 = ({ product }) => {
                 />
 
                 <div className="px-5">
-                    <h5 className="font-bold text-xl sm:text-2xl text-textPrimary mt-2 truncate">
+                    <h5 className="font-bold text-xl sm:text-2xl text-textPrimary dark:text-white mt-2 truncate">
                         {product?.title}
                     </h5>
 
                     <div className="flex flex-wrap items-center mt-1 gap-x-6 gap-y-1">
-                        <p className="text-base sm:text-lg text-textPrimary">
+                        <p className="text-base sm:text-lg text-textPrimary dark:text-white">
                             {product?.brand?.name}
                         </p>
                         <div className="flex items-center">
-                            <p className="text-base sm:text-lg text-textSecondary">
+                            <p className="text-base sm:text-lg text-textSecondary dark:text-white">
                                 {product?.averageRating?.toFixed(1) || 0}
                             </p>
                             <img
@@ -83,10 +83,10 @@ const ProductCard1 = ({ product }) => {
                     </div>
 
                     <div className="mt-3 flex flex-wrap items-center gap-4">
-                        <p className="text-xl sm:text-2xl font-bold text-textPrimary">
+                        <p className="text-xl sm:text-2xl font-bold text-textPrimary dark:text-white">
                             Rs. {product?.price}
                         </p>
-                        <span className="text-textSecondary text-base sm:text-lg line-through">
+                        <span className="text-textSecondary dark:text-white text-base sm:text-lg line-through">
                             Rs. {product?.discountPrice}
                         </span>
                         <span className="text-success font-bold text-base sm:text-lg">
