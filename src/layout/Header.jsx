@@ -87,8 +87,8 @@ const Header = () => {
   return (
     <div className="sticky top-0 z-50 dark:text-white">
       <div className=" bg-white text-[18px] shadow-sm overflow-visible">
-        <header className="h-20 dark:bg-black w-full px-4 md:px-[50px]">
-          <nav className="flex items-center h-20 relative">
+        <header className="h-20 dark:bg-black w-full px-4 md:px-[30px]">
+          <nav className="flex items-center h-20 relative justify-between">
             <div className="md:hidden">
               <button onClick={() => setMenuOpen(true)}>
                 <svg
@@ -115,7 +115,7 @@ const Header = () => {
             />
 
 
-            <ul className="hidden lg:flex lg:text-[15px] xl:text-[18px] items-center ml-10 gap-10  cursor-pointer text-[18px]">
+            <ul className="hidden lg:flex lg:text-[15px] xl:text-[15px] items-center md:justify-between ml-10 gap-6 lg:gap-[21px] xl:gap-10  cursor-pointer text-[18px]">
               <li className={`hover:text-blue-600 ${location?.pathname === '/products' ? "text-red-400 font-semibold underline" : "text-textPrimary dark:text-white"}`} onClick={() => navigate("/products")}>All</li>
               {categoryList?.map((item) => (
                 <NavLink
@@ -132,7 +132,7 @@ const Header = () => {
               ))}
             </ul>
 
-            <div className="hidden ml-[50px] 2xl:flex relative 2xl:w-[350px] 3xl:w-[634px] w-full">
+            <div className="hidden xl:ml-[30px] 2xl:flex relative 2xl:w-[280px] 3xl:w-[554px] ">
               <input
                 value={searchQuery}
                 onChange={(e) => handleSearch(e)}
@@ -149,16 +149,16 @@ const Header = () => {
 
 
 
-            <div className="flex items-center gap-4 md:gap-8 ml-auto cursor-pointer">
+            <div className="flex items-center gap-4 md:gap-8 ml-8 cursor-pointer">
               <div onClick={toggleDarkMode}>
-                {darkMode ? <CiLight size={30} /> : <MdDarkMode size={28} />}
+                {darkMode ? <CiLight className="text-[25px] xl:text-[25px]" /> : <MdDarkMode  className="text-[25px] xl:text-[25px]" />}
               </div>
 
               <div onClick={handleWishlistNavigate} className="relative hidden md:block cursor-pointer">
-                {darkMode ? <CiHeart size={35} color="white" /> : (
+                {darkMode ? <CiHeart className="text-[25px] xl:text-[18px]" color="white" /> : (
                   <img
                     onClick={handleWishlistNavigate}
-                    className="md:w-[29px] md:h-[29px] w-[25px] h-[25px] "
+                    className="md:w-[25px] md:h-[25px] w-[25px] h-[25px] "
                     src={heart_icon}
                     alt="wishlist"
                   />
@@ -170,9 +170,9 @@ const Header = () => {
 
 
               <div onClick={handleCartNavigate} className="relative cursor-pointer">
-                {darkMode ? <GrCart size={28} color="white" /> : (
+                {darkMode ? <GrCart className="text-[25px] xl:text-[28px]" color="white" /> : (
                   <img
-                    className="md:w-[29px] md:h-[29px] w-[25px] h-[25px]"
+                    className="md:w-[25px] md:h-[25px] w-[25px] h-[25px]"
                     src={cart_icon}
                     alt="cart"
                   />
@@ -185,7 +185,7 @@ const Header = () => {
               {darkMode ? <img onClick={handleOrderNavigate} className="w-[25px] h-[25px] cursor-pointer" src={order} alt="" /> : (
                 <img
                   onClick={handleOrderNavigate}
-                  className="w-[25px] h-[25px] cursor-pointer hidden md:block"
+                  className="md:w-[25px] md:h-[59px] w-[25px] h-[25px] cursor-pointer hidden md:block"
                   src={order_icon}
                   alt="order"
                 />
@@ -282,7 +282,7 @@ const Header = () => {
 
       </div>
 
-      <div className="xxl:hidden px-4 pb-3 bg-white">
+      <div className="xxl:hidden px-4 pb-3 bg-white ">
         <input
           value={searchQuery}
           onChange={(e) => handleSearch(e)}

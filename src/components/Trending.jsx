@@ -108,12 +108,12 @@ const Trending = () => {
         {carousel && carousel?.map((item, index) => (
           <div
             key={index}
-            className="!flex items-center justify-center cursor-pointer h-[587px] mb-2"
+            className="!flex items-center justify-center cursor-pointer xl:h-[400px] h-[587px] mb-2"
           >
             <div className="max-w-[1146px] xl:h-[587px] flex flex-col lg:flex-row xl:flex-row items-center rounded-[10px] shadow-[0_0_12px_rgba(0,0,0,0.1)] overflow-hidden ">
               <div className="w-[120px] h-[300px] sm:w-[400px] md:w-[490px] lg:w-[550px] lg:h-[500px] xl:w-[542px] flex flex-col items-center justify-center bg-white">
-                <img className="w-full h-[60px] md:h-[100px] lg:h-[160px] object-cover object-center" src={item?.logoURL} alt="Offer" />
-                <p className="text-[14px] md:text-[20px] xl:text-[48px] font-bold text-textPrimary mt-[15px] lg:mt-[30px] text-center">
+                <img className="w-full h-[60px] md:h-[100px] lg:h-[160px] object-contain" src={item?.logoURL} alt="Offer" />
+                <p className="text-[14px] md:text-[20px] xl:text-[20px] font-bold text-textPrimary mt-[15px] lg:mt-[30px] text-center">
                   {item?.offer}
                 </p>
                 <Button
@@ -121,14 +121,14 @@ const Trending = () => {
                   onClick={(e) => handleProductNavigate(e)}
                   variant="outlineGray"
                   size="md"
-                  className="w-[172px] mt-[19px] lg:mt-[37px] text-[24px] border-2 dark:text-textPrimary "
+                  className="px-10 py-2 mt-[19px] lg:mt-[37px] text-[16px] border-2 dark:text-textPrimary "
                 >
                   Explore
                 </Button>
               </div>
 
               <img
-                className="w-[310px] h-[300px] sm:w-[400px] md:w-[490px] lg:w-[500px] lg:h-[500px] xl:w-[604px]  object-cover"
+                className="w-[310px] h-[300px] sm:w-[400px] md:w-[490px] lg:w-[500px] lg:h-[500px] xl:w-[404px]  object-cover"
                 src={item?.image}
                 alt=""
               />

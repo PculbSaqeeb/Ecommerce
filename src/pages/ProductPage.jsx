@@ -62,7 +62,7 @@ const ProductPage = () => {
   return (
     <Layout>
       <div>
-         <div className="flex justify-end sm:flex-row sm:justify-end items-start sm:items-center gap-4 sm:gap-[20px] md:gap-[44px] mr-[20px] sm:mr-[50px] mt-[30px] sm:mt-[56px]">
+         <div className="flex justify-end sm:flex-row sm:justify-end items-start sm:items-center gap-4 sm:gap-[20px] md:gap-[44px] mr-[20px] sm:mr-[50px] mt-[30px] sm:mt-[0px]">
               <div className="sm:hidden flex items-center gap-2 md:gap-[10px] mx-[20px] ">
                 <p
                   onClick={handleShowFilter}
@@ -131,7 +131,7 @@ const ProductPage = () => {
             {sortVisible && <SortBy onSortChange={handleSortChange} />}
             <div
               className={`grid grid-cols-1 ${!filterVisible ? " grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3" : " grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-                } gap-[30px]  mt-[38px] ml-[50px] mr-[52px] lg:mr-6`}
+                } gap-[30px]  mt-[38px] ml-[52px] mr-[52px] lg:mr-6`}
             >
               {/* {loading ? (
               <p>Loading products...</p>

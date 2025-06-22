@@ -38,7 +38,7 @@ const Banner2 = ({ carousel }) => {
                     backgroundRepeat: "no-repeat",
                   }}
                 >
-                  <div className="flex flex-col items-center justify-center px-4 text-center">
+                  {/* <div className="flex flex-col items-center justify-center px-4 text-center">
                     <p className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold  tracking-[2px] sm:tracking-[5px] lg:tracking-[10px]">
                       {item.brand.toUpperCase()}
                     </p>
@@ -58,7 +58,7 @@ const Banner2 = ({ carousel }) => {
                     >
                       Explore
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             );

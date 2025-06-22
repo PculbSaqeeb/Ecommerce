@@ -36,6 +36,12 @@ const TrendingProduct = () => {
     initialSlide: 0,
     responsive: [
       {
+        breakpoint: 1940,
+        settings:{
+          slidesToShow:3.3
+        }
+      },
+      {
         breakpoint: 1450,
         settings:{
           slidesToShow:3
@@ -133,11 +139,11 @@ const TrendingProduct = () => {
 
       <div className="mt-6 md:mt-[27px]">
         <Slider {...settings}>
-          {loading && (
+          {/* {loading && (
             <p className="text-center mt-3 text-base sm:text-lg md:text-xl ">
               Loading...
             </p>
-          )}
+          )} */}
 
           {items &&
             items?.map((product, index) => (
